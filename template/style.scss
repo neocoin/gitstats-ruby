@@ -1,0 +1,30 @@
+$blueprint-font-size: 12px;
+
+@import "blueprint";
+
+@include blueprint;
+
+table.tablesorter {
+  thead {
+    tr {
+      .header {
+        background: {
+          image: url("bg.gif");
+          position: right center;
+          repeat: no-repeat;
+        }
+        cursor: pointer;
+        padding-right: 21px;
+      }
+
+      .headerSortUp {
+        background-image: url("asc.gif");
+      }
+
+      .headerSortDown {
+        background-image: url("desc.gif");
+      }
+    }
+  }
+}
+
