@@ -1,7 +1,11 @@
 class Git
-  def initialize(base, ref = 'HEAD')
+  attr_reader :base
+  attr_reader :ref
+
+  def initialize(base, ref = 'HEAD', debug = false)
     @base = base
     @ref = ref
+    @debug = debug
   end
 
   def num_authors
@@ -12,7 +16,7 @@ class Git
     commits = Array.new if block.nil?
 
     commit = nil
-    sh("git log --summary --numstat --pretty=format:\"HEADER: %at %ai %H %T %aN <%aE>\" #{@ref}").split(/\n/).each do |line|
+    sh("git log --summary --numstat --pretty=format:\"HEADER: %at %ai %H %T %aN <%aE>\" #{@ref}") do |line|
       if line =~ /^HEADER:/
         parts = line.split(' ', 8)
         parts.shift
@@ -22,7 +26,12 @@ class Git
         commit[:timezone] = parts[3]
         commit[:hash] = parts[4]
         commit[:tree] = parts[5]
-        commit[:name], commit[:email] = /^(.+) <(.+)>$/.match(parts[6]).captures
+        match = /^(.+) <(.+)>$/.match(parts[6])
+        if match.nil?
+          commit[:name], commit[:email] = parts[6], ''
+        else
+          commit[:name], commit[:email] = match.captures
+        end
         commit[:files_added] = 0
         commit[:files_deleted] = 0
         commit[:lines_added] = 0
@@ -40,9 +49,12 @@ class Git
           commit[:files_deleted] += 1
         end
       else
-        added, deleted = /^(\d+)\s+(\d+)/.match(line).captures
-        commit[:lines_added] += added.to_i
-        commit[:lines_deleted] += deleted.to_i
+        match = /^(\d+)\s+(\d+)/.match(line)
+        unless match.nil?
+          added, deleted = match.captures
+          commit[:lines_added] += added.to_i
+          commit[:lines_deleted] += deleted.to_i
+        end
       end
     end
 
@@ -70,9 +82,18 @@ class Git
   end
 
   private
-  def sh(cmd)
+  def sh(cmd, &block)
+    puts cmd if @debug
     Dir.chdir(@base) do
-      `#{cmd}`
+      if block.nil?
+        `#{cmd}`
+      else
+        IO.popen(cmd) do |io|
+          io.each_line do |line|
+            block.call(line.chomp)
+          end
+        end
+      end
     end
   end
 end
