@@ -1,11 +1,18 @@
 $blueprint-font-size: 12px;
 
+@import "compass/css3/border-radius";
 @import "blueprint";
 
 @include blueprint;
 
 table {
   width: auto;
+  border: solid 1px black;
+}
+
+img {
+  border: solid 1px black;
+  margin-bottom: 10px;
 }
 
 tbody th {
@@ -37,6 +44,8 @@ table.tablesorter {
 }
 
 .blockheader {
+  @include border-radius;
+  background-color: $blueprint-table-header-color;
 }
 
 .blockcontainer {

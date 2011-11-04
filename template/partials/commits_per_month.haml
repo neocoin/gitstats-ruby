@@ -2,23 +2,27 @@
   $(document).ready(function() {
     $("#month_table").tablesorter({sortList: [[0, 0]]});
   });
-%h1 Commits by month of year
-%img{ :src => 'commits_per_month.png' }
-%table#month_table.tablesorter.striped
-  %thead
-    %tr
-      %th Month
-      %th Commits
-      %th Files added
-      %th Files deleted
-      %th Lines added
-      %th Lines deleted
-  %tbody
-    - stats.month_stats.months.each do |month, commits|
-      %tr
-        %td&= month
-        %td&= commits.commits
-        %td&= commits.files_added
-        %td&= commits.files_deleted
-        %td&= commits.lines_added
-        %td&= commits.lines_deleted
+%h2.blockheader
+  Commits by month of year
+.blockcontainer
+  .blockdiagram
+    %img{ :src => 'commits_per_month.png' }
+  .blocktable
+    %table#month_table.tablesorter.striped
+      %thead
+        %tr
+          %th Month
+          %th Commits
+          %th Files added
+          %th Files deleted
+          %th Lines added
+          %th Lines deleted
+      %tbody
+        - stats.month_stats.months.each do |month, commits|
+          %tr
+            %td&= month
+            %td&= commits.commits
+            %td&= commits.files_added
+            %td&= commits.files_deleted
+            %td&= commits.lines_added
+            %td&= commits.lines_deleted
