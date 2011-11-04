@@ -1,3 +1,4 @@
+- names = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 %h2.blockheader
   Hour of week
 .blockcontainer
@@ -14,7 +15,7 @@
             - i2[1].commits > r2 ? i2[1].commits : r2
         - for wday in 0..6
           %tr
-            %th= wday
+            %th= names[wday]
             - for hour in 0..23
               - d = stats.wday_stats.days[wday]
               - s = d.nil? ? nil : d.hours[hour]
