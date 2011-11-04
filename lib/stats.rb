@@ -6,6 +6,8 @@ class GeneralStats
   attr_reader :lines_deleted
   attr_reader :files
   attr_reader :lines
+  attr_reader :first_commit
+  attr_reader :last_commit
 
   def initialize
     @commits = 0
@@ -15,6 +17,8 @@ class GeneralStats
     @lines_deleted = 0
     @files = 0
     @lines = 0
+    @first_commit = nil
+    @last_commit = nil
   end
 
   def update(commit)
@@ -25,6 +29,12 @@ class GeneralStats
     @lines_deleted += commit[:lines_deleted]
     @files = @files_added - @files_deleted
     @lines = @lines_added - @lines_deleted
+
+    @first_commit ||= commit[:time]
+    @last_commit ||= commit[:time]
+
+    @first_commit = commit[:time] if commit[:time] < @first_commit
+    @last_commit = commit[:time] if commit[:time] > @last_commit
   end
 end
 

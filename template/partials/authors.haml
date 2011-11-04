@@ -1,0 +1,32 @@
+:javascript
+  $(document).ready(function() {
+    $("#author_table").tablesorter({sortList: [[1, 1]]});
+  });
+%h2.blockheader
+  Authors
+.blockcontainer
+  .blocktable
+    %table#author_table.tablesorter.striped
+      %thead
+        %tr
+          %th Author
+          %th Commits
+          %th Percent
+          %th Files added
+          %th Files deleted
+          %th Lines added
+          %th Lines deleted
+          %th First commit
+          %th Last commit
+      %tbody
+        - stats.author_stats.authors.each do |author, commits|
+          %tr
+            %td&= author
+            %td&= commits.commits
+            %td&= '%.2f%%' % (commits.commits * 100.0 / stats.num_commits.to_f)
+            %td&= commits.files_added
+            %td&= commits.files_deleted
+            %td&= commits.lines_added
+            %td&= commits.lines_deleted
+            %td&= commits.first_commit.strftime('%Y-%m-%d')
+            %td&= commits.last_commit.strftime('%Y-%m-%d')

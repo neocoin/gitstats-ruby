@@ -43,6 +43,13 @@ table.tablesorter {
   }
 }
 
+tr.top {
+  td {
+    font-weight: bold;
+    background-color: $blueprint-table-stripe-color;
+  }
+}
+
 .blockheader {
   @include border-radius;
   background-color: $blueprint-table-header-color;
