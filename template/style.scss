@@ -4,6 +4,14 @@ $blueprint-font-size: 12px;
 
 @include blueprint;
 
+table {
+  width: auto;
+}
+
+tbody th {
+  background-color: $blueprint-table-header-color;
+}
+
 table.tablesorter {
   thead {
     tr {
@@ -25,6 +33,17 @@ table.tablesorter {
         background-image: url("desc.gif");
       }
     }
+  }
+}
+
+.blockheader {
+}
+
+.blockcontainer {
+  .blockdiagram {
+  }
+
+  .blocktable {
   }
 }
 
