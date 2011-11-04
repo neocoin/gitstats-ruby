@@ -1,0 +1,24 @@
+:javascript
+  $(document).ready(function() {
+    $("#year_table").tablesorter({sortList: [[0, 0]]});
+  });
+%h1 Commits by year
+%img{ :src => 'commits_per_year.png' }
+%table#year_table.tablesorter
+  %thead
+    %tr
+      %th Year
+      %th Commits
+      %th Files added
+      %th Files deleted
+      %th Lines added
+      %th Lines deleted
+  %tbody
+    - stats.year_stats.years.each do |year, commits|
+      %tr
+        %td&= year
+        %td&= commits.commits
+        %td&= commits.files_added
+        %td&= commits.files_deleted
+        %td&= commits.lines_added
+        %td&= commits.lines_deleted
