@@ -26,27 +26,6 @@ class GeneralStats
     @files = @files_added - @files_deleted
     @lines = @lines_added - @lines_deleted
   end
-
-  def [](idx)
-    case idx
-    when :commits
-      @commits
-    when :files_added
-      @files_added
-    when :files_deleted
-      @files_deleted
-    when :lines_added
-      @lines_added
-    when :lines_deleted
-      @lines_deleted
-    when :files
-      @files
-    when :lines
-      @lines
-    else
-      nil
-    end
-  end
 end
 
 class AuthorsStats < GeneralStats
@@ -64,12 +43,6 @@ class AuthorsStats < GeneralStats
     @authors[name] ||= GeneralStats.new
     @authors[name].update(commit)
   end
-
-  def [](idx)
-    return super(idx) if idx.is_a? Symbol
-
-    @authors[idx]
-  end
 end
 
 class YearStats
@@ -83,22 +56,6 @@ class YearStats
     year = '%04d' % commit[:time].year
     @years[year] ||= AuthorsStats.new
     @years[year].update(commit)
-  end
-
-  def [](idx)
-    @years[idx]
-  end
-
-  def diag(attr)
-    x = Array.new
-    y = Array.new
-
-    @years.each do |year, stat|
-      x << year.to_i
-      y << stat[attr]
-    end
-
-    [x, y]
   end
 end
 
@@ -114,22 +71,6 @@ class MonthStats
     @months[month] ||= AuthorsStats.new
     @months[month].update(commit)
   end
-
-  def [](idx)
-    @months[idx]
-  end
-
-  def diag(attr)
-    x = Array.new
-    y = Array.new
-
-    @months.each do |month, stat|
-      x << month.to_i
-      y << stat[attr]
-    end
-
-    [x, y]
-  end
 end
 
 class YearMonthStats
@@ -144,21 +85,36 @@ class YearMonthStats
     @yearmonths[yearmonth] ||= AuthorsStats.new
     @yearmonths[yearmonth].update(commit)
   end
+end
 
-  def [](idx)
-    @yearmonths[idx]
+class HourStats < GeneralStats
+  attr_reader :hours
+
+  def initialize
+    super
+    @hours = Hash.new
   end
 
-  def diag(attr)
-    x = Array.new
-    y = Array.new
+  def update(commit)
+    super(commit)
 
-    @yearmonths.each do |yearmonth, stat|
-      x << yearmonth
-      y << stat[attr]
-    end
+    hour = commit[:time].hour
+    @hours[hour] ||= GeneralStats.new
+    @hours[hour].update(commit)
+  end
+end
 
-    [x, y]
+class DayOfWeekStats
+  attr_reader :days
+
+  def initialize
+    @days = Hash.new
+  end
+
+  def update(commit)
+    day = commit[:time].wday
+    @days[day] ||= HourStats.new
+    @days[day].update(commit)
   end
 end
 

@@ -1,5 +1,5 @@
 class Renderer
-  class Helper
+  class HamlHelper
     attr_reader :stats
 
     def initialize(templatedir, stats)
@@ -25,6 +25,20 @@ class Renderer
     end
   end
 
+  class PlotHelper
+    attr_reader :outdir
+    attr_reader :stats
+
+    def initialize(outdir, stats)
+      @outdir = outdir
+      @stats = stats
+    end
+
+    def run(lines)
+      eval(lines)
+    end
+  end
+
   def initialize(templatedir, outdir)
     @templatedir = templatedir
     @outdir = outdir
@@ -41,7 +55,7 @@ class Renderer
       if ext == '.haml'
         lines = IO::readlines(File.join(@templatedir, file)).join('')
 
-        helper = Helper.new(@templatedir, stats)
+        helper = HamlHelper.new(@templatedir, stats)
 
         engine = Haml::Engine.new(lines)
         lines = engine.render(helper)
@@ -71,6 +85,10 @@ class Renderer
         lines = engine.render
 
         File.new(File.join(@outdir, File.basename(file, '.scss') + '.css'), 'w').write(lines)
+      elsif ext == '.plot'
+        lines = IO::readlines(File.join(@templatedir, file)).join('')
+
+        PlotHelper.new(@outdir, stats).run(lines)
       else
         File.copy(File.join(@templatedir, file), @outdir)
       end

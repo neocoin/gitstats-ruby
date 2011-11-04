@@ -1,0 +1,88 @@
+- layout :default
+:javascript
+  $(document).ready(function() {
+    $("#year_table").tablesorter({sortList: [[0, 0]]});
+    $("#month_table").tablesorter({sortList: [[0, 0]]});
+    $("#yearmonth_table").tablesorter({sortList: [[0, 0]]});
+  });
+%h1 Hour of day
+%img{ :src => 'commits_per_hour.png' }
+%h1 Day of week
+%img{ :src => 'commits_per_wday.png' }
+%h1 Hour of week
+%table
+  %thead
+    %tr
+      %th Weekday
+      - for i in 0..23
+        %th= i
+  %tbody
+    - for wday in 0..6
+      %tr
+        %th= wday
+        - for hour in 0..23
+          - d = stats.wday_stats.days[wday]
+          - s = d.nil? ? nil : d.hours[hour]
+          %td= s.nil? ? '' : s.commits
+%h1 Commits by year
+%img{ :src => 'commits_per_year.png' }
+%table#year_table.tablesorter
+  %thead
+    %tr
+      %th Year
+      %th Commits
+      %th Files added
+      %th Files deleted
+      %th Lines added
+      %th Lines deleted
+  %tbody
+    - stats.year_stats.years.each do |year, commits|
+      %tr
+        %td&= year
+        %td&= commits.commits
+        %td&= commits.files_added
+        %td&= commits.files_deleted
+        %td&= commits.lines_added
+        %td&= commits.lines_deleted
+
+%h1 Commits by month of year
+%img{ :src => 'commits_per_month.png' }
+%table#month_table.tablesorter
+  %thead
+    %tr
+      %th Month
+      %th Commits
+      %th Files added
+      %th Files deleted
+      %th Lines added
+      %th Lines deleted
+  %tbody
+    - stats.month_stats.months.each do |month, commits|
+      %tr
+        %td&= month
+        %td&= commits.commits
+        %td&= commits.files_added
+        %td&= commits.files_deleted
+        %td&= commits.lines_added
+        %td&= commits.lines_deleted
+
+%h1 Commits by month/year
+%img{ :src => 'commits_per_yearmonth.png' }
+%table#yearmonth_table.tablesorter
+  %thead
+    %tr
+      %th Year-Month
+      %th Commits
+      %th Files added
+      %th Files deleted
+      %th Lines added
+      %th Lines deleted
+  %tbody
+    - stats.yearmonth_stats.yearmonths.each do |yearmonth, commits|
+      %tr
+        %td&= yearmonth
+        %td&= commits.commits
+        %td&= commits.files_added
+        %td&= commits.files_deleted
+        %td&= commits.lines_added
+        %td&= commits.lines_deleted
