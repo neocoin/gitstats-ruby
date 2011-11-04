@@ -8,8 +8,10 @@ class StatGen
   attr_reader :hour_stats
   attr_reader :wday_stats
 
-  def initialize
+  def initialize(debug = false)
     @repos = Array.new
+
+    @debug = debug
 
     @num_authors = nil
     @num_commits = nil
@@ -22,11 +24,15 @@ class StatGen
   end
 
   def add(directory, ref = 'HEAD')
-    @repos << Git.new(directory, ref)
+    @repos << Git.new(directory, ref, @debug)
   end
 
-  def <<(directory)
-    add(directory)
+  def <<(value)
+    if value.is_a?(Array)
+      add(value[0], value[1])
+    else
+      add(value)
+    end
   end
 
   def calc
@@ -40,8 +46,12 @@ class StatGen
     @wday_stats = DayOfWeekStats.new
 
     @repos.each do |repo|
+      puts "repository #{repo.base} ..."
       @num_authors += repo.num_authors
       repo.get_commits do |commit|
+        next if commit[:time] > Time.now
+        next if (Time.now - commit[:time]) > (10 * 365 * 24 * 60 * 60)
+        puts "  commit #{@num_commits} ..." if (@num_commits % 100) == 0
         @num_commits += 1
         @author_stats.update(commit)
         @year_stats.update(commit)
