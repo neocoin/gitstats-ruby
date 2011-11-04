@@ -9,7 +9,6 @@
     - max = stats.wday_stats.days.inject(0) do |r, i|
       - i[1].hours.inject(r) do |r2, i2|
         - i2[1].commits > r2 ? i2[1].commits : r2
-    = max
     - for wday in 0..6
       %tr
         %th= wday
