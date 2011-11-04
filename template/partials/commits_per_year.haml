@@ -1,6 +1,6 @@
 :javascript
   $(document).ready(function() {
-    $("#year_table").tablesorter({sortList: [[0, 0]]});
+    $("#year_table").tablesorter({sortList: [[0, 1]]});
   });
 
 %h2.blockheader
@@ -19,7 +19,7 @@
           %th Lines added
           %th Lines deleted
       %tbody
-        - stats.year_stats.years.each do |year, commits|
+        - stats.year_stats.each do |year, commits|
           %tr
             %td&= year
             %td&= commits.commits

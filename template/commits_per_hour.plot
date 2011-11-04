@@ -15,7 +15,7 @@ Gnuplot.open do |gp|
     x = Array.new
     y = Array.new
 
-    stats.hour_stats.hours.sort.each do |hour, stats|
+    stats.hour_stats.sort.each do |hour, stats|
       x << hour
       y << stats.commits
     end

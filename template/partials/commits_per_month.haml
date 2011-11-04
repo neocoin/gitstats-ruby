@@ -18,7 +18,7 @@
           %th Lines added
           %th Lines deleted
       %tbody
-        - stats.month_stats.months.each do |month, commits|
+        - stats.month_stats.each do |month, commits|
           %tr
             %td&= month
             %td&= commits.commits

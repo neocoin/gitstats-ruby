@@ -1,3 +1,9 @@
+module StatsHash
+  def method_missing(method, *args, &block)
+    @hash.send(method, *args, &block)
+  end
+end
+
 class GeneralStats
   attr_reader :commits
   attr_reader :files_added
@@ -39,92 +45,116 @@ class GeneralStats
 end
 
 class AuthorsStats < GeneralStats
-  attr_reader :authors
+  include StatsHash
 
   def initialize
     super
-    @authors = Hash.new
+    @hash = Hash.new
   end
 
   def update(commit)
     super(commit)
 
     name = "#{commit[:name]} <#{commit[:email]}>"
-    @authors[name] ||= GeneralStats.new
-    @authors[name].update(commit)
+    @hash[name] ||= GeneralStats.new
+    @hash[name].update(commit)
+  end
+
+  def to_h
+    @hash
   end
 end
 
 class YearStats
-  attr_reader :years
+  include StatsHash
 
   def initialize
-    @years = Hash.new
+    @hash = Hash.new
   end
 
   def update(commit)
     year = '%04d' % commit[:time].year
-    @years[year] ||= AuthorsStats.new
-    @years[year].update(commit)
+    @hash[year] ||= AuthorsStats.new
+    @hash[year].update(commit)
+  end
+
+  def to_h
+    @hash
   end
 end
 
 class MonthStats
-  attr_reader :months
+  include StatsHash
 
   def initialize
-    @months = Hash.new
+    @hash = Hash.new
   end
 
   def update(commit)
     month = '%02d' % commit[:time].month
-    @months[month] ||= AuthorsStats.new
-    @months[month].update(commit)
+    @hash[month] ||= AuthorsStats.new
+    @hash[month].update(commit)
+  end
+
+  def to_h
+    @hash
   end
 end
 
 class YearMonthStats
-  attr_reader :yearmonths
+  include StatsHash
 
   def initialize
-    @yearmonths = Hash.new
+    @hash = Hash.new
   end
 
   def update(commit)
     yearmonth = '%04d-%02d' % [commit[:time].year, commit[:time].month]
-    @yearmonths[yearmonth] ||= AuthorsStats.new
-    @yearmonths[yearmonth].update(commit)
+    @hash[yearmonth] ||= AuthorsStats.new
+    @hash[yearmonth].update(commit)
+  end
+
+  def to_h
+    @hash
   end
 end
 
 class HourStats < GeneralStats
-  attr_reader :hours
+  include StatsHash
 
   def initialize
     super
-    @hours = Hash.new
+    @hash = Hash.new
   end
 
   def update(commit)
     super(commit)
 
     hour = commit[:time].hour
-    @hours[hour] ||= GeneralStats.new
-    @hours[hour].update(commit)
+    @hash[hour] ||= GeneralStats.new
+    @hash[hour].update(commit)
+  end
+
+  def to_h
+    @hash
   end
 end
 
 class DayOfWeekStats
-  attr_reader :days
+  include StatsHash
 
   def initialize
-    @days = Hash.new
+    @hash = Hash.new
   end
 
   def update(commit)
     day = commit[:time].wday
-    @days[day] ||= HourStats.new
-    @days[day].update(commit)
+    @hash[day] ||= HourStats.new
+    @hash[day].update(commit)
+  end
+
+  def to_h
+    @hash
   end
 end
 

@@ -19,7 +19,7 @@
           %th First commit
           %th Last commit
       %tbody
-        - stats.author_stats.authors.each do |author, commits|
+        - stats.author_stats.sort.each do |author, commits|
           %tr
             %td&= author
             %td&= commits.commits

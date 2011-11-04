@@ -16,7 +16,7 @@ Gnuplot.open do |gp|
     labels = Array.new
     y = Array.new
 
-    stats.wday_stats.days.sort.each do |day, stats|
+    stats.wday_stats.sort.each do |day, stats|
       day = (day + 1) % 7
       names = [
         'Mon',

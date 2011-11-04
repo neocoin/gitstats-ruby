@@ -1,6 +1,6 @@
 :javascript
   $(document).ready(function() {
-    $("#yearmonth_table").tablesorter({sortList: [[0, 0]]});
+    $("#yearmonth_table").tablesorter({sortList: [[0, 1]]});
   });
 %h2.blockheader
   Commits by month/year
@@ -18,7 +18,7 @@
           %th Lines added
           %th Lines deleted
       %tbody
-        - stats.yearmonth_stats.yearmonths.each do |yearmonth, commits|
+        - stats.yearmonth_stats.each do |yearmonth, commits|
           %tr
             %td&= yearmonth
             %td&= commits.commits

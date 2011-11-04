@@ -15,7 +15,7 @@ Gnuplot.open do |gp|
     x = Array.new
     y = Array.new
 
-    stats.month_stats.months.each do |month, stats|
+    stats.month_stats.each do |month, stats|
       x << month
       y << stats.commits
     end

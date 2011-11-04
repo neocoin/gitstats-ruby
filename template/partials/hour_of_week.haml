@@ -10,15 +10,15 @@
           - for i in 0..23
             %th= i
       %tbody
-        - max = stats.wday_stats.days.inject(0) do |r, i|
-          - i[1].hours.inject(r) do |r2, i2|
+        - max = stats.wday_stats.inject(0) do |r, i|
+          - i[1].inject(r) do |r2, i2|
             - i2[1].commits > r2 ? i2[1].commits : r2
         - for wday in 0..6
           %tr
             %th= names[wday]
             - for hour in 0..23
-              - d = stats.wday_stats.days[wday]
-              - s = d.nil? ? nil : d.hours[hour]
+              - d = stats.wday_stats[wday]
+              - s = d.nil? ? nil : d[hour]
               - cnt = s.nil? ? 0 : s.commits
               - red = 128 * cnt / max + 127
               - if cnt == 0

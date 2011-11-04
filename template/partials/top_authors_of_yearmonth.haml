@@ -9,8 +9,8 @@
         %th Commits
         %th Total
       %tbody
-        - stats.yearmonth_stats.yearmonths.sort{ |a, b| b[0] <=> a[0] }.each do |yearmonth, authorstats|
-          - authors = authorstats.authors.sort{ |a, b| b[1].commits <=> a[1].commits }[0, 5]
+        - stats.yearmonth_stats.sort{ |a, b| b[0] <=> a[0] }.each do |yearmonth, authorstats|
+          - authors = authorstats.sort{ |a, b| b[1].commits <=> a[1].commits }[0, 5]
           - authors.each do |author|
             - c = author[1].commits
             - first = author == authors.first
@@ -18,4 +18,4 @@
               %td&= first ? yearmonth : ''
               %td&= author[0]
               %td&= '%d of %d (%.2f%%)' % [c, authorstats.commits.to_f, c * 100.0 / authorstats.commits.to_f]
-              %td&= first ? authorstats.authors.count : ''
+              %td&= first ? authorstats.count : ''
