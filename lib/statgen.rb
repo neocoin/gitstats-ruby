@@ -1,4 +1,5 @@
 class StatGen
+  attr_accessor :debug
   attr_reader :num_authors
   attr_reader :num_commits
   attr_reader :author_stats
@@ -22,6 +23,17 @@ class StatGen
     @yearmonth_stats = YearMonthStats.new
     @hour_stats = HourStats.new
     @wday_stats = DayOfWeekStats.new
+  end
+
+  def clear_repos
+    @repos = Array.new
+  end
+
+  def check_repostate
+    @repostate.keys.each do |base|
+      return false if @repos.find { |x| x.base == base }.nil?
+    end
+    true
   end
 
   def add(directory, ref = 'HEAD')

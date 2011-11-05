@@ -19,8 +19,8 @@ $options = {
   :template => 'template',
   :verbose => false,
   :debug => false,
-  :resume => false,
-  :statcache => 'statcache'
+  :cache => false,
+  :statcache => nil
 }
 
 parser = OptionParser.new do |opts|
@@ -34,8 +34,8 @@ parser = OptionParser.new do |opts|
     $options[:template] = arg
   end
 
-  opts.on('-r', '--[no-]resume', 'resume last run') do |arg|
-    $options[:resume] = arg
+  opts.on('-c', '--[no-]cache', 'use the cache file') do |arg|
+    $options[:cache] = arg
   end
 
   opts.on('-s', '--statcache=arg', 'statcache file to use') do |arg|
@@ -58,35 +58,52 @@ end
 
 parser.parse!
 
+if $options[:statcache].nil?
+  $options[:statcache] = File.join($options[:out], '.statcache')
+end
+
 stat = nil
-if $options[:resume]
+if $options[:cache]
   begin
+    puts 'trying to load cache ...'
     stat = Marshal::load(IO::readlines($options[:statcache]).join(''))
+    stat.clear_repos
   rescue
-    STDERR.puts 'Failed to load cache! Cannot resume!'
-    exit 1
   end
-else
+end
+
+if stat.nil?
   if ARGV.empty?
     puts parser
     exit 1
   end
 
-  stat = StatGen.new($options[:debug])
+  stat = StatGen.new
+end
 
-  ARGV.each do |path|
-    path, ref = path.split(':')
-    ref ||= 'HEAD'
-    stat << [path, ref]
+stat.debug = $options[:debug]
+
+ARGV.each do |path|
+  path, ref = path.split(':')
+  ref ||= 'HEAD'
+  stat << [path, ref]
+end
+
+if $options[:cache]
+  unless stat.check_repostate
+    puts 'cannot use cache when working on different repositories!'
+    exit 1
   end
 end
 
 begin
   stat.calc
 ensure
-  puts "writing cache ..."
-  cache = Marshal::dump(stat)
-  File.new($options[:statcache], 'w').write(cache)
+  if $options[:cache]
+    puts "writing cache ..."
+    cache = Marshal::dump(stat)
+    File.new($options[:statcache], 'w').write(cache)
+  end
 end
 
 renderer = Renderer.new($options[:template], $options[:out])
