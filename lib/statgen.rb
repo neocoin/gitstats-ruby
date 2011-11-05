@@ -2,8 +2,10 @@ class StatGen
   attr_accessor :verbose
   attr_accessor :debug
   attr_accessor :quiet
+  attr_reader :repos
   attr_reader :num_authors
   attr_reader :num_commits
+  attr_reader :general_stats
   attr_reader :author_stats
   attr_reader :year_stats
   attr_reader :month_stats
@@ -21,6 +23,7 @@ class StatGen
 
     @num_authors = 0
     @num_commits = 0
+    @general_stats = GeneralStats.new
     @author_stats = AuthorsStats.new
     @year_stats = YearStats.new
     @month_stats = MonthStats.new
@@ -73,6 +76,7 @@ class StatGen
         puts "    commit #{@num_commits} ..." if @verbose && ((@num_commits % 100) == 0)
 
         @num_commits += 1
+        @general_stats.update(commit)
         @author_stats.update(commit)
         @year_stats.update(commit)
         @month_stats.update(commit)

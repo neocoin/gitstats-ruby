@@ -1,0 +1,29 @@
+%h2.blockheader
+  Stats
+.blockcontainer
+  .blocktable
+    %table.simpletable
+      %tbody
+        %tr
+          %th Authors
+          %td= stats.num_authors
+        %tr
+          %th Commits
+          %td= stats.general_stats.commits
+        %tr
+          %th Files
+          %td= '%d (%d added, %d deleted)' % [stats.general_stats.files, stats.general_stats.files_added, stats.general_stats.files_deleted]
+        %tr
+          %th Lines
+          %td= '%d (%d added, %d deleted)' % [stats.general_stats.lines, stats.general_stats.lines_added, stats.general_stats.lines_deleted]
+        %tr
+          %th First commit
+          %td= stats.general_stats.first_commit.to_s
+        %tr
+          %th Last commit
+          %td= stats.general_stats.last_commit.to_s
+        %tr
+          %th Age
+          - age = ((stats.general_stats.last_commit - stats.general_stats.first_commit) / (24 * 60 * 60)).to_i
+          - active = stats.general_stats.days
+          %td= '%d / %d active days (%.2f%%)' % [active, age, active * 100.0 / age.to_f]

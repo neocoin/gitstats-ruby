@@ -21,6 +21,10 @@ class GeneralStats
   attr_reader :first_commit
   attr_reader :last_commit
 
+  def days
+    @days.size
+  end
+
   def initialize
     @commits = 0
     @files_added = 0
@@ -31,6 +35,7 @@ class GeneralStats
     @lines = 0
     @first_commit = nil
     @last_commit = nil
+    @days = Array.new
   end
 
   def update(commit)
@@ -47,6 +52,9 @@ class GeneralStats
 
     @first_commit = commit[:time] if commit[:time] < @first_commit
     @last_commit = commit[:time] if commit[:time] > @last_commit
+
+    day = commit[:time].year.to_s + commit[:time].month.to_s + commit[:time].day.to_s
+    @days << day unless @days.include? day
   end
 end
 

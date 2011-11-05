@@ -20,6 +20,13 @@ table {
   border: solid 1px black;
 }
 
+table.simpletable {
+  border: none;
+  tbody th {
+    text-align: left;
+  }
+}
+
 img {
   border: solid 1px black;
   margin-bottom: 10px;
