@@ -5,6 +5,14 @@ $blueprint-font-size: 12px;
 
 @include blueprint;
 
+@mixin gradientclass($from: green, $to: red) {
+  @for $i from 0 through 100 {
+    .gradient-#{$i} {
+      background-color: mix($to, $from, $i);
+    }
+  }
+}
+
 table {
   width: auto;
   border: solid 1px black;
@@ -62,4 +70,6 @@ tr.top {
   .blocktable {
   }
 }
+
+@include gradientclass(yellow, red);
 

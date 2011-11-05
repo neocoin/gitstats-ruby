@@ -20,8 +20,8 @@
               - d = stats.wday_stats[wday]
               - s = d.nil? ? nil : d[hour]
               - cnt = s.nil? ? 0 : s.commits
-              - red = 128 * cnt / max + 127
+              - percent = (100 * cnt / max).to_i
               - if cnt == 0
                 %td
               - else
-                %td{:style => "background-color: rgb(#{red}, 0, 0)"}= cnt
+                %td{:class => "gradient-#{percent}"}= cnt
