@@ -8,6 +8,14 @@
     %script{:type => 'text/javascript', :src => 'jquery.js'}
     %script{:type => 'text/javascript', :src => 'jquery.tablesorter.js'}
   %body
+    :javascript
+      $(document).ready(function() {
+        $(".toggleable").hide();
+        $(".toggle").click(function() {
+          $(this).toggleClass("active").next().slideToggle("slow");
+          return false;
+        });
+      });
     %ul
       %li
         %a{:href => 'index.html'} General

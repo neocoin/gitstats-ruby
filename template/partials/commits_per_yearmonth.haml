@@ -7,7 +7,8 @@
 .blockcontainer
   .blockdiagram
     %img{ :src => 'commits_per_yearmonth.png' }
-  .blocktable
+  %a.toggle{:href => '#'} Table
+  .blocktable.toggleable
     %table#yearmonth_table.tablesorter.striped
       %thead
         %tr

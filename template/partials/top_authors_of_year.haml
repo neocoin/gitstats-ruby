@@ -1,3 +1,4 @@
+- i = 0
 %h2.blockheader
   Author of year
 .blockcontainer
@@ -14,8 +15,18 @@
           - authors.each do |author|
             - c = author[1].commits
             - first = author == authors.first
-            %tr{:class => first ? 'top' : ''}
-              %td&= first ? year : ''
-              %td&= author[0]
-              %td&= '%d of %d (%.2f%%)' % [c, authorstats.commits.to_f, c * 100.0 / authorstats.commits.to_f]
-              %td&= first ? authorstats.count : ''
+            - i += 1 if first
+            %tr{:class => first ? 'top' : "yearauthor_sub#{i}"}
+              %td{:class => first ? "yearauthor_top#{i}" : ""}&= first ? year : ''
+              %td{:class => first ? "yearauthor_top#{i}" : ""}&= author[0]
+              %td{:class => first ? "yearauthor_top#{i}" : ""}&= '%d of %d (%.2f%%)' % [c, authorstats.commits.to_f, c * 100.0 / authorstats.commits.to_f]
+              %td{:class => first ? "yearauthor_top#{i}" : ""}&= first ? authorstats.count : ''
+- for j in 1...i
+  :javascript
+    $(document).ready(function() {
+      $(".yearauthor_sub#{j}").hide();
+      $(".yearauthor_top#{j}").click(function() {
+        $(".yearauthor_sub#{j}").toggle();
+        return false;
+      });
+    });
