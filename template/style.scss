@@ -1,4 +1,6 @@
 $blueprint-font-size: 12px;
+$menu-vpadding: 5px;
+$menu-hpadding: 10px;
 
 @import "compass/css3/border-radius";
 @import "blueprint";
@@ -25,6 +27,50 @@ img {
 
 tbody th {
   background-color: $blueprint-table-header-color;
+}
+
+#menu {
+  @include clearfix;
+  @include border-radius;
+
+  background-color: $blueprint-table-header-color;
+
+  padding: {
+    left: $menu-hpadding;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: inline-block;
+    float: left;
+
+    padding: {
+      top: $menu-vpadding;
+      bottom: $menu-vpadding;
+      left: $menu-hpadding;
+      right: $menu-hpadding;
+    }
+
+    border-right: solid 1px white;
+
+    &.first {
+      padding-left: 0;
+    }
+    &.last {
+      border: none;
+      box-shadow: none;
+    }
+  }
+
+  a {
+    font-size: 150%;
+    text-decoration: none;
+  }
 }
 
 table.tablesorter {
@@ -60,6 +106,7 @@ tr.top {
 
 .blockheader {
   @include border-radius;
+  padding-left: $menu-hpadding;
   background-color: $blueprint-table-header-color;
 }
 
