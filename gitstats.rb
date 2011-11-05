@@ -18,7 +18,7 @@ require 'lib/renderer'
 
 $options = {
   :out => 'out',
-  :template => 'template',
+  :template => nil,
   :verbose => false,
   :debug => false,
   :quiet => false,
@@ -71,9 +71,8 @@ if $options[:quiet] && $options[:verbose]
   exit 1
 end
 
-if $options[:statcache].nil?
-  $options[:statcache] = File.join($options[:out], '.statcache')
-end
+$options[:statcache] = File.join($options[:out], '.statcache') if $options[:statcache].nil?
+$options[:template] = File.join(File.dirname($0), 'template') if $options[:template].nil?
 
 stat = nil
 if $options[:cache]
