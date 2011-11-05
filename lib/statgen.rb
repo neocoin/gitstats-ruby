@@ -1,5 +1,7 @@
 class StatGen
+  attr_accessor :verbose
   attr_accessor :debug
+  attr_accessor :quiet
   attr_reader :num_authors
   attr_reader :num_commits
   attr_reader :author_stats
@@ -9,11 +11,13 @@ class StatGen
   attr_reader :hour_stats
   attr_reader :wday_stats
 
-  def initialize(debug = false)
+  def initialize
     @repos = Array.new
     @repostate = Hash.new
 
-    @debug = debug
+    @verbose = false
+    @debug = false
+    @quiet = false
 
     @num_authors = 0
     @num_commits = 0
@@ -55,7 +59,7 @@ class StatGen
         :last => nil
       }
 
-      puts "repository #{repo.base} ..."
+      puts "  repository '#{repo.base}' ..." unless @quiet
 
       if !@repostate[repo.base][:authors]
         @num_authors += repo.num_authors
@@ -66,7 +70,7 @@ class StatGen
         next if commit[:time] > Time.now
         next if (Time.now - commit[:time]) > (10 * 365 * 24 * 60 * 60)
 
-        puts "  commit #{@num_commits} ..." if (@num_commits % 100) == 0
+        puts "    commit #{@num_commits} ..." if @verbose && ((@num_commits % 100) == 0)
 
         @num_commits += 1
         @author_stats.update(commit)

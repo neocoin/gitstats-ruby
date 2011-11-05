@@ -19,6 +19,7 @@ $options = {
   :template => 'template',
   :verbose => false,
   :debug => false,
+  :quiet => false,
   :cache => false,
   :statcache => nil
 }
@@ -46,6 +47,10 @@ parser = OptionParser.new do |opts|
     $options[:verbose] = arg
   end
 
+  opts.on('-q', '--[no-]quiet', 'quiet mode') do |arg|
+    $options[:quiet] = arg
+  end
+
   opts.on('-d', '--[no-]debug', 'print debug messages') do |arg|
     $options[:debug] = arg
   end
@@ -58,6 +63,12 @@ end
 
 parser.parse!
 
+
+if $options[:quiet] && $options[:verbose]
+  STDERR.puts 'cannot specify --quiet and --verbose at the same time!'
+  exit 1
+end
+
 if $options[:statcache].nil?
   $options[:statcache] = File.join($options[:out], '.statcache')
 end
@@ -65,7 +76,7 @@ end
 stat = nil
 if $options[:cache]
   begin
-    puts 'trying to load cache ...'
+    puts 'trying to load cache ...' unless $options[:quiet]
     stat = Marshal::load(IO::readlines($options[:statcache]).join(''))
     stat.clear_repos
   rescue
@@ -81,7 +92,9 @@ if stat.nil?
   stat = StatGen.new
 end
 
+stat.verbose = $options[:verbose]
 stat.debug = $options[:debug]
+stat.quiet = $options[:quiet]
 
 ARGV.each do |path|
   path, ref = path.split(':')
@@ -96,16 +109,18 @@ if $options[:cache]
   end
 end
 
+puts 'fetching statistics ...' unless $options[:quiet]
 begin
   stat.calc
 ensure
   if $options[:cache]
-    puts "writing cache ..."
+    puts 'writing cache ...' unless $options[:quiet]
     cache = Marshal::dump(stat)
     File.new($options[:statcache], 'w').write(cache)
   end
 end
 
-renderer = Renderer.new($options[:template], $options[:out])
+puts 'rendering ...' unless $options[:quiet]
+renderer = Renderer.new($options[:template], $options[:out], $options[:verbose])
 renderer.render(stat)
 
