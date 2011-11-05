@@ -19,7 +19,8 @@ $options = {
   :template => 'template',
   :verbose => false,
   :debug => false,
-  :resume => false
+  :resume => false,
+  :statcache => 'statcache'
 }
 
 parser = OptionParser.new do |opts|
@@ -35,6 +36,10 @@ parser = OptionParser.new do |opts|
 
   opts.on('-r', '--[no-]resume', 'resume last run') do |arg|
     $options[:resume] = arg
+  end
+
+  opts.on('-s', '--statcache=arg', 'statcache file to use') do |arg|
+    $options[:statcache] = arg
   end
 
   opts.on('-v', '--[no-]verbose', 'verbose mode') do |arg|
@@ -56,7 +61,7 @@ parser.parse!
 stat = nil
 if $options[:resume]
   begin
-    stat = Marshal::load(IO::readlines('cache').join(''))
+    stat = Marshal::load(IO::readlines($options[:statcache]).join(''))
   rescue
     STDERR.puts 'Failed to load cache! Cannot resume!'
     exit 1
@@ -81,7 +86,7 @@ begin
 ensure
   puts "writing cache ..."
   cache = Marshal::dump(stat)
-  File.new('cache', 'w').write(cache)
+  File.new($options[:statcache], 'w').write(cache)
 end
 
 renderer = Renderer.new($options[:template], $options[:out])
