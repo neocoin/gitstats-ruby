@@ -1,0 +1,5 @@
+#toc
+  %ul
+    - blocks.each do |name|
+      %li
+        %a{:href => "##{name.to_s}"}= label(name)

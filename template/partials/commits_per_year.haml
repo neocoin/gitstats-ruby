@@ -2,10 +2,7 @@
   $(document).ready(function() {
     $("#year_table").tablesorter({sortList: [[0, 1]]});
   });
-
-%h2.blockheader
-  Commits by year
-.blockcontainer
+- block(:commits_per_year) do
   .blockdiagram
     %img{ :src => 'commits_per_year.png' }
   %a.toggle{:href => '#'} Table

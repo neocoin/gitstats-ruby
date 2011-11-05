@@ -15,6 +15,10 @@ $menu-hpadding: 10px;
   }
 }
 
+a {
+  text-decoration: none;
+}
+
 table {
   width: auto;
   border: solid 1px black;
@@ -76,7 +80,6 @@ tbody th {
 
   a {
     font-size: 150%;
-    text-decoration: none;
   }
 }
 

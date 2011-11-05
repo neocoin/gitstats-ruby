@@ -2,9 +2,7 @@
   $(document).ready(function() {
     $("#month_table").tablesorter({sortList: [[0, 0]]});
   });
-%h2.blockheader
-  Commits by month of year
-.blockcontainer
+- block(:commits_per_month) do
   .blockdiagram
     %img{ :src => 'commits_per_month.png' }
   %a.toggle{:href => '#'} Table

@@ -2,9 +2,7 @@
   $(document).ready(function() {
     $("#author_table").tablesorter({sortList: [[1, 1]]});
   });
-%h2.blockheader
-  Authors
-.blockcontainer
+- block(:authors) do
   .blocktable
     %table#author_table.tablesorter.striped
       %thead
