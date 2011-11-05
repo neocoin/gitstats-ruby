@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <title>
+      Statistics
+    </title>
+    <link href='style.css' rel='stylesheet' type='text/css' />
+    <script src='jquery.js' type='text/javascript'></script>
+    <script src='jquery.tablesorter.js' type='text/javascript'></script>
+  </head>
+  <body>
+    <script type='text/javascript'>
+      //<![CDATA[
+        $(document).ready(function() {
+          $(".toggleable").hide();
+          $(".toggle").click(function() {
+            $(this).toggleClass("active").next().slideToggle("slow");
+            return false;
+          });
+        });
+      //]]>
+    </script>
+    <div id='menu'>
+      <ul>
+        <li class='first'>
+          <a href='index.html'>General</a>
+        </li>
+        <li>
+          <a href='activity.html'>Activity</a>
+        </li>
+        <li>
+          <a href='authors.html'>Authors</a>
+        </li>
+        <li>
+          <a href='files.html'>Files</a>
+        </li>
+        <li class='last'>
+          <a href='lines.html'>Lines</a>
+        </li>
+      </ul>
+    </div>
+    <div id='content'>
+      <div id='toc'>
+        <h2>
+          <a name='toc'>Blocks</a>
+        </h2>
+        <ul>
+          <li>
+            <a href='#files_by_yearmonth'>Files by year and month</a>
+          </li>
+          <li>
+            <a href='#filechanges_by_yearmonth'>Filechanges by year and month</a>
+          </li>
+        </ul>
+      </div>
+      <h2 class='blockheader'>
+        <a name='files_by_yearmonth'>Files by year and month</a>
+      </h2>
+      
+      <div id="block-files_by_yearmonth" class="blockcontainer">
+      <div class='blockdiagram'>
+        <img src='files_by_yearmonth.png' />
+      </div>
+      </div>
+      <h2 class='blockheader'>
+        <a name='filechanges_by_yearmonth'>Filechanges by year and month</a>
+      </h2>
+      
+      <div id="block-filechanges_by_yearmonth" class="blockcontainer">
+      <div class='blockdiagram'>
+        <img src='filechanges_by_yearmonth.png' />
+      </div>
+      </div>
+    </div>
+  </body>
+</html>
