@@ -22,6 +22,6 @@
           %td= stats.general_stats.last_commit.to_s
         %tr
           %th Age
-          - age = ((stats.general_stats.last_commit - stats.general_stats.first_commit) / (24 * 60 * 60)).to_i
+          - age = ((stats.general_stats.last_commit - stats.general_stats.first_commit + 86399) / 86400).to_i
           - active = stats.general_stats.days
           %td= '%d / %d active days (%.2f%%)' % [active, age, active * 100.0 / age.to_f]
