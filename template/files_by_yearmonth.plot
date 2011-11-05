@@ -17,9 +17,11 @@ Gnuplot.open do |gp|
     x = Array.new
     y = Array.new
 
+    files = 0
     stats.yearmonth_stats.sort.each do |yearmonth, stats|
+      files += stats.files
       x << yearmonth
-      y << stats.files
+      y << files
     end
 
     plot.data << Gnuplot::DataSet.new([x, y]) do |ds|
