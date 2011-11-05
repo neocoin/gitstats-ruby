@@ -1,29 +1,13 @@
-require "gnuplot"
+defplot do |plotter|
+  plotter.plot.xrange '[-0.5:23.5]'
+  plotter.plot.xtics '1'
+  plotter.plot.ylabel 'Commits'
 
-Gnuplot.open do |gp|
-  Gnuplot::Plot.new(gp) do |plot|
-    plot.terminal 'png transparent size 640,240'
-    plot.size '1.0,1.0'
-    plot.output File.join(outdir, 'commits_per_hour.png')
-    plot.nokey
-    plot.xrange '[0.5:24.5]'
-    plot.xtics '1'
-    plot.grid 'y'
-    plot.ylabel 'Commits'
-    plot.yrange '[0:]'
-
-    x = Array.new
-    y = Array.new
-
+  plotter.add_boxes(:setrange => false, :limitlabels => false) do |x, l, y|
     stats.hour_stats.sort.each do |hour, stats|
       x << hour
+      l << hour
       y << stats.commits
-    end
-
-    plot.data << Gnuplot::DataSet.new([x, y]) do |ds|
-      ds.using = '1:2:(0.5)'
-      ds.with = 'boxes fs solid'
-      ds.notitle
     end
   end
 end

@@ -4,6 +4,7 @@ require 'rubygems'
 require 'haml'
 require 'sass'
 require 'compass'
+require 'gnuplot'
 require 'ftools'
 require 'optparse'
 

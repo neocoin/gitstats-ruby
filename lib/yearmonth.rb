@@ -22,7 +22,7 @@ class YearMonth
   end
 
   def to_i
-    @year * 100 + @month
+    @year * 12 + @month - 1
   end
 
   def to_s
