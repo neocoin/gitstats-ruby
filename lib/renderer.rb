@@ -7,6 +7,10 @@ class Renderer
       @stats = stats
       @verbose = verbose
       @layout = nil
+
+      Dir.glob(File.join(templatedir, 'helpers', '*.rb')).sort.each do |file|
+        eval(IO::readlines(file).join(''))
+      end
     end
 
     def partial(name, hash = {})
