@@ -16,8 +16,9 @@ Gnuplot.open do |gp|
     labels = Array.new
     y = Array.new
 
-    stats.wday_stats.sort.each do |day, stats|
-      day = (day + 1) % 7
+    for i in 0..6
+      s = stats.wday_stats[i]
+      day = (i + 1) % 7
       names = [
         'Mon',
         'Tue',
@@ -29,7 +30,7 @@ Gnuplot.open do |gp|
       ]
       x << day + 1
       labels << names[day]
-      y << stats.commits
+      y << (s.nil? ? 0 : s.commits)
     end
 
     plot.data << Gnuplot::DataSet.new([x, labels, y]) do |ds|

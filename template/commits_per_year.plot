@@ -18,6 +18,7 @@ Gnuplot.open do |gp|
       x << year
       y << stats.commits
     end
+    plot.xrange "[#{x.first - 1}:#{x.last + 1}]"
 
     plot.data << Gnuplot::DataSet.new([x, y]) do |ds|
       ds.using = '1:2:(0.5)'

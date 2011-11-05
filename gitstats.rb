@@ -9,6 +9,7 @@ require 'optparse'
 
 $: << File.dirname($0)
 
+require 'lib/yearmonth'
 require 'lib/git'
 require 'lib/stats'
 require 'lib/statgen'

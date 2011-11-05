@@ -13,15 +13,33 @@ Gnuplot.open do |gp|
     plot.yrange '[0:]'
 
     x = Array.new
+    label = Array.new
     y = Array.new
 
-    stats.month_stats.each do |month, stats|
+    names = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ]
+
+    for month in 1..12
+      s = stats.month_stats[month]
       x << month
-      y << stats.commits
+      label << names[month - 1]
+      y << (s.nil? ? 0 : s.commits)
     end
 
-    plot.data << Gnuplot::DataSet.new([x, y]) do |ds|
-      ds.using = '1:2:(0.5)'
+    plot.data << Gnuplot::DataSet.new([x, label, y]) do |ds|
+      ds.using = '1:3:(0.5):xtic(2)'
       ds.with = 'boxes fs solid'
       ds.notitle
     end

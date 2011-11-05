@@ -2,6 +2,12 @@ module StatsHash
   def method_missing(method, *args, &block)
     @hash.send(method, *args, &block)
   end
+
+  def each_sorted
+    @hash.keys.sort.each do |key|
+      yield key, @hash[key]
+    end
+  end
 end
 
 class GeneralStats
@@ -59,10 +65,6 @@ class AuthorsStats < GeneralStats
     @hash[name] ||= GeneralStats.new
     @hash[name].update(commit)
   end
-
-  def to_h
-    @hash
-  end
 end
 
 class YearStats
@@ -73,13 +75,9 @@ class YearStats
   end
 
   def update(commit)
-    year = '%04d' % commit[:time].year
+    year = commit[:time].year
     @hash[year] ||= AuthorsStats.new
     @hash[year].update(commit)
-  end
-
-  def to_h
-    @hash
   end
 end
 
@@ -91,13 +89,9 @@ class MonthStats
   end
 
   def update(commit)
-    month = '%02d' % commit[:time].month
+    month = commit[:time].month
     @hash[month] ||= AuthorsStats.new
     @hash[month].update(commit)
-  end
-
-  def to_h
-    @hash
   end
 end
 
@@ -109,13 +103,9 @@ class YearMonthStats
   end
 
   def update(commit)
-    yearmonth = '%04d-%02d' % [commit[:time].year, commit[:time].month]
+    yearmonth = YearMonth.new(commit[:time])
     @hash[yearmonth] ||= AuthorsStats.new
     @hash[yearmonth].update(commit)
-  end
-
-  def to_h
-    @hash
   end
 end
 
@@ -134,10 +124,6 @@ class HourStats < GeneralStats
     @hash[hour] ||= GeneralStats.new
     @hash[hour].update(commit)
   end
-
-  def to_h
-    @hash
-  end
 end
 
 class DayOfWeekStats
@@ -151,10 +137,6 @@ class DayOfWeekStats
     day = commit[:time].wday
     @hash[day] ||= HourStats.new
     @hash[day].update(commit)
-  end
-
-  def to_h
-    @hash
   end
 end
 
