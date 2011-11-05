@@ -21,7 +21,7 @@
               %td{:class => first ? "yearauthor_top#{i}" : ""}&= author[0]
               %td{:class => first ? "yearauthor_top#{i}" : ""}&= '%d of %d (%.2f%%)' % [c, authorstats.commits.to_f, c * 100.0 / authorstats.commits.to_f]
               %td{:class => first ? "yearauthor_top#{i}" : ""}&= first ? authorstats.count : ''
-- for j in 1...i
+- for j in 1..i
   :javascript
     $(document).ready(function() {
       $(".yearauthor_sub#{j}").hide();
