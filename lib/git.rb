@@ -12,11 +12,17 @@ class Git
     sh("git shortlog -s #{@ref}").split(/\n/).count
   end
 
-  def get_commits(&block)
+  def get_commits(last = nil, &block)
     commits = Array.new if block.nil?
 
+    if last.nil?
+      range = @ref
+    else
+      range = "#{last}..#{@ref}"
+    end
+
     commit = nil
-    sh("git log --summary --numstat --pretty=format:\"HEADER: %at %ai %H %T %aN <%aE>\" #{@ref}") do |line|
+    sh("git log --reverse --summary --numstat --pretty=format:\"HEADER: %at %ai %H %T %aN <%aE>\" #{range}") do |line|
       if line =~ /^HEADER:/
         parts = line.split(' ', 8)
         parts.shift

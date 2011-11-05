@@ -10,17 +10,18 @@ class StatGen
 
   def initialize(debug = false)
     @repos = Array.new
+    @repostate = Hash.new
 
     @debug = debug
 
-    @num_authors = nil
-    @num_commits = nil
-    @author_stats = nil
-    @year_stats = nil
-    @month_stats = nil
-    @yearmonth_stats = nil
-    @hour_stats = nil
-    @wday_stats = nil
+    @num_authors = 0
+    @num_commits = 0
+    @author_stats = AuthorsStats.new
+    @year_stats = YearStats.new
+    @month_stats = MonthStats.new
+    @yearmonth_stats = YearMonthStats.new
+    @hour_stats = HourStats.new
+    @wday_stats = DayOfWeekStats.new
   end
 
   def add(directory, ref = 'HEAD')
@@ -36,22 +37,25 @@ class StatGen
   end
 
   def calc
-    @num_authors = 0
-    @num_commits = 0
-    @author_stats = AuthorsStats.new
-    @year_stats = YearStats.new
-    @month_stats = MonthStats.new
-    @yearmonth_stats = YearMonthStats.new
-    @hour_stats = HourStats.new
-    @wday_stats = DayOfWeekStats.new
-
     @repos.each do |repo|
+      @repostate[repo.base] ||= {
+        :authors => false,
+        :last => nil
+      }
+
       puts "repository #{repo.base} ..."
-      @num_authors += repo.num_authors
-      repo.get_commits do |commit|
+
+      if !@repostate[repo.base][:authors]
+        @num_authors += repo.num_authors
+        @repostate[repo.base][:authors] = true
+      end
+
+      repo.get_commits(@repostate[repo.base][:last]) do |commit|
         next if commit[:time] > Time.now
         next if (Time.now - commit[:time]) > (10 * 365 * 24 * 60 * 60)
+
         puts "  commit #{@num_commits} ..." if (@num_commits % 100) == 0
+
         @num_commits += 1
         @author_stats.update(commit)
         @year_stats.update(commit)
@@ -59,6 +63,8 @@ class StatGen
         @yearmonth_stats.update(commit)
         @hour_stats.update(commit)
         @wday_stats.update(commit)
+
+        @repostate[repo.base][:last] = commit[:hash]
       end
     end
   end
