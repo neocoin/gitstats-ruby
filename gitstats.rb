@@ -15,6 +15,10 @@ require 'lib/git'
 require 'lib/stats'
 require 'lib/statgen'
 require 'lib/renderer'
+require 'lib/renderer/haml'
+require 'lib/renderer/sass'
+require 'lib/renderer/gnuplot'
+
 
 $options = {
   :out => 'out',
