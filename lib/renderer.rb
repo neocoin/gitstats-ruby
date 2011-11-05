@@ -57,7 +57,8 @@ class Renderer
       def add_boxes(args = {})
         args = {
           :setrange => true,
-          :limitlabels => true
+          :limitlabels => true,
+          :labelcount => 15
         }.merge(args)
 
         x = Array.new
@@ -66,19 +67,7 @@ class Renderer
 
         yield x, l, y
 
-        if args[:limitlabels]
-          cnt = l.size
-          step = (cnt > 15) ? (cnt / 15).round.to_i : 1
-
-          i = 0
-          l.map! do |e|
-            unless ((i % step) == 0) || (i == (cnt - 1))
-              e = '""'
-            end
-            i += 1
-            e
-          end
-        end
+        limitlabels(l, args[:labelcount]) if args[:limitlabels]
 
         @plot.xrange "[\"#{x.first - 1}\":\"#{x.last + 1}\"]" if args[:setrange]
 
@@ -93,7 +82,8 @@ class Renderer
         args = {
           :setrange => true,
           :limitlabels => true,
-          :firstlabel => ''
+          :labelcount => 15,
+          :firstlabel => '""'
         }.merge(args)
 
         x = Array.new
@@ -102,24 +92,12 @@ class Renderer
 
         yield x, l, y
 
-        if args[:limitlabels]
-          cnt = l.size
-          step = (cnt > 15) ? (cnt / 15).round.to_i : 1
-
-          i = 0
-          l.map! do |e|
-            unless ((i % step) == 0) || (i == (cnt - 1))
-              e = '""'
-            end
-            i += 1
-            e
-          end
-        end
+        limitlabels(l, args[:labelcount]) if args[:limitlabels]
 
         @plot.xrange "[\"#{x.first - 1}\":\"#{x.last + 1}\"]" if args[:setrange]
 
         unless args[:firstlabel].nil?
-          x.insert(0, x.first - 1);
+          x.insert(0, x.first - 1)
           l.insert(0, args[:firstlabel])
           y.insert(0, 0)
         end
@@ -129,6 +107,22 @@ class Renderer
           ds.with = 'steps'
           ds.notitle
         end
+      end
+
+      private
+      def limitlabels(l, maxcount)
+        cnt = l.size
+        step = (cnt > maxcount) ? (cnt / maxcount + 0.5).round.to_i : 1
+
+        i = 0
+        l.map! do |e|
+          unless ((i % step) == 0) || (i == (cnt - 1))
+            e = '""'
+          end
+          i += 1
+          e
+        end
+        l
       end
     end
 
