@@ -4,10 +4,11 @@ defplot do |plotter|
   plotter.plot.ylabel 'Commits'
 
   plotter.add_boxes(:setrange => false, :limitlabels => false) do |x, l, y|
-    stats.hour_stats.sort.each do |hour, stats|
+    for hour in 0..23
+      s = stats.hour_stats[hour]
       x << hour
       l << hour
-      y << stats.commits
+      y << (s.nil? ? 0 : s.commits)
     end
   end
 end
