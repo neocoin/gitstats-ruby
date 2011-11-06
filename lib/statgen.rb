@@ -2,6 +2,8 @@ class StatGen
   attr_accessor :verbose
   attr_accessor :debug
   attr_accessor :quiet
+  attr_accessor :future
+  attr_accessor :maxage
   attr_reader :repos
   attr_reader :num_authors
   attr_reader :num_commits
@@ -20,6 +22,8 @@ class StatGen
     @verbose = false
     @debug = false
     @quiet = false
+    @future = true
+    @maxage = 0
 
     @num_authors = 0
     @num_commits = 0
@@ -70,8 +74,8 @@ class StatGen
       end
 
       repo.get_commits(@repostate[repo.base][:last]) do |commit|
-        next if commit[:time] > Time.now
-        next if (Time.now - commit[:time]) > (10 * 365 * 24 * 60 * 60)
+        next if !@future && (commit[:time] > Time.now)
+        next if (@maxage > 0) && ((Time.now - commit[:time]) > @maxage)
 
         puts "    commit #{@num_commits} ..." if @verbose && ((@num_commits % 100) == 0)
 

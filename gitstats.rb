@@ -27,7 +27,9 @@ $options = {
   :debug => false,
   :quiet => false,
   :cache => false,
-  :statcache => nil
+  :statcache => nil,
+  :future => true,
+  :maxage => 0
 }
 
 parser = OptionParser.new do |opts|
@@ -47,6 +49,14 @@ parser = OptionParser.new do |opts|
 
   opts.on('-s', '--statcache=arg', 'statcache file to use') do |arg|
     $options[:statcache] = arg
+  end
+
+  opts.on('--[no-]future', 'count future commits') do |arg|
+    $options[:future] = arg
+  end
+
+  opts.on('-m', '--max-age=arg', Integer, 'set max age of commit in days') do |arg|
+    $options[:maxage] = arg
   end
 
   opts.on('-v', '--[no-]verbose', 'verbose mode') do |arg|
@@ -100,6 +110,8 @@ end
 stat.verbose = $options[:verbose]
 stat.debug = $options[:debug]
 stat.quiet = $options[:quiet]
+stat.future = $options[:future]
+stat.maxage = $options[:maxage]
 
 ARGV.each do |path|
   path, ref = path.split(':')
