@@ -34,16 +34,16 @@ class StatGen
 
     @num_authors = 0
     @num_commits = 0
-    @general_stats = GeneralStats.new
-    @author_stats = AuthorsStats.new
-    @year_stats = YearStats.new
-    @month_stats = MonthStats.new
-    @yearmonth_stats = YearMonthStats.new
-    @hour_stats = HourStats.new
-    @wday_stats = DayOfWeekStats.new
+    @general_stats = CommitStats.new
+    @author_stats = AuthorsCommitStats.new
+    @year_stats = YearCommitStats.new
+    @month_stats = MonthCommitStats.new
+    @yearmonth_stats = YearMonthCommitStats.new
+    @hour_stats = HourCommitStats.new
+    @wday_stats = DayOfWeekCommitStats.new
 
     @file_stats = FileStats.new
-    @filetype_stats = FileTypeStats.new
+    @filetype_stats = FileTypeFileStats.new
   end
 
   def clear_repos
@@ -72,7 +72,7 @@ class StatGen
   def calc
     # reset because of caching for now
     @file_stats = FileStats.new
-    @filetype_stats = FileTypeStats.new
+    @filetype_stats = FileTypeFileStats.new
 
     @repos.each do |repo|
       @repostate[repo.name] ||= {
