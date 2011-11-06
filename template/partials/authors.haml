@@ -17,7 +17,7 @@
           %th First commit
           %th Last commit
       %tbody
-        - stats.author_stats.sort.each do |author, commits|
+        - stats.author_stats.sort{ |a, b| a[1].commits <=> b[1].commits }.reverse[0, author_count].each do |author, commits|
           %tr
             %td&= author
             %td&= commits.commits
