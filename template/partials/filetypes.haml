@@ -1,0 +1,18 @@
+:javascript
+  $(document).ready(function() {
+    $("#filetypes_table").tablesorter({sortList: [[0, 0]]});
+  });
+- block(:filetypes) do
+  .blocktable
+    %table#filetypes_table.tablesorter.striped
+      %thead
+        %tr
+          %th Extension
+          %th Count
+          %th Size
+      %tbody
+        - stats.filetype_stats.each do |type, file|
+          %tr
+            %td&= type
+            %td&= file.count
+            %td&= file.size

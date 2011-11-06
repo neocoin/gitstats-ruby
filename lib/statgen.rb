@@ -6,8 +6,10 @@ class StatGen
   attr_accessor :maxage
   attr_accessor :commitcache
   attr_reader :repos
+
   attr_reader :num_authors
   attr_reader :num_commits
+
   attr_reader :general_stats
   attr_reader :author_stats
   attr_reader :year_stats
@@ -15,6 +17,9 @@ class StatGen
   attr_reader :yearmonth_stats
   attr_reader :hour_stats
   attr_reader :wday_stats
+
+  attr_reader :file_stats
+  attr_reader :filetype_stats
 
   def initialize
     @repos = Array.new
@@ -36,6 +41,9 @@ class StatGen
     @yearmonth_stats = YearMonthStats.new
     @hour_stats = HourStats.new
     @wday_stats = DayOfWeekStats.new
+
+    @file_stats = FileStats.new
+    @filetype_stats = FileTypeStats.new
   end
 
   def clear_repos
@@ -62,6 +70,10 @@ class StatGen
   end
 
   def calc
+    # reset because of caching for now
+    @file_stats = FileStats.new
+    @filetype_stats = FileTypeStats.new
+
     @repos.each do |repo|
       @repostate[repo.name] ||= {
         :authors => false,
@@ -91,6 +103,11 @@ class StatGen
         @wday_stats.update(commit)
 
         @repostate[repo.name][:last] = commit[:hash]
+      end
+
+      repo.get_files do |file|
+        @file_stats.update(file)
+        @filetype_stats.update(file)
       end
     end
   end

@@ -12,6 +12,9 @@
           %th Files
           %td= '%d (%d added, %d deleted)' % [stats.general_stats.files, stats.general_stats.files_added, stats.general_stats.files_deleted]
         %tr
+          %th Size
+          %td= '%d bytes' % stats.file_stats.size
+        %tr
           %th Lines
           %td= '%d (%d added, %d deleted)' % [stats.general_stats.lines, stats.general_stats.lines_added, stats.general_stats.lines_deleted]
         %tr

@@ -108,10 +108,8 @@ class Git
     end
   end
 
-  def get_files(ref = nil)
+  def get_files(ref = nil, &block)
     ref ||= @ref
-
-    files = Array.new
 
     sh("git ls-tree -r -l #{ref}").split(/\n/).each do |line|
       parts = line.split(/\s+/, 5)
@@ -119,13 +117,11 @@ class Git
 
       file = Hash.new
       file[:hash] = parts[2]
-      file[:size] = parts[3]
+      file[:size] = parts[3].to_i
       file[:name] = parts[4]
 
-      files << file
+      block.call(file)
     end
-
-    files
   end
 
   private
