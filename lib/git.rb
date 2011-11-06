@@ -66,7 +66,7 @@ class Git
       range = "#{last}..#{@ref}"
     end
 
-    open_cache
+    open_cache unless @cachefile.nil?
 
     commit = nil
     sh("git log --reverse --summary --numstat --pretty=format:\"HEADER: %at %ai %H %T %aN <%aE>\" #{range}") do |line|
