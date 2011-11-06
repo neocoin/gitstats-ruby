@@ -98,6 +98,8 @@ $options[:statcache] = File.join($options[:out], '.statcache') if $options[:stat
 $options[:commitcache_dir] = $options[:out] if $options[:commitcache_dir].nil?
 $options[:template] = File.expand_path(File.join(File.dirname(__FILE__), '..', 'template')) if $options[:template].nil?
 
+FileUtils.mkdir_p($options[:out])
+
 stat = nil
 if $options[:cache]
   begin
@@ -148,8 +150,6 @@ ensure
     File.new($options[:statcache], 'w').write(cache)
   end
 end
-
-FileUtils.mkdir_p($options[:out])
 
 puts 'rendering ...' unless $options[:quiet]
 renderer = Renderer.new($options[:template], $options[:out], $options[:verbose])
