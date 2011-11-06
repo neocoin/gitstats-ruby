@@ -52,6 +52,9 @@
           <li>
             <a href='#filechanges_by_yearmonth'>Filechanges by year and month</a>
           </li>
+          <li>
+            <a href='#filetypes'>Filetypes</a>
+          </li>
         </ul>
       </div>
       <h2 class='blockheader'>
@@ -70,6 +73,77 @@
       <div id="block-filechanges_by_yearmonth" class="blockcontainer">
       <div class='blockdiagram'>
         <img src='filechanges_by_yearmonth.png' />
+      </div>
+      </div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $("#filetypes_table").tablesorter({sortList: [[0, 0]]});
+          });
+        //]]>
+      </script>
+      <h2 class='blockheader'>
+        <a name='filetypes'>Filetypes</a>
+      </h2>
+      
+      <div id="block-filetypes" class="blockcontainer">
+      <div class='blocktable'>
+        <table class='tablesorter striped' id='filetypes_table'>
+          <thead>
+            <tr>
+              <th>Extension</th>
+              <th>Count</th>
+              <th>Size</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td>3</td>
+              <td>38860</td>
+            </tr>
+            <tr>
+              <td>.js</td>
+              <td>2</td>
+              <td>110540</td>
+            </tr>
+            <tr>
+              <td>.gif</td>
+              <td>3</td>
+              <td>172</td>
+            </tr>
+            <tr>
+              <td>.markdown</td>
+              <td>1</td>
+              <td>574</td>
+            </tr>
+            <tr>
+              <td>.plot</td>
+              <td>10</td>
+              <td>3427</td>
+            </tr>
+            <tr>
+              <td>.haml</td>
+              <td>25</td>
+              <td>10765</td>
+            </tr>
+            <tr>
+              <td>.rb</td>
+              <td>18</td>
+              <td>19179</td>
+            </tr>
+            <tr>
+              <td>.gemspec</td>
+              <td>1</td>
+              <td>721</td>
+            </tr>
+            <tr>
+              <td>.scss</td>
+              <td>1</td>
+              <td>1918</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       </div>
     </div>

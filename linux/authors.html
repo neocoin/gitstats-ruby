@@ -1,0 +1,5120 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <title>
+      Statistics
+    </title>
+    <link href='style.css' rel='stylesheet' type='text/css' />
+    <script src='jquery.js' type='text/javascript'></script>
+    <script src='jquery.tablesorter.js' type='text/javascript'></script>
+  </head>
+  <body>
+    <script type='text/javascript'>
+      //<![CDATA[
+        $(document).ready(function() {
+          $(".toggleable").hide();
+          $(".toggle").click(function() {
+            $(this).toggleClass("active").next().slideToggle("slow");
+            return false;
+          });
+        });
+      //]]>
+    </script>
+    <div id='menu'>
+      <ul>
+        <li class='first'>
+          <a href='index.html'>General</a>
+        </li>
+        <li>
+          <a href='activity.html'>Activity</a>
+        </li>
+        <li>
+          <a href='authors.html'>Authors</a>
+        </li>
+        <li>
+          <a href='files.html'>Files</a>
+        </li>
+        <li class='last'>
+          <a href='lines.html'>Lines</a>
+        </li>
+      </ul>
+    </div>
+    <div id='content'>
+      <div id='toc'>
+        <h2>
+          <a name='toc'>Blocks</a>
+        </h2>
+        <ul>
+          <li>
+            <a href='#authors'>Authors</a>
+          </li>
+          <li>
+            <a href='#top_authors_of_year'>Top authors of year</a>
+          </li>
+          <li>
+            <a href='#top_authors_of_yearmonth'>Top authors of year and month</a>
+          </li>
+        </ul>
+      </div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $("#author_table").tablesorter({sortList: [[1, 1]]});
+          });
+        //]]>
+      </script>
+      <h2 class='blockheader'>
+        <a name='authors'>Authors</a>
+      </h2>
+      
+      <div id="block-authors" class="blockcontainer">
+      <div class='blocktable'>
+        <table class='tablesorter striped' id='author_table'>
+          <thead>
+            <tr>
+              <th>Author</th>
+              <th>Commits</th>
+              <th>Percent</th>
+              <th>Files added</th>
+              <th>Files deleted</th>
+              <th>Lines added</th>
+              <th>Lines deleted</th>
+              <th>First commit</th>
+              <th>Last commit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Linus Torvalds</td>
+              <td>11026</td>
+              <td>4.03%</td>
+              <td>17539</td>
+              <td>253</td>
+              <td>6778222</td>
+              <td>71790</td>
+              <td>2005-04-17</td>
+              <td>2011-11-05</td>
+            </tr>
+            <tr>
+              <td>David S. Miller</td>
+              <td>3883</td>
+              <td>1.42%</td>
+              <td>178</td>
+              <td>139</td>
+              <td>160518</td>
+              <td>135713</td>
+              <td>2005-04-17</td>
+              <td>2011-11-04</td>
+            </tr>
+            <tr>
+              <td>Ingo Molnar</td>
+              <td>3439</td>
+              <td>1.26%</td>
+              <td>331</td>
+              <td>229</td>
+              <td>142816</td>
+              <td>111213</td>
+              <td>2005-04-18</td>
+              <td>2011-10-18</td>
+            </tr>
+            <tr>
+              <td>Takashi Iwai</td>
+              <td>3321</td>
+              <td>1.21%</td>
+              <td>48</td>
+              <td>39</td>
+              <td>136530</td>
+              <td>116558</td>
+              <td>2005-03-24</td>
+              <td>2011-11-03</td>
+            </tr>
+            <tr>
+              <td>Al Viro</td>
+              <td>2792</td>
+              <td>1.02%</td>
+              <td>927</td>
+              <td>1053</td>
+              <td>113713</td>
+              <td>118825</td>
+              <td>2005-04-03</td>
+              <td>2011-09-15</td>
+            </tr>
+            <tr>
+              <td>Russell King</td>
+              <td>2403</td>
+              <td>0.88%</td>
+              <td>1156</td>
+              <td>1205</td>
+              <td>162380</td>
+              <td>150361</td>
+              <td>2005-01-25</td>
+              <td>2011-10-25</td>
+            </tr>
+            <tr>
+              <td>Paul Mundt</td>
+              <td>2286</td>
+              <td>0.83%</td>
+              <td>888</td>
+              <td>936</td>
+              <td>190607</td>
+              <td>172604</td>
+              <td>2005-05-29</td>
+              <td>2011-10-28</td>
+            </tr>
+            <tr>
+              <td>Tejun Heo</td>
+              <td>2246</td>
+              <td>0.82%</td>
+              <td>27</td>
+              <td>18</td>
+              <td>91205</td>
+              <td>68939</td>
+              <td>2005-04-03</td>
+              <td>2011-11-03</td>
+            </tr>
+            <tr>
+              <td>Thomas Gleixner</td>
+              <td>2236</td>
+              <td>0.82%</td>
+              <td>1328</td>
+              <td>1302</td>
+              <td>316527</td>
+              <td>313115</td>
+              <td>2005-01-18</td>
+              <td>2011-10-27</td>
+            </tr>
+            <tr>
+              <td>Bartlomiej Zolnierkiewicz</td>
+              <td>2057</td>
+              <td>0.75%</td>
+              <td>275</td>
+              <td>342</td>
+              <td>281272</td>
+              <td>559379</td>
+              <td>2005-05-26</td>
+              <td>2011-10-13</td>
+            </tr>
+            <tr>
+              <td>Mark Brown</td>
+              <td>2002</td>
+              <td>0.73%</td>
+              <td>202</td>
+              <td>17</td>
+              <td>195138</td>
+              <td>81375</td>
+              <td>2006-02-02</td>
+              <td>2011-11-01</td>
+            </tr>
+            <tr>
+              <td>Greg Kroah-Hartman</td>
+              <td>1947</td>
+              <td>0.71%</td>
+              <td>907</td>
+              <td>1252</td>
+              <td>902211</td>
+              <td>820108</td>
+              <td>2002-04-09</td>
+              <td>2011-10-25</td>
+            </tr>
+            <tr>
+              <td>Adrian Bunk</td>
+              <td>1924</td>
+              <td>0.70%</td>
+              <td>32</td>
+              <td>950</td>
+              <td>25452</td>
+              <td>368933</td>
+              <td>2005-03-24</td>
+              <td>2011-10-05</td>
+            </tr>
+            <tr>
+              <td>Johannes Berg</td>
+              <td>1896</td>
+              <td>0.69%</td>
+              <td>149</td>
+              <td>51</td>
+              <td>138957</td>
+              <td>109788</td>
+              <td>2005-12-11</td>
+              <td>2011-10-13</td>
+            </tr>
+            <tr>
+              <td>Mauro Carvalho Chehab</td>
+              <td>1895</td>
+              <td>0.69%</td>
+              <td>949</td>
+              <td>629</td>
+              <td>448910</td>
+              <td>356574</td>
+              <td>2005-06-24</td>
+              <td>2011-11-02</td>
+            </tr>
+            <tr>
+              <td>Ralf Baechle</td>
+              <td>1705</td>
+              <td>0.62%</td>
+              <td>871</td>
+              <td>807</td>
+              <td>196128</td>
+              <td>178569</td>
+              <td>2004-12-28</td>
+              <td>2011-09-29</td>
+            </tr>
+            <tr>
+              <td>Alan Cox</td>
+              <td>1689</td>
+              <td>0.62%</td>
+              <td>175</td>
+              <td>97</td>
+              <td>147235</td>
+              <td>109282</td>
+              <td>2005-05-27</td>
+              <td>2011-09-22</td>
+            </tr>
+            <tr>
+              <td>Christoph Hellwig</td>
+              <td>1683</td>
+              <td>0.61%</td>
+              <td>119</td>
+              <td>197</td>
+              <td>115397</td>
+              <td>156564</td>
+              <td>2005-04-03</td>
+              <td>2011-10-28</td>
+            </tr>
+            <tr>
+              <td>Stephen Hemminger</td>
+              <td>1660</td>
+              <td>0.61%</td>
+              <td>130</td>
+              <td>56</td>
+              <td>131567</td>
+              <td>83587</td>
+              <td>2005-04-20</td>
+              <td>2011-09-27</td>
+            </tr>
+            <tr>
+              <td>Andrew Morton</td>
+              <td>1530</td>
+              <td>0.56%</td>
+              <td>23</td>
+              <td>7</td>
+              <td>25782</td>
+              <td>21341</td>
+              <td>2005-03-31</td>
+              <td>2011-11-02</td>
+            </tr>
+            <tr>
+              <td>Randy Dunlap</td>
+              <td>1473</td>
+              <td>0.54%</td>
+              <td>93</td>
+              <td>52</td>
+              <td>37649</td>
+              <td>32737</td>
+              <td>2005-03-03</td>
+              <td>2011-10-27</td>
+            </tr>
+            <tr>
+              <td>Joe Perches</td>
+              <td>1446</td>
+              <td>0.53%</td>
+              <td>1</td>
+              <td>4</td>
+              <td>64321</td>
+              <td>64646</td>
+              <td>2006-01-13</td>
+              <td>2011-11-01</td>
+            </tr>
+            <tr>
+              <td>Jean Delvare</td>
+              <td>1421</td>
+              <td>0.52%</td>
+              <td>110</td>
+              <td>114</td>
+              <td>76111</td>
+              <td>72430</td>
+              <td>2005-04-02</td>
+              <td>2011-11-04</td>
+            </tr>
+            <tr>
+              <td>Ben Dooks</td>
+              <td>1359</td>
+              <td>0.50%</td>
+              <td>579</td>
+              <td>282</td>
+              <td>109839</td>
+              <td>57849</td>
+              <td>2005-01-18</td>
+              <td>2011-11-01</td>
+            </tr>
+            <tr>
+              <td>Jeff Garzik</td>
+              <td>1337</td>
+              <td>0.49%</td>
+              <td>113</td>
+              <td>192</td>
+              <td>125059</td>
+              <td>171453</td>
+              <td>2005-05-01</td>
+              <td>2011-08-19</td>
+            </tr>
+            <tr>
+              <td>Hans Verkuil</td>
+              <td>1306</td>
+              <td>0.48%</td>
+              <td>173</td>
+              <td>84</td>
+              <td>123683</td>
+              <td>115533</td>
+              <td>2005-11-09</td>
+              <td>2011-09-12</td>
+            </tr>
+            <tr>
+              <td>Andi Kleen</td>
+              <td>1297</td>
+              <td>0.47%</td>
+              <td>59</td>
+              <td>18</td>
+              <td>27351</td>
+              <td>23212</td>
+              <td>2005-04-17</td>
+              <td>2011-10-14</td>
+            </tr>
+            <tr>
+              <td>Trond Myklebust</td>
+              <td>1271</td>
+              <td>0.46%</td>
+              <td>9</td>
+              <td>0</td>
+              <td>28903</td>
+              <td>19913</td>
+              <td>2005-06-08</td>
+              <td>2011-11-03</td>
+            </tr>
+            <tr>
+              <td>Patrick McHardy</td>
+              <td>1262</td>
+              <td>0.46%</td>
+              <td>93</td>
+              <td>79</td>
+              <td>57548</td>
+              <td>58891</td>
+              <td>2005-04-22</td>
+              <td>2011-08-30</td>
+            </tr>
+            <tr>
+              <td>Eric Dumazet</td>
+              <td>1228</td>
+              <td>0.45%</td>
+              <td>13</td>
+              <td>0</td>
+              <td>30064</td>
+              <td>22662</td>
+              <td>2005-06-22</td>
+              <td>2011-11-02</td>
+            </tr>
+            <tr>
+              <td>Peter Zijlstra</td>
+              <td>1226</td>
+              <td>0.45%</td>
+              <td>53</td>
+              <td>8</td>
+              <td>45682</td>
+              <td>32228</td>
+              <td>2006-06-23</td>
+              <td>2011-10-17</td>
+            </tr>
+            <tr>
+              <td>Mike Frysinger</td>
+              <td>1163</td>
+              <td>0.42%</td>
+              <td>88</td>
+              <td>74</td>
+              <td>58052</td>
+              <td>58653</td>
+              <td>2005-06-03</td>
+              <td>2011-08-20</td>
+            </tr>
+            <tr>
+              <td>Steven Rostedt</td>
+              <td>1107</td>
+              <td>0.40%</td>
+              <td>61</td>
+              <td>19</td>
+              <td>57634</td>
+              <td>19708</td>
+              <td>2005-07-25</td>
+              <td>2011-11-02</td>
+            </tr>
+            <tr>
+              <td>Arnaldo Carvalho de Melo</td>
+              <td>1095</td>
+              <td>0.40%</td>
+              <td>145</td>
+              <td>19</td>
+              <td>71167</td>
+              <td>45596</td>
+              <td>2005-04-17</td>
+              <td>2011-10-21</td>
+            </tr>
+            <tr>
+              <td>David Woodhouse</td>
+              <td>1087</td>
+              <td>0.40%</td>
+              <td>169</td>
+              <td>108</td>
+              <td>76647</td>
+              <td>113164</td>
+              <td>2005-02-02</td>
+              <td>2011-10-24</td>
+            </tr>
+            <tr>
+              <td>Herbert Xu</td>
+              <td>1032</td>
+              <td>0.38%</td>
+              <td>46</td>
+              <td>5</td>
+              <td>52568</td>
+              <td>32488</td>
+              <td>2005-04-16</td>
+              <td>2011-11-01</td>
+            </tr>
+            <tr>
+              <td>Benjamin Herrenschmidt</td>
+              <td>1029</td>
+              <td>0.38%</td>
+              <td>172</td>
+              <td>60</td>
+              <td>84133</td>
+              <td>180864</td>
+              <td>2005-04-17</td>
+              <td>2011-10-14</td>
+            </tr>
+            <tr>
+              <td>NeilBrown</td>
+              <td>1005</td>
+              <td>0.37%</td>
+              <td>8</td>
+              <td>6</td>
+              <td>32226</td>
+              <td>20245</td>
+              <td>2005-04-17</td>
+              <td>2011-10-31</td>
+            </tr>
+            <tr>
+              <td>Alexey Dobriyan</td>
+              <td>983</td>
+              <td>0.36%</td>
+              <td>85</td>
+              <td>8</td>
+              <td>29302</td>
+              <td>29293</td>
+              <td>2005-04-16</td>
+              <td>2011-11-01</td>
+            </tr>
+            <tr>
+              <td>Avi Kivity</td>
+              <td>977</td>
+              <td>0.36%</td>
+              <td>52</td>
+              <td>29</td>
+              <td>50771</td>
+              <td>34092</td>
+              <td>2006-12-07</td>
+              <td>2011-09-20</td>
+            </tr>
+            <tr>
+              <td>Len Brown</td>
+              <td>950</td>
+              <td>0.35%</td>
+              <td>183</td>
+              <td>172</td>
+              <td>128187</td>
+              <td>131208</td>
+              <td>2005-03-18</td>
+              <td>2011-09-13</td>
+            </tr>
+            <tr>
+              <td>Yinghai Lu</td>
+              <td>923</td>
+              <td>0.34%</td>
+              <td>66</td>
+              <td>62</td>
+              <td>45780</td>
+              <td>41204</td>
+              <td>2006-10-21</td>
+              <td>2011-10-12</td>
+            </tr>
+            <tr>
+              <td>Chris Mason</td>
+              <td>919</td>
+              <td>0.34%</td>
+              <td>63</td>
+              <td>13</td>
+              <td>80099</td>
+              <td>39024</td>
+              <td>2005-09-13</td>
+              <td>2011-10-11</td>
+            </tr>
+            <tr>
+              <td>Michael Krufky</td>
+              <td>915</td>
+              <td>0.33%</td>
+              <td>88</td>
+              <td>28</td>
+              <td>46902</td>
+              <td>25928</td>
+              <td>2005-06-24</td>
+              <td>2011-10-23</td>
+            </tr>
+            <tr>
+              <td>Dmitry Torokhov</td>
+              <td>914</td>
+              <td>0.33%</td>
+              <td>35</td>
+              <td>34</td>
+              <td>50259</td>
+              <td>43522</td>
+              <td>2005-03-19</td>
+              <td>2011-10-27</td>
+            </tr>
+            <tr>
+              <td>Jens Axboe</td>
+              <td>913</td>
+              <td>0.33%</td>
+              <td>43</td>
+              <td>44</td>
+              <td>45619</td>
+              <td>68165</td>
+              <td>2005-04-12</td>
+              <td>2011-10-25</td>
+            </tr>
+            <tr>
+              <td>Magnus Damm</td>
+              <td>909</td>
+              <td>0.33%</td>
+              <td>165</td>
+              <td>55</td>
+              <td>71398</td>
+              <td>24037</td>
+              <td>2005-04-05</td>
+              <td>2011-11-01</td>
+            </tr>
+            <tr>
+              <td>David Brownell</td>
+              <td>904</td>
+              <td>0.33%</td>
+              <td>119</td>
+              <td>19</td>
+              <td>74603</td>
+              <td>38593</td>
+              <td>2005-04-09</td>
+              <td>2011-01-16</td>
+            </tr>
+            <tr>
+              <td>Jeremy Fitzhardinge</td>
+              <td>876</td>
+              <td>0.32%</td>
+              <td>110</td>
+              <td>14</td>
+              <td>42850</td>
+              <td>17417</td>
+              <td>2005-05-29</td>
+              <td>2011-11-01</td>
+            </tr>
+            <tr>
+              <td>David Howells</td>
+              <td>861</td>
+              <td>0.31%</td>
+              <td>658</td>
+              <td>295</td>
+              <td>141680</td>
+              <td>64605</td>
+              <td>2005-04-18</td>
+              <td>2011-08-22</td>
+            </tr>
+            <tr>
+              <td>Alan Stern</td>
+              <td>853</td>
+              <td>0.31%</td>
+              <td>20</td>
+              <td>18</td>
+              <td>30070</td>
+              <td>21806</td>
+              <td>2005-03-30</td>
+              <td>2011-10-12</td>
+            </tr>
+            <tr>
+              <td>Julia Lawall</td>
+              <td>839</td>
+              <td>0.31%</td>
+              <td>3</td>
+              <td>0</td>
+              <td>3345</td>
+              <td>3342</td>
+              <td>2007-11-14</td>
+              <td>2011-11-01</td>
+            </tr>
+            <tr>
+              <td>Heiko Carstens</td>
+              <td>837</td>
+              <td>0.31%</td>
+              <td>58</td>
+              <td>20</td>
+              <td>23973</td>
+              <td>19642</td>
+              <td>2005-05-01</td>
+              <td>2011-11-02</td>
+            </tr>
+            <tr>
+              <td>Jiri Slaby</td>
+              <td>836</td>
+              <td>0.31%</td>
+              <td>50</td>
+              <td>18</td>
+              <td>61161</td>
+              <td>45863</td>
+              <td>2005-06-24</td>
+              <td>2011-10-12</td>
+            </tr>
+            <tr>
+              <td>Stephen Rothwell</td>
+              <td>805</td>
+              <td>0.29%</td>
+              <td>380</td>
+              <td>425</td>
+              <td>73138</td>
+              <td>85038</td>
+              <td>2005-05-01</td>
+              <td>2011-11-02</td>
+            </tr>
+            <tr>
+              <td>Rafael J. Wysocki</td>
+              <td>805</td>
+              <td>0.29%</td>
+              <td>46</td>
+              <td>18</td>
+              <td>39353</td>
+              <td>23213</td>
+              <td>2005-05-05</td>
+              <td>2011-10-22</td>
+            </tr>
+            <tr>
+              <td>Dan Carpenter</td>
+              <td>798</td>
+              <td>0.29%</td>
+              <td>0</td>
+              <td>0</td>
+              <td>4259</td>
+              <td>3985</td>
+              <td>2006-11-20</td>
+              <td>2011-10-28</td>
+            </tr>
+            <tr>
+              <td>Dave Airlie</td>
+              <td>795</td>
+              <td>0.29%</td>
+              <td>180</td>
+              <td>115</td>
+              <td>135515</td>
+              <td>104176</td>
+              <td>2005-04-17</td>
+              <td>2011-10-27</td>
+            </tr>
+            <tr>
+              <td>Chris Wilson</td>
+              <td>782</td>
+              <td>0.29%</td>
+              <td>6</td>
+              <td>1</td>
+              <td>25786</td>
+              <td>20687</td>
+              <td>2009-01-30</td>
+              <td>2011-09-14</td>
+            </tr>
+            <tr>
+              <td>FUJITA Tomonori</td>
+              <td>767</td>
+              <td>0.28%</td>
+              <td>18</td>
+              <td>12</td>
+              <td>15952</td>
+              <td>18167</td>
+              <td>2006-01-14</td>
+              <td>2011-07-04</td>
+            </tr>
+            <tr>
+              <td>Rusty Russell</td>
+              <td>765</td>
+              <td>0.28%</td>
+              <td>57</td>
+              <td>10</td>
+              <td>45722</td>
+              <td>23375</td>
+              <td>2005-07-21</td>
+              <td>2011-10-27</td>
+            </tr>
+            <tr>
+              <td>Stefan Richter</td>
+              <td>755</td>
+              <td>0.28%</td>
+              <td>30</td>
+              <td>65</td>
+              <td>37983</td>
+              <td>64867</td>
+              <td>2005-11-05</td>
+              <td>2011-09-19</td>
+            </tr>
+            <tr>
+              <td>Sam Ravnborg</td>
+              <td>741</td>
+              <td>0.27%</td>
+              <td>1114</td>
+              <td>1102</td>
+              <td>203303</td>
+              <td>408429</td>
+              <td>2005-05-01</td>
+              <td>2011-11-01</td>
+            </tr>
+            <tr>
+              <td>Paul Mackerras</td>
+              <td>740</td>
+              <td>0.27%</td>
+              <td>321</td>
+              <td>716</td>
+              <td>157276</td>
+              <td>272259</td>
+              <td>2005-04-17</td>
+              <td>2011-07-23</td>
+            </tr>
+            <tr>
+              <td>Lennert Buytenhek</td>
+              <td>734</td>
+              <td>0.27%</td>
+              <td>264</td>
+              <td>110</td>
+              <td>69433</td>
+              <td>42224</td>
+              <td>2005-03-18</td>
+              <td>2011-08-11</td>
+            </tr>
+            <tr>
+              <td>Steve French</td>
+              <td>722</td>
+              <td>0.26%</td>
+              <td>11</td>
+              <td>5</td>
+              <td>24102</td>
+              <td>16680</td>
+              <td>2005-04-29</td>
+              <td>2011-10-28</td>
+            </tr>
+            <tr>
+              <td>Uwe Kleine-König</td>
+              <td>719</td>
+              <td>0.26%</td>
+              <td>192</td>
+              <td>197</td>
+              <td>49122</td>
+              <td>244607</td>
+              <td>2007-02-16</td>
+              <td>2011-11-02</td>
+            </tr>
+            <tr>
+              <td>Dan Williams</td>
+              <td>719</td>
+              <td>0.26%</td>
+              <td>197</td>
+              <td>83</td>
+              <td>137982</td>
+              <td>89520</td>
+              <td>2005-05-10</td>
+              <td>2011-10-01</td>
+            </tr>
+            <tr>
+              <td>Christoph Lameter</td>
+              <td>718</td>
+              <td>0.26%</td>
+              <td>42</td>
+              <td>5</td>
+              <td>37235</td>
+              <td>16877</td>
+              <td>2005-03-30</td>
+              <td>2011-11-01</td>
+            </tr>
+            <tr>
+              <td>Joerg Roedel</td>
+              <td>716</td>
+              <td>0.26%</td>
+              <td>19</td>
+              <td>7</td>
+              <td>19003</td>
+              <td>8597</td>
+              <td>2006-10-10</td>
+              <td>2011-10-21</td>
+            </tr>
+            <tr>
+              <td>Eric W. Biederman</td>
+              <td>715</td>
+              <td>0.26%</td>
+              <td>59</td>
+              <td>6</td>
+              <td>27065</td>
+              <td>18933</td>
+              <td>2005-06-25</td>
+              <td>2011-11-01</td>
+            </tr>
+            <tr>
+              <td>Ben Hutchings</td>
+              <td>713</td>
+              <td>0.26%</td>
+              <td>89</td>
+              <td>25</td>
+              <td>67076</td>
+              <td>79606</td>
+              <td>2008-03-05</td>
+              <td>2011-10-05</td>
+            </tr>
+            <tr>
+              <td>Alex Deucher</td>
+              <td>711</td>
+              <td>0.26%</td>
+              <td>18</td>
+              <td>0</td>
+              <td>72982</td>
+              <td>16655</td>
+              <td>2008-03-17</td>
+              <td>2011-10-19</td>
+            </tr>
+            <tr>
+              <td>Roland Dreier</td>
+              <td>704</td>
+              <td>0.26%</td>
+              <td>75</td>
+              <td>16</td>
+              <td>36989</td>
+              <td>14093</td>
+              <td>2005-04-17</td>
+              <td>2011-11-04</td>
+            </tr>
+            <tr>
+              <td>Kumar Gala</td>
+              <td>702</td>
+              <td>0.26%</td>
+              <td>245</td>
+              <td>242</td>
+              <td>150374</td>
+              <td>132210</td>
+              <td>2005-04-17</td>
+              <td>2011-08-04</td>
+            </tr>
+            <tr>
+              <td>Luis R. Rodriguez</td>
+              <td>701</td>
+              <td>0.26%</td>
+              <td>191</td>
+              <td>154</td>
+              <td>204291</td>
+              <td>168237</td>
+              <td>2007-06-01</td>
+              <td>2011-09-29</td>
+            </tr>
+            <tr>
+              <td>Arnd Bergmann</td>
+              <td>697</td>
+              <td>0.25%</td>
+              <td>194</td>
+              <td>119</td>
+              <td>54740</td>
+              <td>54333</td>
+              <td>2005-05-18</td>
+              <td>2011-11-02</td>
+            </tr>
+            <tr>
+              <td>Clemens Ladisch</td>
+              <td>687</td>
+              <td>0.25%</td>
+              <td>50</td>
+              <td>1</td>
+              <td>34144</td>
+              <td>11453</td>
+              <td>2005-03-30</td>
+              <td>2011-11-01</td>
+            </tr>
+            <tr>
+              <td>Chuck Lever</td>
+              <td>684</td>
+              <td>0.25%</td>
+              <td>9</td>
+              <td>2</td>
+              <td>25578</td>
+              <td>15586</td>
+              <td>2005-06-22</td>
+              <td>2011-10-25</td>
+            </tr>
+            <tr>
+              <td>J. Bruce Fields</td>
+              <td>683</td>
+              <td>0.25%</td>
+              <td>31</td>
+              <td>32</td>
+              <td>15604</td>
+              <td>13932</td>
+              <td>2005-06-22</td>
+              <td>2011-10-19</td>
+            </tr>
+            <tr>
+              <td>Oleg Nesterov</td>
+              <td>681</td>
+              <td>0.25%</td>
+              <td>0</td>
+              <td>0</td>
+              <td>6559</td>
+              <td>7648</td>
+              <td>2005-06-23</td>
+              <td>2011-09-25</td>
+            </tr>
+            <tr>
+              <td>Harvey Harrison</td>
+              <td>678</td>
+              <td>0.25%</td>
+              <td>38</td>
+              <td>24</td>
+              <td>21841</td>
+              <td>23829</td>
+              <td>2007-12-11</td>
+              <td>2011-03-28</td>
+            </tr>
+            <tr>
+              <td>Steven Whitehouse</td>
+              <td>673</td>
+              <td>0.25%</td>
+              <td>12</td>
+              <td>53</td>
+              <td>31573</td>
+              <td>38125</td>
+              <td>2005-08-10</td>
+              <td>2011-09-21</td>
+            </tr>
+            <tr>
+              <td>John W. Linville</td>
+              <td>661</td>
+              <td>0.24%</td>
+              <td>110</td>
+              <td>74</td>
+              <td>94354</td>
+              <td>82476</td>
+              <td>2005-04-22</td>
+              <td>2011-10-17</td>
+            </tr>
+            <tr>
+              <td>Ben Skeggs</td>
+              <td>644</td>
+              <td>0.24%</td>
+              <td>135</td>
+              <td>5</td>
+              <td>74478</td>
+              <td>18227</td>
+              <td>2009-03-02</td>
+              <td>2011-09-13</td>
+            </tr>
+            <tr>
+              <td>Guennadi Liakhovetski</td>
+              <td>632</td>
+              <td>0.23%</td>
+              <td>72</td>
+              <td>9</td>
+              <td>54513</td>
+              <td>18949</td>
+              <td>2005-09-16</td>
+              <td>2011-11-03</td>
+            </tr>
+            <tr>
+              <td>Pavel Emelyanov</td>
+              <td>618</td>
+              <td>0.23%</td>
+              <td>17</td>
+              <td>3</td>
+              <td>12043</td>
+              <td>10382</td>
+              <td>2007-08-31</td>
+              <td>2011-11-02</td>
+            </tr>
+            <tr>
+              <td>Frederic Weisbecker</td>
+              <td>613</td>
+              <td>0.22%</td>
+              <td>48</td>
+              <td>11</td>
+              <td>24294</td>
+              <td>14971</td>
+              <td>2008-09-29</td>
+              <td>2011-07-05</td>
+            </tr>
+            <tr>
+              <td>Larry Finger</td>
+              <td>606</td>
+              <td>0.22%</td>
+              <td>268</td>
+              <td>228</td>
+              <td>184052</td>
+              <td>179763</td>
+              <td>2005-12-21</td>
+              <td>2011-10-12</td>
+            </tr>
+            <tr>
+              <td>Roel Kluin</td>
+              <td>605</td>
+              <td>0.22%</td>
+              <td>0</td>
+              <td>0</td>
+              <td>1950</td>
+              <td>1839</td>
+              <td>2007-10-17</td>
+              <td>2011-05-24</td>
+            </tr>
+            <tr>
+              <td>Wey-Yi Guy</td>
+              <td>601</td>
+              <td>0.22%</td>
+              <td>82</td>
+              <td>38</td>
+              <td>86196</td>
+              <td>47516</td>
+              <td>2009-03-10</td>
+              <td>2011-10-10</td>
+            </tr>
+            <tr>
+              <td>Bjorn Helgaas</td>
+              <td>600</td>
+              <td>0.22%</td>
+              <td>11</td>
+              <td>4</td>
+              <td>17335</td>
+              <td>16231</td>
+              <td>2005-05-03</td>
+              <td>2011-08-16</td>
+            </tr>
+            <tr>
+              <td>Axel Lin</td>
+              <td>597</td>
+              <td>0.22%</td>
+              <td>2</td>
+              <td>1</td>
+              <td>2709</td>
+              <td>2089</td>
+              <td>2010-03-09</td>
+              <td>2011-11-01</td>
+            </tr>
+            <tr>
+              <td>Artem Bityutskiy</td>
+              <td>595</td>
+              <td>0.22%</td>
+              <td>45</td>
+              <td>3</td>
+              <td>50717</td>
+              <td>9271</td>
+              <td>2006-10-04</td>
+              <td>2011-08-19</td>
+            </tr>
+            <tr>
+              <td>K. Y. Srinivasan</td>
+              <td>593</td>
+              <td>0.22%</td>
+              <td>4</td>
+              <td>26</td>
+              <td>10390</td>
+              <td>15088</td>
+              <td>2010-03-11</td>
+              <td>2011-10-15</td>
+            </tr>
+            <tr>
+              <td>Sage Weil</td>
+              <td>579</td>
+              <td>0.21%</td>
+              <td>64</td>
+              <td>1</td>
+              <td>35294</td>
+              <td>5313</td>
+              <td>2008-05-02</td>
+              <td>2011-10-28</td>
+            </tr>
+            <tr>
+              <td>James Bottomley</td>
+              <td>566</td>
+              <td>0.21%</td>
+              <td>68</td>
+              <td>31</td>
+              <td>86375</td>
+              <td>84321</td>
+              <td>2005-04-03</td>
+              <td>2011-09-18</td>
+            </tr>
+            <tr>
+              <td>Borislav Petkov</td>
+              <td>562</td>
+              <td>0.21%</td>
+              <td>17</td>
+              <td>9</td>
+              <td>21914</td>
+              <td>22842</td>
+              <td>2005-09-28</td>
+              <td>2011-10-17</td>
+            </tr>
+            <tr>
+              <td>Jeff Dike</td>
+              <td>561</td>
+              <td>0.20%</td>
+              <td>73</td>
+              <td>101</td>
+              <td>26977</td>
+              <td>32578</td>
+              <td>2005-05-01</td>
+              <td>2010-06-17</td>
+            </tr>
+            <tr>
+              <td>Greg Ungerer</td>
+              <td>552</td>
+              <td>0.20%</td>
+              <td>343</td>
+              <td>410</td>
+              <td>72787</td>
+              <td>68889</td>
+              <td>2005-06-03</td>
+              <td>2011-08-23</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+      <h2 class='blockheader'>
+        <a name='top_authors_of_year'>Top authors of year</a>
+      </h2>
+      
+      <div id="block-top_authors_of_year" class="blockcontainer">
+      <div class='blocktable'>
+        <table>
+          <thead>
+            <th>Year</th>
+            <th>Author</th>
+            <th>Commits</th>
+            <th>Total</th>
+          </thead>
+          <tbody>
+            <tr class='top'>
+              <td class='yearauthor_top1'>2011</td>
+              <td class='yearauthor_top1'>Linus Torvalds</td>
+              <td class='yearauthor_top1'>1829 of 43052 (4.25%)</td>
+              <td class='yearauthor_top1'>2630</td>
+            </tr>
+            <tr class='yearauthor_sub1'>
+              <td class=''></td>
+              <td class=''>Mark Brown</td>
+              <td class=''>693 of 43052 (1.61%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub1'>
+              <td class=''></td>
+              <td class=''>David S. Miller</td>
+              <td class=''>671 of 43052 (1.56%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub1'>
+              <td class=''></td>
+              <td class=''>Thomas Gleixner</td>
+              <td class=''>606 of 43052 (1.41%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub1'>
+              <td class=''></td>
+              <td class=''>K. Y. Srinivasan</td>
+              <td class=''>588 of 43052 (1.37%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearauthor_top2'>2010</td>
+              <td class='yearauthor_top2'>Linus Torvalds</td>
+              <td class='yearauthor_top2'>1887 of 49723 (3.80%)</td>
+              <td class='yearauthor_top2'>2912</td>
+            </tr>
+            <tr class='yearauthor_sub2'>
+              <td class=''></td>
+              <td class=''>Joe Perches</td>
+              <td class=''>592 of 49723 (1.19%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub2'>
+              <td class=''></td>
+              <td class=''>Chris Wilson</td>
+              <td class=''>525 of 49723 (1.06%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub2'>
+              <td class=''></td>
+              <td class=''>Mark Brown</td>
+              <td class=''>517 of 49723 (1.04%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub2'>
+              <td class=''></td>
+              <td class=''>Dan Carpenter</td>
+              <td class=''>504 of 49723 (1.01%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearauthor_top3'>2009</td>
+              <td class='yearauthor_top3'>Linus Torvalds</td>
+              <td class='yearauthor_top3'>2121 of 52592 (4.03%)</td>
+              <td class='yearauthor_top3'>2780</td>
+            </tr>
+            <tr class='yearauthor_sub3'>
+              <td class=''></td>
+              <td class=''>Ingo Molnar</td>
+              <td class=''>1084 of 52592 (2.06%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub3'>
+              <td class=''></td>
+              <td class=''>Takashi Iwai</td>
+              <td class=''>940 of 52592 (1.79%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub3'>
+              <td class=''></td>
+              <td class=''>Bartlomiej Zolnierkiewicz</td>
+              <td class=''>692 of 52592 (1.32%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub3'>
+              <td class=''></td>
+              <td class=''>Paul Mundt</td>
+              <td class=''>570 of 52592 (1.08%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearauthor_top4'>2008</td>
+              <td class='yearauthor_top4'>Linus Torvalds</td>
+              <td class='yearauthor_top4'>1912 of 48808 (3.92%)</td>
+              <td class='yearauthor_top4'>2482</td>
+            </tr>
+            <tr class='yearauthor_sub4'>
+              <td class=''></td>
+              <td class=''>Ingo Molnar</td>
+              <td class=''>1277 of 48808 (2.62%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub4'>
+              <td class=''></td>
+              <td class=''>Bartlomiej Zolnierkiewicz</td>
+              <td class=''>925 of 48808 (1.90%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub4'>
+              <td class=''></td>
+              <td class=''>David S. Miller</td>
+              <td class=''>899 of 48808 (1.84%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub4'>
+              <td class=''></td>
+              <td class=''>Adrian Bunk</td>
+              <td class=''>665 of 48808 (1.36%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearauthor_top5'>2007</td>
+              <td class='yearauthor_top5'>Linus Torvalds</td>
+              <td class='yearauthor_top5'>1395 of 33756 (4.13%)</td>
+              <td class='yearauthor_top5'>2087</td>
+            </tr>
+            <tr class='yearauthor_sub5'>
+              <td class=''></td>
+              <td class=''>Paul Mundt</td>
+              <td class=''>501 of 33756 (1.48%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub5'>
+              <td class=''></td>
+              <td class=''>Ralf Baechle</td>
+              <td class=''>498 of 33756 (1.48%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub5'>
+              <td class=''></td>
+              <td class=''>David S. Miller</td>
+              <td class=''>489 of 33756 (1.45%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub5'>
+              <td class=''></td>
+              <td class=''>Thomas Gleixner</td>
+              <td class=''>485 of 33756 (1.44%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearauthor_top6'>2006</td>
+              <td class='yearauthor_top6'>Linus Torvalds</td>
+              <td class='yearauthor_top6'>1108 of 29255 (3.79%)</td>
+              <td class='yearauthor_top6'>1920</td>
+            </tr>
+            <tr class='yearauthor_sub6'>
+              <td class=''></td>
+              <td class=''>Al Viro</td>
+              <td class=''>740 of 29255 (2.53%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub6'>
+              <td class=''></td>
+              <td class=''>David S. Miller</td>
+              <td class=''>609 of 29255 (2.08%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub6'>
+              <td class=''></td>
+              <td class=''>Andrew Morton</td>
+              <td class=''>551 of 29255 (1.88%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub6'>
+              <td class=''></td>
+              <td class=''>Adrian Bunk</td>
+              <td class=''>520 of 29255 (1.78%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearauthor_top7'>2005</td>
+              <td class='yearauthor_top7'>Linus Torvalds</td>
+              <td class='yearauthor_top7'>774 of 16696 (4.64%)</td>
+              <td class='yearauthor_top7'>1285</td>
+            </tr>
+            <tr class='yearauthor_sub7'>
+              <td class=''></td>
+              <td class=''>Jeff Garzik</td>
+              <td class=''>443 of 16696 (2.65%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub7'>
+              <td class=''></td>
+              <td class=''>Takashi Iwai</td>
+              <td class=''>402 of 16696 (2.41%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub7'>
+              <td class=''></td>
+              <td class=''>Ralf Baechle</td>
+              <td class=''>362 of 16696 (2.17%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub7'>
+              <td class=''></td>
+              <td class=''>Al Viro</td>
+              <td class=''>359 of 16696 (2.15%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearauthor_top8'>2004</td>
+              <td class='yearauthor_top8'>Anton Altaparmakov</td>
+              <td class='yearauthor_top8'>8 of 17 (47.06%)</td>
+              <td class='yearauthor_top8'>6</td>
+            </tr>
+            <tr class='yearauthor_sub8'>
+              <td class=''></td>
+              <td class=''>Thiemo Seufer</td>
+              <td class=''>4 of 17 (23.53%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub8'>
+              <td class=''></td>
+              <td class=''>Ralf Baechle</td>
+              <td class=''>2 of 17 (11.76%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub8'>
+              <td class=''></td>
+              <td class=''>Greg Edwards</td>
+              <td class=''>1 of 17 (5.88%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearauthor_sub8'>
+              <td class=''></td>
+              <td class=''>Thomas Renninger</td>
+              <td class=''>1 of 17 (5.88%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearauthor_top9'>2003</td>
+              <td class='yearauthor_top9'>Ayaz Abdulla</td>
+              <td class='yearauthor_top9'>1 of 1 (100.00%)</td>
+              <td class='yearauthor_top9'>1</td>
+            </tr>
+            <tr class='top'>
+              <td class='yearauthor_top10'>2002</td>
+              <td class='yearauthor_top10'>Greg Kroah-Hartman</td>
+              <td class='yearauthor_top10'>12 of 12 (100.00%)</td>
+              <td class='yearauthor_top10'>1</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearauthor_sub1").hide();
+            $(".yearauthor_top1").click(function() {
+              $(".yearauthor_sub1").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearauthor_sub2").hide();
+            $(".yearauthor_top2").click(function() {
+              $(".yearauthor_sub2").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearauthor_sub3").hide();
+            $(".yearauthor_top3").click(function() {
+              $(".yearauthor_sub3").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearauthor_sub4").hide();
+            $(".yearauthor_top4").click(function() {
+              $(".yearauthor_sub4").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearauthor_sub5").hide();
+            $(".yearauthor_top5").click(function() {
+              $(".yearauthor_sub5").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearauthor_sub6").hide();
+            $(".yearauthor_top6").click(function() {
+              $(".yearauthor_sub6").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearauthor_sub7").hide();
+            $(".yearauthor_top7").click(function() {
+              $(".yearauthor_sub7").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearauthor_sub8").hide();
+            $(".yearauthor_top8").click(function() {
+              $(".yearauthor_sub8").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearauthor_sub9").hide();
+            $(".yearauthor_top9").click(function() {
+              $(".yearauthor_sub9").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearauthor_sub10").hide();
+            $(".yearauthor_top10").click(function() {
+              $(".yearauthor_sub10").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <h2 class='blockheader'>
+        <a name='top_authors_of_yearmonth'>Top authors of year and month</a>
+      </h2>
+      
+      <div id="block-top_authors_of_yearmonth" class="blockcontainer">
+      <div class='blocktable'>
+        <table>
+          <thead>
+            <th>Year-Month</th>
+            <th>Author</th>
+            <th>Commits</th>
+            <th>Total</th>
+          </thead>
+          <tbody>
+            <tr class='top'>
+              <td class='yearmonthauthor_top1'>2011-11</td>
+              <td class='yearmonthauthor_top1'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top1'>55 of 376 (14.63%)</td>
+              <td class='yearmonthauthor_top1'>131</td>
+            </tr>
+            <tr class='yearmonthauthor_sub1'>
+              <td class=''></td>
+              <td class=''>Richard Kuo</td>
+              <td class=''>32 of 376 (8.51%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub1'>
+              <td class=''></td>
+              <td class=''>Andrea Arcangeli</td>
+              <td class=''>13 of 376 (3.46%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub1'>
+              <td class=''></td>
+              <td class=''>Jean Delvare</td>
+              <td class=''>11 of 376 (2.93%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub1'>
+              <td class=''></td>
+              <td class=''>Éric Piel</td>
+              <td class=''>9 of 376 (2.39%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top2'>2011-10</td>
+              <td class='yearmonthauthor_top2'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top2'>122 of 2411 (5.06%)</td>
+              <td class='yearmonthauthor_top2'>476</td>
+            </tr>
+            <tr class='yearmonthauthor_sub2'>
+              <td class=''></td>
+              <td class=''>Axel Lin</td>
+              <td class=''>95 of 2411 (3.94%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub2'>
+              <td class=''></td>
+              <td class=''>Arnd Bergmann</td>
+              <td class=''>67 of 2411 (2.78%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub2'>
+              <td class=''></td>
+              <td class=''>Mark Brown</td>
+              <td class=''>52 of 2411 (2.16%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub2'>
+              <td class=''></td>
+              <td class=''>Mark Einon</td>
+              <td class=''>47 of 2411 (1.95%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top3'>2011-09</td>
+              <td class='yearmonthauthor_top3'>Roland Vossen</td>
+              <td class='yearmonthauthor_top3'>83 of 2963 (2.80%)</td>
+              <td class='yearmonthauthor_top3'>555</td>
+            </tr>
+            <tr class='yearmonthauthor_sub3'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>82 of 2963 (2.77%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub3'>
+              <td class=''></td>
+              <td class=''>Mark Brown</td>
+              <td class=''>69 of 2963 (2.33%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub3'>
+              <td class=''></td>
+              <td class=''>Leonid V. Fedorenchik</td>
+              <td class=''>63 of 2963 (2.13%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub3'>
+              <td class=''></td>
+              <td class=''>Axel Lin</td>
+              <td class=''>55 of 2963 (1.86%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top4'>2011-08</td>
+              <td class='yearmonthauthor_top4'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top4'>151 of 3946 (3.83%)</td>
+              <td class='yearmonthauthor_top4'>705</td>
+            </tr>
+            <tr class='yearmonthauthor_sub4'>
+              <td class=''></td>
+              <td class=''>Mark Brown</td>
+              <td class=''>106 of 3946 (2.69%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub4'>
+              <td class=''></td>
+              <td class=''>K. Y. Srinivasan</td>
+              <td class=''>103 of 3946 (2.61%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub4'>
+              <td class=''></td>
+              <td class=''>Al Viro</td>
+              <td class=''>87 of 3946 (2.20%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub4'>
+              <td class=''></td>
+              <td class=''>Jonathan Cameron</td>
+              <td class=''>79 of 3946 (2.00%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top5'>2011-07</td>
+              <td class='yearmonthauthor_top5'>Larry Finger</td>
+              <td class='yearmonthauthor_top5'>230 of 4945 (4.65%)</td>
+              <td class='yearmonthauthor_top5'>787</td>
+            </tr>
+            <tr class='yearmonthauthor_sub5'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>229 of 4945 (4.63%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub5'>
+              <td class=''></td>
+              <td class=''>Nicolas Pitre</td>
+              <td class=''>98 of 4945 (1.98%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub5'>
+              <td class=''></td>
+              <td class=''>Alan Cox</td>
+              <td class=''>79 of 4945 (1.60%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub5'>
+              <td class=''></td>
+              <td class=''>Guennadi Liakhovetski</td>
+              <td class=''>69 of 4945 (1.40%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top6'>2011-06</td>
+              <td class='yearmonthauthor_top6'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top6'>153 of 4383 (3.49%)</td>
+              <td class='yearmonthauthor_top6'>717</td>
+            </tr>
+            <tr class='yearmonthauthor_sub6'>
+              <td class=''></td>
+              <td class=''>Mark Brown</td>
+              <td class=''>99 of 4383 (2.26%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub6'>
+              <td class=''></td>
+              <td class=''>Takashi Iwai</td>
+              <td class=''>91 of 4383 (2.08%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub6'>
+              <td class=''></td>
+              <td class=''>Arend van Spriel</td>
+              <td class=''>88 of 4383 (2.01%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub6'>
+              <td class=''></td>
+              <td class=''>Al Viro</td>
+              <td class=''>85 of 4383 (1.94%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top7'>2011-05</td>
+              <td class='yearmonthauthor_top7'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top7'>268 of 5482 (4.89%)</td>
+              <td class='yearmonthauthor_top7'>836</td>
+            </tr>
+            <tr class='yearmonthauthor_sub7'>
+              <td class=''></td>
+              <td class=''>K. Y. Srinivasan</td>
+              <td class=''>221 of 5482 (4.03%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub7'>
+              <td class=''></td>
+              <td class=''>David S. Miller</td>
+              <td class=''>116 of 5482 (2.12%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub7'>
+              <td class=''></td>
+              <td class=''>Jonathan Cameron</td>
+              <td class=''>93 of 5482 (1.70%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub7'>
+              <td class=''></td>
+              <td class=''>Takashi Iwai</td>
+              <td class=''>78 of 5482 (1.42%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top8'>2011-04</td>
+              <td class='yearmonthauthor_top8'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top8'>134 of 3877 (3.46%)</td>
+              <td class='yearmonthauthor_top8'>695</td>
+            </tr>
+            <tr class='yearmonthauthor_sub8'>
+              <td class=''></td>
+              <td class=''>David S. Miller</td>
+              <td class=''>94 of 3877 (2.42%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub8'>
+              <td class=''></td>
+              <td class=''>K. Y. Srinivasan</td>
+              <td class=''>72 of 3877 (1.86%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub8'>
+              <td class=''></td>
+              <td class=''>Michał Mirosław</td>
+              <td class=''>67 of 3877 (1.73%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub8'>
+              <td class=''></td>
+              <td class=''>Mark Brown</td>
+              <td class=''>62 of 3877 (1.60%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top9'>2011-03</td>
+              <td class='yearmonthauthor_top9'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top9'>276 of 5313 (5.19%)</td>
+              <td class='yearmonthauthor_top9'>871</td>
+            </tr>
+            <tr class='yearmonthauthor_sub9'>
+              <td class=''></td>
+              <td class=''>Thomas Gleixner</td>
+              <td class=''>231 of 5313 (4.35%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub9'>
+              <td class=''></td>
+              <td class=''>David S. Miller</td>
+              <td class=''>116 of 5313 (2.18%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub9'>
+              <td class=''></td>
+              <td class=''>Luis R. Rodriguez</td>
+              <td class=''>91 of 5313 (1.71%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub9'>
+              <td class=''></td>
+              <td class=''>Al Viro</td>
+              <td class=''>74 of 5313 (1.39%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top10'>2011-02</td>
+              <td class='yearmonthauthor_top10'>Thomas Gleixner</td>
+              <td class='yearmonthauthor_top10'>223 of 4392 (5.08%)</td>
+              <td class='yearmonthauthor_top10'>762</td>
+            </tr>
+            <tr class='yearmonthauthor_sub10'>
+              <td class=''></td>
+              <td class=''>David S. Miller</td>
+              <td class=''>126 of 4392 (2.87%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub10'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>113 of 4392 (2.57%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub10'>
+              <td class=''></td>
+              <td class=''>Mark Brown</td>
+              <td class=''>68 of 4392 (1.55%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub10'>
+              <td class=''></td>
+              <td class=''>Tejun Heo</td>
+              <td class=''>58 of 4392 (1.32%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top11'>2011-01</td>
+              <td class='yearmonthauthor_top11'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top11'>246 of 4964 (4.96%)</td>
+              <td class='yearmonthauthor_top11'>811</td>
+            </tr>
+            <tr class='yearmonthauthor_sub11'>
+              <td class=''></td>
+              <td class=''>Russell King</td>
+              <td class=''>109 of 4964 (2.20%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub11'>
+              <td class=''></td>
+              <td class=''>Chris Wilson</td>
+              <td class=''>71 of 4964 (1.43%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub11'>
+              <td class=''></td>
+              <td class=''>Andrea Arcangeli</td>
+              <td class=''>65 of 4964 (1.31%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub11'>
+              <td class=''></td>
+              <td class=''>Tejun Heo</td>
+              <td class=''>65 of 4964 (1.31%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top12'>2010-12</td>
+              <td class='yearmonthauthor_top12'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top12'>117 of 3875 (3.02%)</td>
+              <td class='yearmonthauthor_top12'>705</td>
+            </tr>
+            <tr class='yearmonthauthor_sub12'>
+              <td class=''></td>
+              <td class=''>Mark Brown</td>
+              <td class=''>90 of 3875 (2.32%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub12'>
+              <td class=''></td>
+              <td class=''>Russell King</td>
+              <td class=''>90 of 3875 (2.32%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub12'>
+              <td class=''></td>
+              <td class=''>Tejun Heo</td>
+              <td class=''>74 of 3875 (1.91%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub12'>
+              <td class=''></td>
+              <td class=''>Chris Wilson</td>
+              <td class=''>67 of 3875 (1.73%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top13'>2010-11</td>
+              <td class='yearmonthauthor_top13'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top13'>118 of 3997 (2.95%)</td>
+              <td class='yearmonthauthor_top13'>705</td>
+            </tr>
+            <tr class='yearmonthauthor_sub13'>
+              <td class=''></td>
+              <td class=''>Joe Perches</td>
+              <td class=''>116 of 3997 (2.90%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub13'>
+              <td class=''></td>
+              <td class=''>Mark Brown</td>
+              <td class=''>79 of 3997 (1.98%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub13'>
+              <td class=''></td>
+              <td class=''>Chris Wilson</td>
+              <td class=''>77 of 3997 (1.93%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub13'>
+              <td class=''></td>
+              <td class=''>Axel Lin</td>
+              <td class=''>74 of 3997 (1.85%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top14'>2010-10</td>
+              <td class='yearmonthauthor_top14'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top14'>262 of 5325 (4.92%)</td>
+              <td class='yearmonthauthor_top14'>812</td>
+            </tr>
+            <tr class='yearmonthauthor_sub14'>
+              <td class=''></td>
+              <td class=''>Greg Kroah-Hartman</td>
+              <td class=''>119 of 5325 (2.23%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub14'>
+              <td class=''></td>
+              <td class=''>Paul Mundt</td>
+              <td class=''>79 of 5325 (1.48%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub14'>
+              <td class=''></td>
+              <td class=''>Namhyung Kim</td>
+              <td class=''>77 of 5325 (1.45%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub14'>
+              <td class=''></td>
+              <td class=''>Joe Perches</td>
+              <td class=''>76 of 5325 (1.43%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top15'>2010-09</td>
+              <td class='yearmonthauthor_top15'>Chris Wilson</td>
+              <td class='yearmonthauthor_top15'>144 of 4193 (3.43%)</td>
+              <td class='yearmonthauthor_top15'>751</td>
+            </tr>
+            <tr class='yearmonthauthor_sub15'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>122 of 4193 (2.91%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub15'>
+              <td class=''></td>
+              <td class=''>Thomas Gleixner</td>
+              <td class=''>90 of 4193 (2.15%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub15'>
+              <td class=''></td>
+              <td class=''>Eric Dumazet</td>
+              <td class=''>77 of 4193 (1.84%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub15'>
+              <td class=''></td>
+              <td class=''>Hans Verkuil</td>
+              <td class=''>66 of 4193 (1.57%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top16'>2010-08</td>
+              <td class='yearmonthauthor_top16'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top16'>255 of 4509 (5.66%)</td>
+              <td class='yearmonthauthor_top16'>771</td>
+            </tr>
+            <tr class='yearmonthauthor_sub16'>
+              <td class=''></td>
+              <td class=''>Chris Wilson</td>
+              <td class=''>99 of 4509 (2.20%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub16'>
+              <td class=''></td>
+              <td class=''>Johannes Berg</td>
+              <td class=''>87 of 4509 (1.93%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub16'>
+              <td class=''></td>
+              <td class=''>Julia Lawall</td>
+              <td class=''>83 of 4509 (1.84%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub16'>
+              <td class=''></td>
+              <td class=''>Dan Carpenter</td>
+              <td class=''>66 of 4509 (1.46%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top17'>2010-07</td>
+              <td class='yearmonthauthor_top17'>Kulikov Vasiliy</td>
+              <td class='yearmonthauthor_top17'>100 of 3798 (2.63%)</td>
+              <td class='yearmonthauthor_top17'>658</td>
+            </tr>
+            <tr class='yearmonthauthor_sub17'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>99 of 3798 (2.61%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub17'>
+              <td class=''></td>
+              <td class=''>Avi Kivity</td>
+              <td class=''>60 of 3798 (1.58%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub17'>
+              <td class=''></td>
+              <td class=''>John W. Linville</td>
+              <td class=''>55 of 3798 (1.45%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub17'>
+              <td class=''></td>
+              <td class=''>Benjamin Herrenschmidt</td>
+              <td class=''>49 of 3798 (1.29%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top18'>2010-06</td>
+              <td class='yearmonthauthor_top18'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top18'>93 of 3357 (2.77%)</td>
+              <td class='yearmonthauthor_top18'>644</td>
+            </tr>
+            <tr class='yearmonthauthor_sub18'>
+              <td class=''></td>
+              <td class=''>Christoph Hellwig</td>
+              <td class=''>71 of 3357 (2.11%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub18'>
+              <td class=''></td>
+              <td class=''>Eric Dumazet</td>
+              <td class=''>69 of 3357 (2.06%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub18'>
+              <td class=''></td>
+              <td class=''>Uwe Kleine-König</td>
+              <td class=''>64 of 3357 (1.91%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub18'>
+              <td class=''></td>
+              <td class=''>Al Viro</td>
+              <td class=''>60 of 3357 (1.79%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top19'>2010-05</td>
+              <td class='yearmonthauthor_top19'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top19'>230 of 5122 (4.49%)</td>
+              <td class='yearmonthauthor_top19'>824</td>
+            </tr>
+            <tr class='yearmonthauthor_sub19'>
+              <td class=''></td>
+              <td class=''>Greg Kroah-Hartman</td>
+              <td class=''>125 of 5122 (2.44%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub19'>
+              <td class=''></td>
+              <td class=''>Ben Dooks</td>
+              <td class=''>115 of 5122 (2.25%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub19'>
+              <td class=''></td>
+              <td class=''>Julia Lawall</td>
+              <td class=''>105 of 5122 (2.05%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub19'>
+              <td class=''></td>
+              <td class=''>Dan Carpenter</td>
+              <td class=''>85 of 5122 (1.66%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top20'>2010-04</td>
+              <td class='yearmonthauthor_top20'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top20'>133 of 3458 (3.85%)</td>
+              <td class='yearmonthauthor_top20'>665</td>
+            </tr>
+            <tr class='yearmonthauthor_sub20'>
+              <td class=''></td>
+              <td class=''>Johannes Berg</td>
+              <td class=''>64 of 3458 (1.85%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub20'>
+              <td class=''></td>
+              <td class=''>David S. Miller</td>
+              <td class=''>64 of 3458 (1.85%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub20'>
+              <td class=''></td>
+              <td class=''>Luis R. Rodriguez</td>
+              <td class=''>58 of 3458 (1.68%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub20'>
+              <td class=''></td>
+              <td class=''>Dan Carpenter</td>
+              <td class=''>56 of 3458 (1.62%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top21'>2010-03</td>
+              <td class='yearmonthauthor_top21'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top21'>177 of 4413 (4.01%)</td>
+              <td class='yearmonthauthor_top21'>805</td>
+            </tr>
+            <tr class='yearmonthauthor_sub21'>
+              <td class=''></td>
+              <td class=''>Joe Perches</td>
+              <td class=''>91 of 4413 (2.06%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub21'>
+              <td class=''></td>
+              <td class=''>Dan Carpenter</td>
+              <td class=''>71 of 4413 (1.61%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub21'>
+              <td class=''></td>
+              <td class=''>Peter Zijlstra</td>
+              <td class=''>56 of 4413 (1.27%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub21'>
+              <td class=''></td>
+              <td class=''>Mark Brown</td>
+              <td class=''>54 of 4413 (1.22%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top22'>2010-02</td>
+              <td class='yearmonthauthor_top22'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top22'>160 of 3939 (4.06%)</td>
+              <td class='yearmonthauthor_top22'>737</td>
+            </tr>
+            <tr class='yearmonthauthor_sub22'>
+              <td class=''></td>
+              <td class=''>Uwe Kleine-König</td>
+              <td class=''>53 of 3939 (1.35%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub22'>
+              <td class=''></td>
+              <td class=''>Magnus Damm</td>
+              <td class=''>52 of 3939 (1.32%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub22'>
+              <td class=''></td>
+              <td class=''>Jan Kiszka</td>
+              <td class=''>52 of 3939 (1.32%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub22'>
+              <td class=''></td>
+              <td class=''>Joe Perches</td>
+              <td class=''>50 of 3939 (1.27%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top23'>2010-01</td>
+              <td class='yearmonthauthor_top23'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top23'>121 of 3737 (3.24%)</td>
+              <td class='yearmonthauthor_top23'>643</td>
+            </tr>
+            <tr class='yearmonthauthor_sub23'>
+              <td class=''></td>
+              <td class=''>Paul Mundt</td>
+              <td class=''>100 of 3737 (2.68%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub23'>
+              <td class=''></td>
+              <td class=''>Ben Dooks</td>
+              <td class=''>90 of 3737 (2.41%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub23'>
+              <td class=''></td>
+              <td class=''>Rafał Miłecki</td>
+              <td class=''>63 of 3737 (1.69%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub23'>
+              <td class=''></td>
+              <td class=''>Mark Brown</td>
+              <td class=''>62 of 3737 (1.66%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top24'>2009-12</td>
+              <td class='yearmonthauthor_top24'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top24'>253 of 4838 (5.23%)</td>
+              <td class='yearmonthauthor_top24'>753</td>
+            </tr>
+            <tr class='yearmonthauthor_sub24'>
+              <td class=''></td>
+              <td class=''>Manu Abraham</td>
+              <td class=''>102 of 4838 (2.11%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub24'>
+              <td class=''></td>
+              <td class=''>Eric Paris</td>
+              <td class=''>81 of 4838 (1.67%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub24'>
+              <td class=''></td>
+              <td class=''>Takashi Iwai</td>
+              <td class=''>65 of 4838 (1.34%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub24'>
+              <td class=''></td>
+              <td class=''>Jean Delvare</td>
+              <td class=''>62 of 4838 (1.28%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top25'>2009-11</td>
+              <td class='yearmonthauthor_top25'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top25'>121 of 4157 (2.91%)</td>
+              <td class='yearmonthauthor_top25'>708</td>
+            </tr>
+            <tr class='yearmonthauthor_sub25'>
+              <td class=''></td>
+              <td class=''>Ben Hutchings</td>
+              <td class=''>88 of 4157 (2.12%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub25'>
+              <td class=''></td>
+              <td class=''>Eric Dumazet</td>
+              <td class=''>65 of 4157 (1.56%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub25'>
+              <td class=''></td>
+              <td class=''>Arnaldo Carvalho de Melo</td>
+              <td class=''>64 of 4157 (1.54%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub25'>
+              <td class=''></td>
+              <td class=''>Bartlomiej Zolnierkiewicz</td>
+              <td class=''>63 of 4157 (1.52%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top26'>2009-10</td>
+              <td class='yearmonthauthor_top26'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top26'>144 of 3740 (3.85%)</td>
+              <td class='yearmonthauthor_top26'>656</td>
+            </tr>
+            <tr class='yearmonthauthor_sub26'>
+              <td class=''></td>
+              <td class=''>Paul Mundt</td>
+              <td class=''>63 of 3740 (1.68%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub26'>
+              <td class=''></td>
+              <td class=''>Alexander Duyck</td>
+              <td class=''>62 of 3740 (1.66%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub26'>
+              <td class=''></td>
+              <td class=''>Eric Dumazet</td>
+              <td class=''>56 of 3740 (1.50%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub26'>
+              <td class=''></td>
+              <td class=''>Sage Weil</td>
+              <td class=''>55 of 3740 (1.47%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top27'>2009-09</td>
+              <td class='yearmonthauthor_top27'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top27'>233 of 4347 (5.36%)</td>
+              <td class='yearmonthauthor_top27'>757</td>
+            </tr>
+            <tr class='yearmonthauthor_sub27'>
+              <td class=''></td>
+              <td class=''>Ingo Molnar</td>
+              <td class=''>80 of 4347 (1.84%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub27'>
+              <td class=''></td>
+              <td class=''>Luis R. Rodriguez</td>
+              <td class=''>71 of 4347 (1.63%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub27'>
+              <td class=''></td>
+              <td class=''>Mauro Carvalho Chehab</td>
+              <td class=''>67 of 4347 (1.54%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub27'>
+              <td class=''></td>
+              <td class=''>Peter Zijlstra</td>
+              <td class=''>59 of 4347 (1.36%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top28'>2009-08</td>
+              <td class='yearmonthauthor_top28'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top28'>139 of 3973 (3.50%)</td>
+              <td class='yearmonthauthor_top28'>654</td>
+            </tr>
+            <tr class='yearmonthauthor_sub28'>
+              <td class=''></td>
+              <td class=''>Greg Kroah-Hartman</td>
+              <td class=''>94 of 3973 (2.37%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub28'>
+              <td class=''></td>
+              <td class=''>Paul Mundt</td>
+              <td class=''>87 of 3973 (2.19%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub28'>
+              <td class=''></td>
+              <td class=''>Alan Cox</td>
+              <td class=''>81 of 3973 (2.04%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub28'>
+              <td class=''></td>
+              <td class=''>Bartlomiej Zolnierkiewicz</td>
+              <td class=''>64 of 3973 (1.61%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top29'>2009-07</td>
+              <td class='yearmonthauthor_top29'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top29'>145 of 3606 (4.02%)</td>
+              <td class='yearmonthauthor_top29'>646</td>
+            </tr>
+            <tr class='yearmonthauthor_sub29'>
+              <td class=''></td>
+              <td class=''>Johannes Berg</td>
+              <td class=''>110 of 3606 (3.05%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub29'>
+              <td class=''></td>
+              <td class=''>Takashi Iwai</td>
+              <td class=''>100 of 3606 (2.77%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub29'>
+              <td class=''></td>
+              <td class=''>Herbert Xu</td>
+              <td class=''>68 of 3606 (1.89%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub29'>
+              <td class=''></td>
+              <td class=''>Greg Kroah-Hartman</td>
+              <td class=''>68 of 3606 (1.89%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top30'>2009-06</td>
+              <td class='yearmonthauthor_top30'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top30'>252 of 4934 (5.11%)</td>
+              <td class='yearmonthauthor_top30'>773</td>
+            </tr>
+            <tr class='yearmonthauthor_sub30'>
+              <td class=''></td>
+              <td class=''>Takashi Iwai</td>
+              <td class=''>133 of 4934 (2.70%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub30'>
+              <td class=''></td>
+              <td class=''>Ingo Molnar</td>
+              <td class=''>110 of 4934 (2.23%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub30'>
+              <td class=''></td>
+              <td class=''>Mike Frysinger</td>
+              <td class=''>103 of 4934 (2.09%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub30'>
+              <td class=''></td>
+              <td class=''>Peter Zijlstra</td>
+              <td class=''>85 of 4934 (1.72%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top31'>2009-05</td>
+              <td class='yearmonthauthor_top31'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top31'>136 of 3538 (3.84%)</td>
+              <td class='yearmonthauthor_top31'>652</td>
+            </tr>
+            <tr class='yearmonthauthor_sub31'>
+              <td class=''></td>
+              <td class=''>Paul Mundt</td>
+              <td class=''>92 of 3538 (2.60%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub31'>
+              <td class=''></td>
+              <td class=''>Ingo Molnar</td>
+              <td class=''>79 of 3538 (2.23%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub31'>
+              <td class=''></td>
+              <td class=''>Takashi Iwai</td>
+              <td class=''>67 of 3538 (1.89%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub31'>
+              <td class=''></td>
+              <td class=''>Peter Zijlstra</td>
+              <td class=''>63 of 3538 (1.78%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top32'>2009-04</td>
+              <td class='yearmonthauthor_top32'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top32'>217 of 4967 (4.37%)</td>
+              <td class='yearmonthauthor_top32'>748</td>
+            </tr>
+            <tr class='yearmonthauthor_sub32'>
+              <td class=''></td>
+              <td class=''>Bartlomiej Zolnierkiewicz</td>
+              <td class=''>130 of 4967 (2.62%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub32'>
+              <td class=''></td>
+              <td class=''>Tejun Heo</td>
+              <td class=''>94 of 4967 (1.89%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub32'>
+              <td class=''></td>
+              <td class=''>Alexander Beregalov</td>
+              <td class=''>86 of 4967 (1.73%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub32'>
+              <td class=''></td>
+              <td class=''>Mark Brown</td>
+              <td class=''>78 of 4967 (1.57%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top33'>2009-03</td>
+              <td class='yearmonthauthor_top33'>Bill Pemberton</td>
+              <td class='yearmonthauthor_top33'>283 of 5208 (5.43%)</td>
+              <td class='yearmonthauthor_top33'>681</td>
+            </tr>
+            <tr class='yearmonthauthor_sub33'>
+              <td class=''></td>
+              <td class=''>Bartlomiej Zolnierkiewicz</td>
+              <td class=''>162 of 5208 (3.11%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub33'>
+              <td class=''></td>
+              <td class=''>Ingo Molnar</td>
+              <td class=''>154 of 5208 (2.96%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub33'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>153 of 5208 (2.94%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub33'>
+              <td class=''></td>
+              <td class=''>Stephen Hemminger</td>
+              <td class=''>123 of 5208 (2.36%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top34'>2009-02</td>
+              <td class='yearmonthauthor_top34'>Ingo Molnar</td>
+              <td class='yearmonthauthor_top34'>208 of 4002 (5.20%)</td>
+              <td class='yearmonthauthor_top34'>657</td>
+            </tr>
+            <tr class='yearmonthauthor_sub34'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>141 of 4002 (3.52%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub34'>
+              <td class=''></td>
+              <td class=''>Takashi Iwai</td>
+              <td class=''>124 of 4002 (3.10%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub34'>
+              <td class=''></td>
+              <td class=''>Jeremy Fitzhardinge</td>
+              <td class=''>114 of 4002 (2.85%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub34'>
+              <td class=''></td>
+              <td class=''>Hannes Eder</td>
+              <td class=''>78 of 4002 (1.95%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top35'>2009-01</td>
+              <td class='yearmonthauthor_top35'>Ingo Molnar</td>
+              <td class='yearmonthauthor_top35'>235 of 5282 (4.45%)</td>
+              <td class='yearmonthauthor_top35'>725</td>
+            </tr>
+            <tr class='yearmonthauthor_sub35'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>187 of 5282 (3.54%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub35'>
+              <td class=''></td>
+              <td class=''>Jaswinder Singh Rajput</td>
+              <td class=''>171 of 5282 (3.24%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub35'>
+              <td class=''></td>
+              <td class=''>Stephen Hemminger</td>
+              <td class=''>100 of 5282 (1.89%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub35'>
+              <td class=''></td>
+              <td class=''>Takashi Iwai</td>
+              <td class=''>87 of 5282 (1.65%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top36'>2008-12</td>
+              <td class='yearmonthauthor_top36'>Ingo Molnar</td>
+              <td class='yearmonthauthor_top36'>159 of 3931 (4.04%)</td>
+              <td class='yearmonthauthor_top36'>614</td>
+            </tr>
+            <tr class='yearmonthauthor_sub36'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>134 of 3931 (3.41%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub36'>
+              <td class=''></td>
+              <td class=''>Takashi Iwai</td>
+              <td class=''>93 of 3931 (2.37%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub36'>
+              <td class=''></td>
+              <td class=''>Joerg Roedel</td>
+              <td class=''>62 of 3931 (1.58%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub36'>
+              <td class=''></td>
+              <td class=''>Paul Mundt</td>
+              <td class=''>55 of 3931 (1.40%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top37'>2008-11</td>
+              <td class='yearmonthauthor_top37'>Ingo Molnar</td>
+              <td class='yearmonthauthor_top37'>128 of 3843 (3.33%)</td>
+              <td class='yearmonthauthor_top37'>630</td>
+            </tr>
+            <tr class='yearmonthauthor_sub37'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>122 of 3843 (3.17%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub37'>
+              <td class=''></td>
+              <td class=''>Takashi Iwai</td>
+              <td class=''>98 of 3843 (2.55%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub37'>
+              <td class=''></td>
+              <td class=''>David Howells</td>
+              <td class=''>91 of 3843 (2.37%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub37'>
+              <td class=''></td>
+              <td class=''>Alexey Dobriyan</td>
+              <td class=''>90 of 3843 (2.34%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top38'>2008-10</td>
+              <td class='yearmonthauthor_top38'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top38'>250 of 4903 (5.10%)</td>
+              <td class='yearmonthauthor_top38'>774</td>
+            </tr>
+            <tr class='yearmonthauthor_sub38'>
+              <td class=''></td>
+              <td class=''>Bartlomiej Zolnierkiewicz</td>
+              <td class=''>144 of 4903 (2.94%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub38'>
+              <td class=''></td>
+              <td class=''>Alexey Dobriyan</td>
+              <td class=''>100 of 4903 (2.04%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub38'>
+              <td class=''></td>
+              <td class=''>Ben Dooks</td>
+              <td class=''>98 of 4903 (2.00%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub38'>
+              <td class=''></td>
+              <td class=''>Ingo Molnar</td>
+              <td class=''>78 of 4903 (1.59%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top39'>2008-09</td>
+              <td class='yearmonthauthor_top39'>David S. Miller</td>
+              <td class='yearmonthauthor_top39'>133 of 3132 (4.25%)</td>
+              <td class='yearmonthauthor_top39'>570</td>
+            </tr>
+            <tr class='yearmonthauthor_sub39'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>120 of 3132 (3.83%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub39'>
+              <td class=''></td>
+              <td class=''>Gerrit Renker</td>
+              <td class=''>98 of 3132 (3.13%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub39'>
+              <td class=''></td>
+              <td class=''>Yinghai Lu</td>
+              <td class=''>81 of 3132 (2.59%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub39'>
+              <td class=''></td>
+              <td class=''>Johannes Berg</td>
+              <td class=''>74 of 3132 (2.36%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top40'>2008-08</td>
+              <td class='yearmonthauthor_top40'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top40'>179 of 3323 (5.39%)</td>
+              <td class='yearmonthauthor_top40'>571</td>
+            </tr>
+            <tr class='yearmonthauthor_sub40'>
+              <td class=''></td>
+              <td class=''>David S. Miller</td>
+              <td class=''>170 of 3323 (5.12%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub40'>
+              <td class=''></td>
+              <td class=''>Yinghai Lu</td>
+              <td class=''>95 of 3323 (2.86%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub40'>
+              <td class=''></td>
+              <td class=''>Ingo Molnar</td>
+              <td class=''>65 of 3323 (1.96%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub40'>
+              <td class=''></td>
+              <td class=''>Al Viro</td>
+              <td class=''>50 of 3323 (1.50%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top41'>2008-07</td>
+              <td class='yearmonthauthor_top41'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top41'>228 of 5665 (4.02%)</td>
+              <td class='yearmonthauthor_top41'>709</td>
+            </tr>
+            <tr class='yearmonthauthor_sub41'>
+              <td class=''></td>
+              <td class=''>Bartlomiej Zolnierkiewicz</td>
+              <td class=''>224 of 5665 (3.95%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub41'>
+              <td class=''></td>
+              <td class=''>Ingo Molnar</td>
+              <td class=''>209 of 5665 (3.69%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub41'>
+              <td class=''></td>
+              <td class=''>David S. Miller</td>
+              <td class=''>125 of 5665 (2.21%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub41'>
+              <td class=''></td>
+              <td class=''>Adrian Bunk</td>
+              <td class=''>121 of 5665 (2.14%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top42'>2008-06</td>
+              <td class='yearmonthauthor_top42'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top42'>113 of 3033 (3.73%)</td>
+              <td class='yearmonthauthor_top42'>576</td>
+            </tr>
+            <tr class='yearmonthauthor_sub42'>
+              <td class=''></td>
+              <td class=''>Ingo Molnar</td>
+              <td class=''>109 of 3033 (3.59%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub42'>
+              <td class=''></td>
+              <td class=''>Yinghai Lu</td>
+              <td class=''>108 of 3033 (3.56%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub42'>
+              <td class=''></td>
+              <td class=''>Jeremy Fitzhardinge</td>
+              <td class=''>59 of 3033 (1.95%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub42'>
+              <td class=''></td>
+              <td class=''>Adrian Bunk</td>
+              <td class=''>50 of 3033 (1.65%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top43'>2008-05</td>
+              <td class='yearmonthauthor_top43'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top43'>166 of 3579 (4.64%)</td>
+              <td class='yearmonthauthor_top43'>567</td>
+            </tr>
+            <tr class='yearmonthauthor_sub43'>
+              <td class=''></td>
+              <td class=''>Ingo Molnar</td>
+              <td class=''>114 of 3579 (3.19%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub43'>
+              <td class=''></td>
+              <td class=''>Steven Rostedt</td>
+              <td class=''>91 of 3579 (2.54%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub43'>
+              <td class=''></td>
+              <td class=''>Alan Cox</td>
+              <td class=''>83 of 3579 (2.32%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub43'>
+              <td class=''></td>
+              <td class=''>Arnd Bergmann</td>
+              <td class=''>69 of 3579 (1.93%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top44'>2008-04</td>
+              <td class='yearmonthauthor_top44'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top44'>196 of 5389 (3.64%)</td>
+              <td class='yearmonthauthor_top44'>686</td>
+            </tr>
+            <tr class='yearmonthauthor_sub44'>
+              <td class=''></td>
+              <td class=''>Bartlomiej Zolnierkiewicz</td>
+              <td class=''>171 of 5389 (3.17%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub44'>
+              <td class=''></td>
+              <td class=''>Harvey Harrison</td>
+              <td class=''>139 of 5389 (2.58%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub44'>
+              <td class=''></td>
+              <td class=''>Adrian Bunk</td>
+              <td class=''>135 of 5389 (2.51%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub44'>
+              <td class=''></td>
+              <td class=''>Pavel Emelyanov</td>
+              <td class=''>103 of 5389 (1.91%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top45'>2008-03</td>
+              <td class='yearmonthauthor_top45'>Joe Perches</td>
+              <td class='yearmonthauthor_top45'>152 of 3141 (4.84%)</td>
+              <td class='yearmonthauthor_top45'>556</td>
+            </tr>
+            <tr class='yearmonthauthor_sub45'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>127 of 3141 (4.04%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub45'>
+              <td class=''></td>
+              <td class=''>Al Viro</td>
+              <td class=''>114 of 3141 (3.63%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub45'>
+              <td class=''></td>
+              <td class=''>Glauber Costa</td>
+              <td class=''>81 of 3141 (2.58%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub45'>
+              <td class=''></td>
+              <td class=''>Glauber de Oliveira Costa</td>
+              <td class=''>78 of 3141 (2.48%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top46'>2008-02</td>
+              <td class='yearmonthauthor_top46'>Bartlomiej Zolnierkiewicz</td>
+              <td class='yearmonthauthor_top46'>171 of 4600 (3.72%)</td>
+              <td class='yearmonthauthor_top46'>691</td>
+            </tr>
+            <tr class='yearmonthauthor_sub46'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>165 of 4600 (3.59%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub46'>
+              <td class=''></td>
+              <td class=''>Adrian Bunk</td>
+              <td class=''>124 of 4600 (2.70%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub46'>
+              <td class=''></td>
+              <td class=''>Harvey Harrison</td>
+              <td class=''>105 of 4600 (2.28%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub46'>
+              <td class=''></td>
+              <td class=''>David S. Miller</td>
+              <td class=''>82 of 4600 (1.78%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top47'>2008-01</td>
+              <td class='yearmonthauthor_top47'>Ingo Molnar</td>
+              <td class='yearmonthauthor_top47'>154 of 4269 (3.61%)</td>
+              <td class='yearmonthauthor_top47'>605</td>
+            </tr>
+            <tr class='yearmonthauthor_sub47'>
+              <td class=''></td>
+              <td class=''>Glauber de Oliveira Costa</td>
+              <td class=''>124 of 4269 (2.90%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub47'>
+              <td class=''></td>
+              <td class=''>Bartlomiej Zolnierkiewicz</td>
+              <td class=''>122 of 4269 (2.86%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub47'>
+              <td class=''></td>
+              <td class=''>Thomas Gleixner</td>
+              <td class=''>120 of 4269 (2.81%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub47'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>112 of 4269 (2.62%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top48'>2007-12</td>
+              <td class='yearmonthauthor_top48'>David Woodhouse</td>
+              <td class='yearmonthauthor_top48'>122 of 2594 (4.70%)</td>
+              <td class='yearmonthauthor_top48'>441</td>
+            </tr>
+            <tr class='yearmonthauthor_sub48'>
+              <td class=''></td>
+              <td class=''>Patrick McHardy</td>
+              <td class=''>93 of 2594 (3.59%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub48'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>89 of 2594 (3.43%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub48'>
+              <td class=''></td>
+              <td class=''>Al Viro</td>
+              <td class=''>87 of 2594 (3.35%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub48'>
+              <td class=''></td>
+              <td class=''>Herbert Xu</td>
+              <td class=''>71 of 2594 (2.74%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top49'>2007-11</td>
+              <td class='yearmonthauthor_top49'>Paul Mundt</td>
+              <td class='yearmonthauthor_top49'>180 of 2857 (6.30%)</td>
+              <td class='yearmonthauthor_top49'>508</td>
+            </tr>
+            <tr class='yearmonthauthor_sub49'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>99 of 2857 (3.47%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub49'>
+              <td class=''></td>
+              <td class=''>Greg Kroah-Hartman</td>
+              <td class=''>63 of 2857 (2.21%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub49'>
+              <td class=''></td>
+              <td class=''>Jesper Nilsson</td>
+              <td class=''>63 of 2857 (2.21%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub49'>
+              <td class=''></td>
+              <td class=''>Adrian Bunk</td>
+              <td class=''>61 of 2857 (2.14%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top50'>2007-10</td>
+              <td class='yearmonthauthor_top50'>Thomas Gleixner</td>
+              <td class='yearmonthauthor_top50'>347 of 5418 (6.40%)</td>
+              <td class='yearmonthauthor_top50'>659</td>
+            </tr>
+            <tr class='yearmonthauthor_sub50'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>213 of 5418 (3.93%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub50'>
+              <td class=''></td>
+              <td class=''>Bartlomiej Zolnierkiewicz</td>
+              <td class=''>156 of 5418 (2.88%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub50'>
+              <td class=''></td>
+              <td class=''>Ralf Baechle</td>
+              <td class=''>128 of 5418 (2.36%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub50'>
+              <td class=''></td>
+              <td class=''>Adrian Bunk</td>
+              <td class=''>106 of 5418 (1.96%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top51'>2007-09</td>
+              <td class='yearmonthauthor_top51'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top51'>93 of 1928 (4.82%)</td>
+              <td class='yearmonthauthor_top51'>402</td>
+            </tr>
+            <tr class='yearmonthauthor_sub51'>
+              <td class=''></td>
+              <td class=''>Johannes Berg</td>
+              <td class=''>51 of 1928 (2.65%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub51'>
+              <td class=''></td>
+              <td class=''>Tejun Heo</td>
+              <td class=''>50 of 1928 (2.59%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub51'>
+              <td class=''></td>
+              <td class=''>Paul Mundt</td>
+              <td class=''>40 of 1928 (2.07%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub51'>
+              <td class=''></td>
+              <td class=''>Eric W. Biederman</td>
+              <td class=''>27 of 1928 (1.40%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top52'>2007-08</td>
+              <td class='yearmonthauthor_top52'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top52'>100 of 2429 (4.12%)</td>
+              <td class='yearmonthauthor_top52'>480</td>
+            </tr>
+            <tr class='yearmonthauthor_sub52'>
+              <td class=''></td>
+              <td class=''>Ingo Molnar</td>
+              <td class=''>81 of 2429 (3.33%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub52'>
+              <td class=''></td>
+              <td class=''>Takashi Iwai</td>
+              <td class=''>52 of 2429 (2.14%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub52'>
+              <td class=''></td>
+              <td class=''>Ralf Baechle</td>
+              <td class=''>50 of 2429 (2.06%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub52'>
+              <td class=''></td>
+              <td class=''>Hans Verkuil</td>
+              <td class=''>47 of 2429 (1.93%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top53'>2007-07</td>
+              <td class='yearmonthauthor_top53'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top53'>182 of 4251 (4.28%)</td>
+              <td class='yearmonthauthor_top53'>660</td>
+            </tr>
+            <tr class='yearmonthauthor_sub53'>
+              <td class=''></td>
+              <td class=''>Al Viro</td>
+              <td class=''>88 of 4251 (2.07%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub53'>
+              <td class=''></td>
+              <td class=''>Adrian Bunk</td>
+              <td class=''>84 of 4251 (1.98%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub53'>
+              <td class=''></td>
+              <td class=''>Ralf Baechle</td>
+              <td class=''>80 of 4251 (1.88%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub53'>
+              <td class=''></td>
+              <td class=''>David S. Miller</td>
+              <td class=''>77 of 4251 (1.81%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top54'>2007-06</td>
+              <td class='yearmonthauthor_top54'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top54'>80 of 1794 (4.46%)</td>
+              <td class='yearmonthauthor_top54'>436</td>
+            </tr>
+            <tr class='yearmonthauthor_sub54'>
+              <td class=''></td>
+              <td class=''>Tejun Heo</td>
+              <td class=''>63 of 1794 (3.51%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub54'>
+              <td class=''></td>
+              <td class=''>Trond Myklebust</td>
+              <td class=''>61 of 1794 (3.40%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub54'>
+              <td class=''></td>
+              <td class=''>Paul Mundt</td>
+              <td class=''>42 of 1794 (2.34%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub54'>
+              <td class=''></td>
+              <td class=''>Greg Kroah-Hartman</td>
+              <td class=''>39 of 1794 (2.17%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top55'>2007-05</td>
+              <td class='yearmonthauthor_top55'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top55'>157 of 3927 (4.00%)</td>
+              <td class='yearmonthauthor_top55'>652</td>
+            </tr>
+            <tr class='yearmonthauthor_sub55'>
+              <td class=''></td>
+              <td class=''>David S. Miller</td>
+              <td class=''>82 of 3927 (2.09%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub55'>
+              <td class=''></td>
+              <td class=''>Christoph Lameter</td>
+              <td class=''>74 of 3927 (1.88%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub55'>
+              <td class=''></td>
+              <td class=''>Jean Delvare</td>
+              <td class=''>64 of 3927 (1.63%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub55'>
+              <td class=''></td>
+              <td class=''>Jeff Dike</td>
+              <td class=''>61 of 3927 (1.55%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top56'>2007-04</td>
+              <td class='yearmonthauthor_top56'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top56'>74 of 1646 (4.50%)</td>
+              <td class='yearmonthauthor_top56'>368</td>
+            </tr>
+            <tr class='yearmonthauthor_sub56'>
+              <td class=''></td>
+              <td class=''>Chris Mason</td>
+              <td class=''>52 of 1646 (3.16%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub56'>
+              <td class=''></td>
+              <td class=''>Dmitry Torokhov</td>
+              <td class=''>43 of 1646 (2.61%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub56'>
+              <td class=''></td>
+              <td class=''>Henrique de Moraes Holschuh</td>
+              <td class=''>38 of 1646 (2.31%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub56'>
+              <td class=''></td>
+              <td class=''>Stephen Hemminger</td>
+              <td class=''>29 of 1646 (1.76%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top57'>2007-03</td>
+              <td class='yearmonthauthor_top57'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top57'>111 of 2351 (4.72%)</td>
+              <td class='yearmonthauthor_top57'>483</td>
+            </tr>
+            <tr class='yearmonthauthor_sub57'>
+              <td class=''></td>
+              <td class=''>David S. Miller</td>
+              <td class=''>73 of 2351 (3.11%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub57'>
+              <td class=''></td>
+              <td class=''>Ralf Baechle</td>
+              <td class=''>68 of 2351 (2.89%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub57'>
+              <td class=''></td>
+              <td class=''>Arnaldo Carvalho de Melo</td>
+              <td class=''>66 of 2351 (2.81%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub57'>
+              <td class=''></td>
+              <td class=''>Chris Mason</td>
+              <td class=''>66 of 2351 (2.81%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top58'>2007-02</td>
+              <td class='yearmonthauthor_top58'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top58'>115 of 3018 (3.81%)</td>
+              <td class='yearmonthauthor_top58'>499</td>
+            </tr>
+            <tr class='yearmonthauthor_sub58'>
+              <td class=''></td>
+              <td class=''>Eric W. Biederman</td>
+              <td class=''>93 of 3018 (3.08%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub58'>
+              <td class=''></td>
+              <td class=''>Bob Moore</td>
+              <td class=''>66 of 3018 (2.19%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub58'>
+              <td class=''></td>
+              <td class=''>Ralf Baechle</td>
+              <td class=''>63 of 3018 (2.09%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub58'>
+              <td class=''></td>
+              <td class=''>Al Viro</td>
+              <td class=''>58 of 3018 (1.92%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top59'>2007-01</td>
+              <td class='yearmonthauthor_top59'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top59'>82 of 1543 (5.31%)</td>
+              <td class='yearmonthauthor_top59'>386</td>
+            </tr>
+            <tr class='yearmonthauthor_sub59'>
+              <td class=''></td>
+              <td class=''>Avi Kivity</td>
+              <td class=''>46 of 1543 (2.98%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub59'>
+              <td class=''></td>
+              <td class=''>Darrick J. Wong</td>
+              <td class=''>40 of 1543 (2.59%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub59'>
+              <td class=''></td>
+              <td class=''>Mauro Carvalho Chehab</td>
+              <td class=''>30 of 1543 (1.94%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub59'>
+              <td class=''></td>
+              <td class=''>Tejun Heo</td>
+              <td class=''>27 of 1543 (1.75%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top60'>2006-12</td>
+              <td class='yearmonthauthor_top60'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top60'>107 of 2924 (3.66%)</td>
+              <td class='yearmonthauthor_top60'>516</td>
+            </tr>
+            <tr class='yearmonthauthor_sub60'>
+              <td class=''></td>
+              <td class=''>Jiri Slaby</td>
+              <td class=''>92 of 2924 (3.15%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub60'>
+              <td class=''></td>
+              <td class=''>Josef Sipek</td>
+              <td class=''>79 of 2924 (2.70%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub60'>
+              <td class=''></td>
+              <td class=''>Andrew Morton</td>
+              <td class=''>70 of 2924 (2.39%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub60'>
+              <td class=''></td>
+              <td class=''>Adrian Bunk</td>
+              <td class=''>63 of 2924 (2.15%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top61'>2006-11</td>
+              <td class='yearmonthauthor_top61'>Al Viro</td>
+              <td class='yearmonthauthor_top61'>159 of 1822 (8.73%)</td>
+              <td class='yearmonthauthor_top61'>367</td>
+            </tr>
+            <tr class='yearmonthauthor_sub61'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>81 of 1822 (4.45%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub61'>
+              <td class=''></td>
+              <td class=''>Gerrit Renker</td>
+              <td class=''>47 of 1822 (2.58%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub61'>
+              <td class=''></td>
+              <td class=''>Mariusz Kozlowski</td>
+              <td class=''>42 of 1822 (2.31%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub61'>
+              <td class=''></td>
+              <td class=''>Tejun Heo</td>
+              <td class=''>41 of 1822 (2.25%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top62'>2006-10</td>
+              <td class='yearmonthauthor_top62'>Al Viro</td>
+              <td class='yearmonthauthor_top62'>152 of 2780 (5.47%)</td>
+              <td class='yearmonthauthor_top62'>521</td>
+            </tr>
+            <tr class='yearmonthauthor_sub62'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>130 of 2780 (4.68%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub62'>
+              <td class=''></td>
+              <td class=''>Jeff Garzik</td>
+              <td class=''>67 of 2780 (2.41%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub62'>
+              <td class=''></td>
+              <td class=''>Eric W. Biederman</td>
+              <td class=''>65 of 2780 (2.34%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub62'>
+              <td class=''></td>
+              <td class=''>Ralf Baechle</td>
+              <td class=''>60 of 2780 (2.16%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top63'>2006-09</td>
+              <td class='yearmonthauthor_top63'>Al Viro</td>
+              <td class='yearmonthauthor_top63'>148 of 2778 (5.33%)</td>
+              <td class='yearmonthauthor_top63'>508</td>
+            </tr>
+            <tr class='yearmonthauthor_sub63'>
+              <td class=''></td>
+              <td class=''>Andi Kleen</td>
+              <td class=''>135 of 2778 (4.86%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub63'>
+              <td class=''></td>
+              <td class=''>Paul Mundt</td>
+              <td class=''>97 of 2778 (3.49%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub63'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>81 of 2778 (2.92%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub63'>
+              <td class=''></td>
+              <td class=''>Jeff Garzik</td>
+              <td class=''>61 of 2778 (2.20%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top64'>2006-08</td>
+              <td class='yearmonthauthor_top64'>Greg Kroah-Hartman</td>
+              <td class='yearmonthauthor_top64'>55 of 1803 (3.05%)</td>
+              <td class='yearmonthauthor_top64'>383</td>
+            </tr>
+            <tr class='yearmonthauthor_sub64'>
+              <td class=''></td>
+              <td class=''>Mauro Carvalho Chehab</td>
+              <td class=''>53 of 1803 (2.94%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub64'>
+              <td class=''></td>
+              <td class=''>Jeff Garzik</td>
+              <td class=''>52 of 1803 (2.88%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub64'>
+              <td class=''></td>
+              <td class=''>Thomas Graf</td>
+              <td class=''>48 of 1803 (2.66%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub64'>
+              <td class=''></td>
+              <td class=''>Herbert Xu</td>
+              <td class=''>45 of 1803 (2.50%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top65'>2006-07</td>
+              <td class='yearmonthauthor_top65'>Ingo Molnar</td>
+              <td class='yearmonthauthor_top65'>87 of 1766 (4.93%)</td>
+              <td class='yearmonthauthor_top65'>355</td>
+            </tr>
+            <tr class='yearmonthauthor_sub65'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>84 of 1766 (4.76%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub65'>
+              <td class=''></td>
+              <td class=''>Thomas Gleixner</td>
+              <td class=''>74 of 1766 (4.19%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub65'>
+              <td class=''></td>
+              <td class=''>Jens Axboe</td>
+              <td class=''>42 of 1766 (2.38%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub65'>
+              <td class=''></td>
+              <td class=''>Benjamin Herrenschmidt</td>
+              <td class=''>40 of 1766 (2.27%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top66'>2006-06</td>
+              <td class='yearmonthauthor_top66'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top66'>113 of 3163 (3.57%)</td>
+              <td class='yearmonthauthor_top66'>531</td>
+            </tr>
+            <tr class='yearmonthauthor_sub66'>
+              <td class=''></td>
+              <td class=''>David S. Miller</td>
+              <td class=''>109 of 3163 (3.45%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub66'>
+              <td class=''></td>
+              <td class=''>Andrew Morton</td>
+              <td class=''>66 of 3163 (2.09%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub66'>
+              <td class=''></td>
+              <td class=''>Adrian Bunk</td>
+              <td class=''>64 of 3163 (2.02%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub66'>
+              <td class=''></td>
+              <td class=''>Ralf Baechle</td>
+              <td class=''>59 of 3163 (1.87%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top67'>2006-05</td>
+              <td class='yearmonthauthor_top67'>David Woodhouse</td>
+              <td class='yearmonthauthor_top67'>105 of 1542 (6.81%)</td>
+              <td class='yearmonthauthor_top67'>334</td>
+            </tr>
+            <tr class='yearmonthauthor_sub67'>
+              <td class=''></td>
+              <td class=''>Tejun Heo</td>
+              <td class=''>92 of 1542 (5.97%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub67'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>69 of 1542 (4.47%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub67'>
+              <td class=''></td>
+              <td class=''>Thomas Gleixner</td>
+              <td class=''>40 of 1542 (2.59%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub67'>
+              <td class=''></td>
+              <td class=''>Stephen Hemminger</td>
+              <td class=''>38 of 1542 (2.46%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top68'>2006-04</td>
+              <td class='yearmonthauthor_top68'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top68'>87 of 1780 (4.89%)</td>
+              <td class='yearmonthauthor_top68'>368</td>
+            </tr>
+            <tr class='yearmonthauthor_sub68'>
+              <td class=''></td>
+              <td class=''>Andrew de Quincey</td>
+              <td class=''>60 of 1780 (3.37%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub68'>
+              <td class=''></td>
+              <td class=''>David Woodhouse</td>
+              <td class=''>56 of 1780 (3.15%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub68'>
+              <td class=''></td>
+              <td class=''>Tejun Heo</td>
+              <td class=''>48 of 1780 (2.70%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub68'>
+              <td class=''></td>
+              <td class=''>Adrian Bunk</td>
+              <td class=''>47 of 1780 (2.64%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top69'>2006-03</td>
+              <td class='yearmonthauthor_top69'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top69'>111 of 3510 (3.16%)</td>
+              <td class='yearmonthauthor_top69'>522</td>
+            </tr>
+            <tr class='yearmonthauthor_sub69'>
+              <td class=''></td>
+              <td class=''>Andrew Morton</td>
+              <td class=''>99 of 3510 (2.82%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub69'>
+              <td class=''></td>
+              <td class=''>Adrian Bunk</td>
+              <td class=''>88 of 3510 (2.51%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub69'>
+              <td class=''></td>
+              <td class=''>David S. Miller</td>
+              <td class=''>69 of 3510 (1.97%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub69'>
+              <td class=''></td>
+              <td class=''>Nathan Scott</td>
+              <td class=''>68 of 3510 (1.94%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top70'>2006-02</td>
+              <td class='yearmonthauthor_top70'>David S. Miller</td>
+              <td class='yearmonthauthor_top70'>205 of 1951 (10.51%)</td>
+              <td class='yearmonthauthor_top70'>415</td>
+            </tr>
+            <tr class='yearmonthauthor_sub70'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>104 of 1951 (5.33%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub70'>
+              <td class=''></td>
+              <td class=''>Tejun Heo</td>
+              <td class=''>56 of 1951 (2.87%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub70'>
+              <td class=''></td>
+              <td class=''>Jeff Garzik</td>
+              <td class=''>43 of 1951 (2.20%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub70'>
+              <td class=''></td>
+              <td class=''>Al Viro</td>
+              <td class=''>40 of 1951 (2.05%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top71'>2006-01</td>
+              <td class='yearmonthauthor_top71'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top71'>114 of 3436 (3.32%)</td>
+              <td class='yearmonthauthor_top71'>516</td>
+            </tr>
+            <tr class='yearmonthauthor_sub71'>
+              <td class=''></td>
+              <td class=''>Al Viro</td>
+              <td class=''>102 of 3436 (2.97%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub71'>
+              <td class=''></td>
+              <td class=''>Adrian Bunk</td>
+              <td class=''>97 of 3436 (2.82%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub71'>
+              <td class=''></td>
+              <td class=''>Russell King</td>
+              <td class=''>85 of 3436 (2.47%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub71'>
+              <td class=''></td>
+              <td class=''>Andi Kleen</td>
+              <td class=''>70 of 3436 (2.04%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top72'>2005-12</td>
+              <td class='yearmonthauthor_top72'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top72'>73 of 1059 (6.89%)</td>
+              <td class='yearmonthauthor_top72'>284</td>
+            </tr>
+            <tr class='yearmonthauthor_sub72'>
+              <td class=''></td>
+              <td class=''>Al Viro</td>
+              <td class=''>58 of 1059 (5.48%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub72'>
+              <td class=''></td>
+              <td class=''>Stephen Hemminger</td>
+              <td class=''>53 of 1059 (5.00%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub72'>
+              <td class=''></td>
+              <td class=''>Jeff Garzik</td>
+              <td class=''>41 of 1059 (3.87%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub72'>
+              <td class=''></td>
+              <td class=''>Len Brown</td>
+              <td class=''>28 of 1059 (2.64%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top73'>2005-11</td>
+              <td class='yearmonthauthor_top73'>Takashi Iwai</td>
+              <td class='yearmonthauthor_top73'>203 of 3083 (6.58%)</td>
+              <td class='yearmonthauthor_top73'>485</td>
+            </tr>
+            <tr class='yearmonthauthor_sub73'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>150 of 3083 (4.87%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub73'>
+              <td class=''></td>
+              <td class=''>Jeff Garzik</td>
+              <td class=''>107 of 3083 (3.47%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub73'>
+              <td class=''></td>
+              <td class=''>Russell King</td>
+              <td class=''>89 of 3083 (2.89%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub73'>
+              <td class=''></td>
+              <td class=''>Paul Mackerras</td>
+              <td class=''>74 of 3083 (2.40%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top74'>2005-10</td>
+              <td class='yearmonthauthor_top74'>Paul Mackerras</td>
+              <td class='yearmonthauthor_top74'>136 of 1995 (6.82%)</td>
+              <td class='yearmonthauthor_top74'>339</td>
+            </tr>
+            <tr class='yearmonthauthor_sub74'>
+              <td class=''></td>
+              <td class=''>Jeff Garzik</td>
+              <td class=''>97 of 1995 (4.86%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub74'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>89 of 1995 (4.46%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub74'>
+              <td class=''></td>
+              <td class=''>Ralf Baechle</td>
+              <td class=''>70 of 1995 (3.51%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub74'>
+              <td class=''></td>
+              <td class=''>Al Viro</td>
+              <td class=''>55 of 1995 (2.76%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top75'>2005-09</td>
+              <td class='yearmonthauthor_top75'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top75'>138 of 2804 (4.92%)</td>
+              <td class='yearmonthauthor_top75'>460</td>
+            </tr>
+            <tr class='yearmonthauthor_sub75'>
+              <td class=''></td>
+              <td class=''>Al Viro</td>
+              <td class=''>89 of 2804 (3.17%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub75'>
+              <td class=''></td>
+              <td class=''>David S. Miller</td>
+              <td class=''>70 of 2804 (2.50%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub75'>
+              <td class=''></td>
+              <td class=''>Andi Kleen</td>
+              <td class=''>60 of 2804 (2.14%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub75'>
+              <td class=''></td>
+              <td class=''>Stephen Rothwell</td>
+              <td class=''>49 of 2804 (1.75%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top76'>2005-08</td>
+              <td class='yearmonthauthor_top76'>Arnaldo Carvalho de Melo</td>
+              <td class='yearmonthauthor_top76'>89 of 1519 (5.86%)</td>
+              <td class='yearmonthauthor_top76'>287</td>
+            </tr>
+            <tr class='yearmonthauthor_sub76'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>82 of 1519 (5.40%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub76'>
+              <td class=''></td>
+              <td class=''>Al Viro</td>
+              <td class=''>56 of 1519 (3.69%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub76'>
+              <td class=''></td>
+              <td class=''>Jeff Garzik</td>
+              <td class=''>53 of 1519 (3.49%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub76'>
+              <td class=''></td>
+              <td class=''>Harald Welte</td>
+              <td class=''>36 of 1519 (2.37%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top77'>2005-07</td>
+              <td class='yearmonthauthor_top77'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top77'>73 of 1539 (4.74%)</td>
+              <td class='yearmonthauthor_top77'>324</td>
+            </tr>
+            <tr class='yearmonthauthor_sub77'>
+              <td class=''></td>
+              <td class=''>David S. Miller</td>
+              <td class=''>53 of 1539 (3.44%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub77'>
+              <td class=''></td>
+              <td class=''>Jean Delvare</td>
+              <td class=''>37 of 1539 (2.40%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub77'>
+              <td class=''></td>
+              <td class=''>Andrew Morton</td>
+              <td class=''>36 of 1539 (2.34%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub77'>
+              <td class=''></td>
+              <td class=''>Ralf Baechle</td>
+              <td class=''>35 of 1539 (2.27%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top78'>2005-06</td>
+              <td class='yearmonthauthor_top78'>Linus Torvalds</td>
+              <td class='yearmonthauthor_top78'>99 of 2125 (4.66%)</td>
+              <td class='yearmonthauthor_top78'>375</td>
+            </tr>
+            <tr class='yearmonthauthor_sub78'>
+              <td class=''></td>
+              <td class=''>Dominik Brodowski</td>
+              <td class=''>78 of 2125 (3.67%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub78'>
+              <td class=''></td>
+              <td class=''>NeilBrown</td>
+              <td class=''>65 of 2125 (3.06%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub78'>
+              <td class=''></td>
+              <td class=''>Russell King</td>
+              <td class=''>62 of 2125 (2.92%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub78'>
+              <td class=''></td>
+              <td class=''>Greg Kroah-Hartman</td>
+              <td class=''>60 of 2125 (2.82%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top79'>2005-05</td>
+              <td class='yearmonthauthor_top79'>Jeff Garzik</td>
+              <td class='yearmonthauthor_top79'>48 of 1322 (3.63%)</td>
+              <td class='yearmonthauthor_top79'>296</td>
+            </tr>
+            <tr class='yearmonthauthor_sub79'>
+              <td class=''></td>
+              <td class=''>Johannes Stezenbach</td>
+              <td class=''>47 of 1322 (3.56%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub79'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>44 of 1322 (3.33%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub79'>
+              <td class=''></td>
+              <td class=''>Adrian Bunk</td>
+              <td class=''>37 of 1322 (2.80%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub79'>
+              <td class=''></td>
+              <td class=''>Takashi Iwai</td>
+              <td class=''>36 of 1322 (2.72%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top80'>2005-04</td>
+              <td class='yearmonthauthor_top80'>Al Viro</td>
+              <td class='yearmonthauthor_top80'>46 of 946 (4.86%)</td>
+              <td class='yearmonthauthor_top80'>223</td>
+            </tr>
+            <tr class='yearmonthauthor_sub80'>
+              <td class=''></td>
+              <td class=''>Andi Kleen</td>
+              <td class=''>33 of 946 (3.49%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub80'>
+              <td class=''></td>
+              <td class=''>Malli Chilakala</td>
+              <td class=''>33 of 946 (3.49%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub80'>
+              <td class=''></td>
+              <td class=''>Steve French</td>
+              <td class=''>31 of 946 (3.28%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub80'>
+              <td class=''></td>
+              <td class=''>Linus Torvalds</td>
+              <td class=''>26 of 946 (2.75%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top81'>2005-03</td>
+              <td class='yearmonthauthor_top81'>Patrick Mochel</td>
+              <td class='yearmonthauthor_top81'>21 of 172 (12.21%)</td>
+              <td class='yearmonthauthor_top81'>54</td>
+            </tr>
+            <tr class='yearmonthauthor_sub81'>
+              <td class=''></td>
+              <td class=''>Ralf Baechle</td>
+              <td class=''>20 of 172 (11.63%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub81'>
+              <td class=''></td>
+              <td class=''>Greg Kroah-Hartman</td>
+              <td class=''>20 of 172 (11.63%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub81'>
+              <td class=''></td>
+              <td class=''>Anton Altaparmakov</td>
+              <td class=''>10 of 172 (5.81%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub81'>
+              <td class=''></td>
+              <td class=''>Dean Nelson</td>
+              <td class=''>9 of 172 (5.23%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top82'>2005-02</td>
+              <td class='yearmonthauthor_top82'>Ralf Baechle</td>
+              <td class='yearmonthauthor_top82'>37 of 101 (36.63%)</td>
+              <td class='yearmonthauthor_top82'>21</td>
+            </tr>
+            <tr class='yearmonthauthor_sub82'>
+              <td class=''></td>
+              <td class=''>Maciej W. Rozycki</td>
+              <td class=''>11 of 101 (10.89%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub82'>
+              <td class=''></td>
+              <td class=''>Thiemo Seufer</td>
+              <td class=''>10 of 101 (9.90%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub82'>
+              <td class=''></td>
+              <td class=''>Artem B. Bityuckiy</td>
+              <td class=''>6 of 101 (5.94%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub82'>
+              <td class=''></td>
+              <td class=''>Nicolas Pitre</td>
+              <td class=''>6 of 101 (5.94%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top83'>2005-01</td>
+              <td class='yearmonthauthor_top83'>David A. Marlin</td>
+              <td class='yearmonthauthor_top83'>6 of 31 (19.35%)</td>
+              <td class='yearmonthauthor_top83'>13</td>
+            </tr>
+            <tr class='yearmonthauthor_sub83'>
+              <td class=''></td>
+              <td class=''>Anton Altaparmakov</td>
+              <td class=''>5 of 31 (16.13%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub83'>
+              <td class=''></td>
+              <td class=''>Thomas Gleixner</td>
+              <td class=''>4 of 31 (12.90%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub83'>
+              <td class=''></td>
+              <td class=''>Estelle Hammache</td>
+              <td class=''>4 of 31 (12.90%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='yearmonthauthor_sub83'>
+              <td class=''></td>
+              <td class=''>Ralf Baechle</td>
+              <td class=''>3 of 31 (9.68%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top84'>2004-12</td>
+              <td class='yearmonthauthor_top84'>Thiemo Seufer</td>
+              <td class='yearmonthauthor_top84'>4 of 6 (66.67%)</td>
+              <td class='yearmonthauthor_top84'>2</td>
+            </tr>
+            <tr class='yearmonthauthor_sub84'>
+              <td class=''></td>
+              <td class=''>Ralf Baechle</td>
+              <td class=''>2 of 6 (33.33%)</td>
+              <td class=''></td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top85'>2004-11</td>
+              <td class='yearmonthauthor_top85'>Anton Altaparmakov</td>
+              <td class='yearmonthauthor_top85'>8 of 8 (100.00%)</td>
+              <td class='yearmonthauthor_top85'>1</td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top86'>2004-09</td>
+              <td class='yearmonthauthor_top86'>Thomas Renninger</td>
+              <td class='yearmonthauthor_top86'>1 of 1 (100.00%)</td>
+              <td class='yearmonthauthor_top86'>1</td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top87'>2004-08</td>
+              <td class='yearmonthauthor_top87'>Christian Lupien</td>
+              <td class='yearmonthauthor_top87'>1 of 1 (100.00%)</td>
+              <td class='yearmonthauthor_top87'>1</td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top88'>2004-07</td>
+              <td class='yearmonthauthor_top88'>Greg Edwards</td>
+              <td class='yearmonthauthor_top88'>1 of 1 (100.00%)</td>
+              <td class='yearmonthauthor_top88'>1</td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top89'>2003-02</td>
+              <td class='yearmonthauthor_top89'>Ayaz Abdulla</td>
+              <td class='yearmonthauthor_top89'>1 of 1 (100.00%)</td>
+              <td class='yearmonthauthor_top89'>1</td>
+            </tr>
+            <tr class='top'>
+              <td class='yearmonthauthor_top90'>2002-04</td>
+              <td class='yearmonthauthor_top90'>Greg Kroah-Hartman</td>
+              <td class='yearmonthauthor_top90'>12 of 12 (100.00%)</td>
+              <td class='yearmonthauthor_top90'>1</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub1").hide();
+            $(".yearmonthauthor_top1").click(function() {
+              $(".yearmonthauthor_sub1").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub2").hide();
+            $(".yearmonthauthor_top2").click(function() {
+              $(".yearmonthauthor_sub2").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub3").hide();
+            $(".yearmonthauthor_top3").click(function() {
+              $(".yearmonthauthor_sub3").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub4").hide();
+            $(".yearmonthauthor_top4").click(function() {
+              $(".yearmonthauthor_sub4").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub5").hide();
+            $(".yearmonthauthor_top5").click(function() {
+              $(".yearmonthauthor_sub5").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub6").hide();
+            $(".yearmonthauthor_top6").click(function() {
+              $(".yearmonthauthor_sub6").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub7").hide();
+            $(".yearmonthauthor_top7").click(function() {
+              $(".yearmonthauthor_sub7").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub8").hide();
+            $(".yearmonthauthor_top8").click(function() {
+              $(".yearmonthauthor_sub8").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub9").hide();
+            $(".yearmonthauthor_top9").click(function() {
+              $(".yearmonthauthor_sub9").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub10").hide();
+            $(".yearmonthauthor_top10").click(function() {
+              $(".yearmonthauthor_sub10").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub11").hide();
+            $(".yearmonthauthor_top11").click(function() {
+              $(".yearmonthauthor_sub11").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub12").hide();
+            $(".yearmonthauthor_top12").click(function() {
+              $(".yearmonthauthor_sub12").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub13").hide();
+            $(".yearmonthauthor_top13").click(function() {
+              $(".yearmonthauthor_sub13").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub14").hide();
+            $(".yearmonthauthor_top14").click(function() {
+              $(".yearmonthauthor_sub14").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub15").hide();
+            $(".yearmonthauthor_top15").click(function() {
+              $(".yearmonthauthor_sub15").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub16").hide();
+            $(".yearmonthauthor_top16").click(function() {
+              $(".yearmonthauthor_sub16").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub17").hide();
+            $(".yearmonthauthor_top17").click(function() {
+              $(".yearmonthauthor_sub17").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub18").hide();
+            $(".yearmonthauthor_top18").click(function() {
+              $(".yearmonthauthor_sub18").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub19").hide();
+            $(".yearmonthauthor_top19").click(function() {
+              $(".yearmonthauthor_sub19").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub20").hide();
+            $(".yearmonthauthor_top20").click(function() {
+              $(".yearmonthauthor_sub20").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub21").hide();
+            $(".yearmonthauthor_top21").click(function() {
+              $(".yearmonthauthor_sub21").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub22").hide();
+            $(".yearmonthauthor_top22").click(function() {
+              $(".yearmonthauthor_sub22").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub23").hide();
+            $(".yearmonthauthor_top23").click(function() {
+              $(".yearmonthauthor_sub23").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub24").hide();
+            $(".yearmonthauthor_top24").click(function() {
+              $(".yearmonthauthor_sub24").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub25").hide();
+            $(".yearmonthauthor_top25").click(function() {
+              $(".yearmonthauthor_sub25").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub26").hide();
+            $(".yearmonthauthor_top26").click(function() {
+              $(".yearmonthauthor_sub26").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub27").hide();
+            $(".yearmonthauthor_top27").click(function() {
+              $(".yearmonthauthor_sub27").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub28").hide();
+            $(".yearmonthauthor_top28").click(function() {
+              $(".yearmonthauthor_sub28").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub29").hide();
+            $(".yearmonthauthor_top29").click(function() {
+              $(".yearmonthauthor_sub29").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub30").hide();
+            $(".yearmonthauthor_top30").click(function() {
+              $(".yearmonthauthor_sub30").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub31").hide();
+            $(".yearmonthauthor_top31").click(function() {
+              $(".yearmonthauthor_sub31").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub32").hide();
+            $(".yearmonthauthor_top32").click(function() {
+              $(".yearmonthauthor_sub32").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub33").hide();
+            $(".yearmonthauthor_top33").click(function() {
+              $(".yearmonthauthor_sub33").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub34").hide();
+            $(".yearmonthauthor_top34").click(function() {
+              $(".yearmonthauthor_sub34").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub35").hide();
+            $(".yearmonthauthor_top35").click(function() {
+              $(".yearmonthauthor_sub35").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub36").hide();
+            $(".yearmonthauthor_top36").click(function() {
+              $(".yearmonthauthor_sub36").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub37").hide();
+            $(".yearmonthauthor_top37").click(function() {
+              $(".yearmonthauthor_sub37").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub38").hide();
+            $(".yearmonthauthor_top38").click(function() {
+              $(".yearmonthauthor_sub38").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub39").hide();
+            $(".yearmonthauthor_top39").click(function() {
+              $(".yearmonthauthor_sub39").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub40").hide();
+            $(".yearmonthauthor_top40").click(function() {
+              $(".yearmonthauthor_sub40").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub41").hide();
+            $(".yearmonthauthor_top41").click(function() {
+              $(".yearmonthauthor_sub41").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub42").hide();
+            $(".yearmonthauthor_top42").click(function() {
+              $(".yearmonthauthor_sub42").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub43").hide();
+            $(".yearmonthauthor_top43").click(function() {
+              $(".yearmonthauthor_sub43").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub44").hide();
+            $(".yearmonthauthor_top44").click(function() {
+              $(".yearmonthauthor_sub44").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub45").hide();
+            $(".yearmonthauthor_top45").click(function() {
+              $(".yearmonthauthor_sub45").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub46").hide();
+            $(".yearmonthauthor_top46").click(function() {
+              $(".yearmonthauthor_sub46").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub47").hide();
+            $(".yearmonthauthor_top47").click(function() {
+              $(".yearmonthauthor_sub47").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub48").hide();
+            $(".yearmonthauthor_top48").click(function() {
+              $(".yearmonthauthor_sub48").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub49").hide();
+            $(".yearmonthauthor_top49").click(function() {
+              $(".yearmonthauthor_sub49").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub50").hide();
+            $(".yearmonthauthor_top50").click(function() {
+              $(".yearmonthauthor_sub50").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub51").hide();
+            $(".yearmonthauthor_top51").click(function() {
+              $(".yearmonthauthor_sub51").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub52").hide();
+            $(".yearmonthauthor_top52").click(function() {
+              $(".yearmonthauthor_sub52").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub53").hide();
+            $(".yearmonthauthor_top53").click(function() {
+              $(".yearmonthauthor_sub53").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub54").hide();
+            $(".yearmonthauthor_top54").click(function() {
+              $(".yearmonthauthor_sub54").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub55").hide();
+            $(".yearmonthauthor_top55").click(function() {
+              $(".yearmonthauthor_sub55").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub56").hide();
+            $(".yearmonthauthor_top56").click(function() {
+              $(".yearmonthauthor_sub56").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub57").hide();
+            $(".yearmonthauthor_top57").click(function() {
+              $(".yearmonthauthor_sub57").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub58").hide();
+            $(".yearmonthauthor_top58").click(function() {
+              $(".yearmonthauthor_sub58").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub59").hide();
+            $(".yearmonthauthor_top59").click(function() {
+              $(".yearmonthauthor_sub59").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub60").hide();
+            $(".yearmonthauthor_top60").click(function() {
+              $(".yearmonthauthor_sub60").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub61").hide();
+            $(".yearmonthauthor_top61").click(function() {
+              $(".yearmonthauthor_sub61").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub62").hide();
+            $(".yearmonthauthor_top62").click(function() {
+              $(".yearmonthauthor_sub62").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub63").hide();
+            $(".yearmonthauthor_top63").click(function() {
+              $(".yearmonthauthor_sub63").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub64").hide();
+            $(".yearmonthauthor_top64").click(function() {
+              $(".yearmonthauthor_sub64").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub65").hide();
+            $(".yearmonthauthor_top65").click(function() {
+              $(".yearmonthauthor_sub65").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub66").hide();
+            $(".yearmonthauthor_top66").click(function() {
+              $(".yearmonthauthor_sub66").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub67").hide();
+            $(".yearmonthauthor_top67").click(function() {
+              $(".yearmonthauthor_sub67").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub68").hide();
+            $(".yearmonthauthor_top68").click(function() {
+              $(".yearmonthauthor_sub68").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub69").hide();
+            $(".yearmonthauthor_top69").click(function() {
+              $(".yearmonthauthor_sub69").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub70").hide();
+            $(".yearmonthauthor_top70").click(function() {
+              $(".yearmonthauthor_sub70").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub71").hide();
+            $(".yearmonthauthor_top71").click(function() {
+              $(".yearmonthauthor_sub71").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub72").hide();
+            $(".yearmonthauthor_top72").click(function() {
+              $(".yearmonthauthor_sub72").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub73").hide();
+            $(".yearmonthauthor_top73").click(function() {
+              $(".yearmonthauthor_sub73").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub74").hide();
+            $(".yearmonthauthor_top74").click(function() {
+              $(".yearmonthauthor_sub74").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub75").hide();
+            $(".yearmonthauthor_top75").click(function() {
+              $(".yearmonthauthor_sub75").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub76").hide();
+            $(".yearmonthauthor_top76").click(function() {
+              $(".yearmonthauthor_sub76").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub77").hide();
+            $(".yearmonthauthor_top77").click(function() {
+              $(".yearmonthauthor_sub77").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub78").hide();
+            $(".yearmonthauthor_top78").click(function() {
+              $(".yearmonthauthor_sub78").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub79").hide();
+            $(".yearmonthauthor_top79").click(function() {
+              $(".yearmonthauthor_sub79").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub80").hide();
+            $(".yearmonthauthor_top80").click(function() {
+              $(".yearmonthauthor_sub80").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub81").hide();
+            $(".yearmonthauthor_top81").click(function() {
+              $(".yearmonthauthor_sub81").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub82").hide();
+            $(".yearmonthauthor_top82").click(function() {
+              $(".yearmonthauthor_sub82").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub83").hide();
+            $(".yearmonthauthor_top83").click(function() {
+              $(".yearmonthauthor_sub83").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub84").hide();
+            $(".yearmonthauthor_top84").click(function() {
+              $(".yearmonthauthor_sub84").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub85").hide();
+            $(".yearmonthauthor_top85").click(function() {
+              $(".yearmonthauthor_sub85").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub86").hide();
+            $(".yearmonthauthor_top86").click(function() {
+              $(".yearmonthauthor_sub86").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub87").hide();
+            $(".yearmonthauthor_top87").click(function() {
+              $(".yearmonthauthor_sub87").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub88").hide();
+            $(".yearmonthauthor_top88").click(function() {
+              $(".yearmonthauthor_sub88").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub89").hide();
+            $(".yearmonthauthor_top89").click(function() {
+              $(".yearmonthauthor_sub89").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function() {
+            $(".yearmonthauthor_sub90").hide();
+            $(".yearmonthauthor_top90").click(function() {
+              $(".yearmonthauthor_sub90").toggle();
+              return false;
+            });
+          });
+        //]]>
+      </script>
+    </div>
+  </body>
+</html>
