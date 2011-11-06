@@ -44,18 +44,12 @@ class Git
   end
 
   def get_commits(last = nil, &block)
-    commits = Array.new if block.nil?
-
     if last.nil?
       range = @ref
       unless @cachefile.nil?
         begin
           read_cache do |commit|
-            if block.nil?
-              commits << commit
-            else
-              block.call(commit)
-            end
+            block.call(commit)
             last = commit
           end
           range = "#{last[:hash]}..#{@ref}"
@@ -91,11 +85,7 @@ class Git
         commit[:lines_deleted] = 0
       elsif line == ''
         write_cache(commit) unless @cachefile.nil?
-        if block.nil?
-          commits << commit
-        else
-          block.call(commit)
-        end
+        block.call(commit)
       elsif line =~ /^ /
         if line =~ /^ create/
           commit[:files_added] += 1
@@ -114,14 +104,8 @@ class Git
 
     unless commit.nil?
       write_cache(commit) unless @cachefile.nil?
-      if block.nil?
-        commits << commit
-      else
-        block.call(commit)
-      end
+      block.call(commit)
     end
-
-    commits if block.nil?
   end
 
   def get_files(ref = nil)
