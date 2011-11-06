@@ -4,6 +4,7 @@ class StatGen
   attr_accessor :quiet
   attr_accessor :future
   attr_accessor :maxage
+  attr_accessor :commitcache
   attr_reader :repos
   attr_reader :num_authors
   attr_reader :num_commits
@@ -24,6 +25,7 @@ class StatGen
     @quiet = false
     @future = true
     @maxage = 0
+    @commitcache = nil
 
     @num_authors = 0
     @num_commits = 0
@@ -48,7 +50,11 @@ class StatGen
   end
 
   def add(name, directory, ref = 'HEAD')
-    @repos << Git.new(name, directory, ref, @debug)
+    cache = nil
+    unless @commitcache.nil?
+      cache = File.join(@commitcache, ".commitcache.#{name.tr('^a-zA-Z0-9_', '_')}")
+    end
+    @repos << Git.new(name, directory, ref, @debug, cache)
   end
 
   def <<(value)

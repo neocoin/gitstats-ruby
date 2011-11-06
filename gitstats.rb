@@ -28,6 +28,8 @@ $options = {
   :quiet => false,
   :cache => false,
   :statcache => nil,
+  :commitcache => nil,
+  :commitcache_dir => nil,
   :future => true,
   :maxage => 0
 }
@@ -47,8 +49,16 @@ parser = OptionParser.new do |opts|
     $options[:cache] = arg
   end
 
+  opts.on('-C', '--[no-]commitcache', 'use the commit cache') do |arg|
+    $options[:commitcache] = arg
+  end
+
   opts.on('-s', '--statcache=arg', 'statcache file to use') do |arg|
     $options[:statcache] = arg
+  end
+
+  opts.on('--commitcache=arg', 'commit cache directory to use') do |arg|
+    $options[:commitcache_dir] = arg
   end
 
   opts.on('--[no-]future', 'count future commits') do |arg|
@@ -86,6 +96,7 @@ if $options[:quiet] && $options[:verbose]
 end
 
 $options[:statcache] = File.join($options[:out], '.statcache') if $options[:statcache].nil?
+$options[:commitcache_dir] = $options[:out] if $options[:commitcache_dir].nil?
 $options[:template] = File.join(File.dirname($0), 'template') if $options[:template].nil?
 
 stat = nil
@@ -112,6 +123,7 @@ stat.debug = $options[:debug]
 stat.quiet = $options[:quiet]
 stat.future = $options[:future]
 stat.maxage = $options[:maxage]
+stat.commitcache = $options[:commitcache] ? $options[:commitcache_dir] : nil
 
 ARGV.each do |path|
   name, path, ref = path.split(':')

@@ -3,15 +3,44 @@ class Git
   attr_reader :base
   attr_reader :ref
 
-  def initialize(name, base, ref = 'HEAD', debug = false)
+  def initialize(name, base, ref = 'HEAD', debug = false, cachefile = nil)
     @name = name
     @base = base
     @ref = ref
     @debug = debug
+    @cachefile = cachefile
   end
 
   def num_authors
     sh("git shortlog -s #{@ref}").split(/\n/).count
+  end
+
+  def open_cache
+    @cache = File.new(@cachefile, 'a')
+  end
+
+  def write_cache(commit)
+    obj = Marshal.dump(commit)
+    raise "Object too large" if obj.size > 65535
+
+    str = ((obj.size >> 8) & 0xff).chr
+    str += (obj.size & 0xff).chr
+    str += obj
+
+    @cache.write(str)
+    @cache.flush
+  end
+
+  def read_cache
+    f = File.new(@cachefile)
+    while(!f.eof?)
+      tmp = f.read(2)
+      len = (tmp[0] << 8) + tmp[1]
+      obj = f.read(len)
+      raise "Read short object" if obj.size != len
+      yield Marshal.load(obj)
+    end
+    f.close
   end
 
   def get_commits(last = nil, &block)
@@ -19,9 +48,25 @@ class Git
 
     if last.nil?
       range = @ref
+      unless @cachefile.nil?
+        begin
+          read_cache do |commit|
+            if block.nil?
+              commits << commit
+            else
+              block.call(commit)
+            end
+            last = commit
+          end
+          range = "#{last[:hash]}..#{@ref}"
+        rescue
+        end
+      end
     else
       range = "#{last}..#{@ref}"
     end
+
+    open_cache
 
     commit = nil
     sh("git log --reverse --summary --numstat --pretty=format:\"HEADER: %at %ai %H %T %aN <%aE>\" #{range}") do |line|
@@ -45,6 +90,7 @@ class Git
         commit[:lines_added] = 0
         commit[:lines_deleted] = 0
       elsif line == ''
+        write_cache(commit) unless @cachefile.nil?
         if block.nil?
           commits << commit
         else
@@ -63,6 +109,15 @@ class Git
           commit[:lines_added] += added.to_i
           commit[:lines_deleted] += deleted.to_i
         end
+      end
+    end
+
+    unless commit.nil?
+      write_cache(commit) unless @cachefile.nil?
+      if block.nil?
+        commits << commit
+      else
+        block.call(commit)
       end
     end
 
