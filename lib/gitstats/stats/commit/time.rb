@@ -71,3 +71,22 @@ class DayOfWeekCommitStats
   end
 end
 
+class LastWeeksCommitStats
+  include StatsHash
+
+  def initialize
+    @hash = Hash.new
+    @base = Time.now
+  end
+
+  def update(commit)
+    return if commit[:time] > @base
+
+    diff = ((@base - commit[:time]) / 604800).to_i
+    return if diff > 52
+
+    @hash[diff] ||= CommitStats.new
+    @hash[diff].update(commit)
+  end
+end
+

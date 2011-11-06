@@ -17,6 +17,7 @@ class StatGen
   attr_reader :yearmonth_stats
   attr_reader :hour_stats
   attr_reader :wday_stats
+  attr_reader :lastweeks_stats
 
   attr_reader :file_stats
   attr_reader :filetype_stats
@@ -41,6 +42,7 @@ class StatGen
     @yearmonth_stats = YearMonthCommitStats.new
     @hour_stats = HourCommitStats.new
     @wday_stats = DayOfWeekCommitStats.new
+    @lastweeks_stats = LastWeeksCommitStats.new
 
     @file_stats = FileStats.new
     @filetype_stats = FileTypeFileStats.new
@@ -101,6 +103,7 @@ class StatGen
         @yearmonth_stats.update(commit)
         @hour_stats.update(commit)
         @wday_stats.update(commit)
+        @lastweeks_stats.update(commit)
 
         @repostate[repo.name][:last] = commit[:hash]
       end

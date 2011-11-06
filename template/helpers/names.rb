@@ -17,6 +17,7 @@ module NamesHelper
       :lines_by_yearmonth => 'Lines by year and month',
       :linechanges_by_yearmonth => 'Linechanges by year and month',
       :filetypes => 'Filetypes',
+      :lastweeks => 'Last years weeks',
     }
 
     @names[name].nil? ? name.to_s : @names[name]
