@@ -15,7 +15,7 @@ class Renderer
     Dir.chdir(@templatedir) { Dir.glob('*').sort }.each do |file|
       next unless File.file?(File.join(@templatedir, file))
 
-      r = @renderers.select { |r| r.handle?(file) }.first
+      r = @renderers.find { |r| r.handle?(file) }
 
       if r.nil?
         puts "copying '#{file}' ..." if @verbose
