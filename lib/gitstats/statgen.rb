@@ -7,7 +7,6 @@ class StatGen
   attr_accessor :commitcache
   attr_reader :repos
 
-  attr_reader :num_authors
   attr_reader :num_commits
 
   attr_reader :general_stats
@@ -33,7 +32,6 @@ class StatGen
     @maxage = 0
     @commitcache = nil
 
-    @num_authors = 0
     @num_commits = 0
     @general_stats = CommitStats.new
     @author_stats = AuthorsCommitStats.new
@@ -46,6 +44,10 @@ class StatGen
 
     @file_stats = FileStats.new
     @filetype_stats = FileTypeFileStats.new
+  end
+
+  def num_authors
+    @author_stats.size
   end
 
   def clear_repos
@@ -78,16 +80,10 @@ class StatGen
 
     @repos.each do |repo|
       @repostate[repo.name] ||= {
-        :authors => false,
         :last => nil
       }
 
       puts "  repository '#{repo.name}' ..." unless @quiet
-
-      if !@repostate[repo.name][:authors]
-        @num_authors += repo.num_authors
-        @repostate[repo.name][:authors] = true
-      end
 
       repo.get_commits(@repostate[repo.name][:last]) do |commit|
         next if !@future && (commit[:time] > Time.now)

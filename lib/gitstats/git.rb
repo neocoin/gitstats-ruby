@@ -11,10 +11,6 @@ class Git
     @cachefile = cachefile
   end
 
-  def num_authors
-    sh("git shortlog -s #{@ref}").split(/\n/).count
-  end
-
   def open_cache
     @cache = File.new(@cachefile, 'a')
   end
