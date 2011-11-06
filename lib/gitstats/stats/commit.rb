@@ -41,7 +41,7 @@ class CommitStats
     @first_commit = commit[:time] if commit[:time] < @first_commit
     @last_commit = commit[:time] if commit[:time] > @last_commit
 
-    day = commit[:time].year.to_s + commit[:time].month.to_s + commit[:time].day.to_s
+    day = commit[:time].year * 10000 + commit[:time].month * 100 + commit[:time].day
     @days << day unless @days.include? day
   end
 end
