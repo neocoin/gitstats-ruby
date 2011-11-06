@@ -1,8 +1,10 @@
 class Git
+  attr_reader :name
   attr_reader :base
   attr_reader :ref
 
-  def initialize(base, ref = 'HEAD', debug = false)
+  def initialize(name, base, ref = 'HEAD', debug = false)
+    @name = name
     @base = base
     @ref = ref
     @debug = debug

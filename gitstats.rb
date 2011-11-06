@@ -33,7 +33,7 @@ $options = {
 }
 
 parser = OptionParser.new do |opts|
-  opts.banner = 'Usage: gitstats.rb [options] <gitdir1:[ref1]> [<gitdir2:[ref2]> ...]'
+  opts.banner = 'Usage: gitstats.rb [options] <[name1:]gitdir1[:ref1]> [<[name2:]gitdir2[:ref2]> ...]'
 
   opts.on('-o', '--out=arg', 'output directory') do |arg|
     $options[:out] = arg
@@ -114,9 +114,10 @@ stat.future = $options[:future]
 stat.maxage = $options[:maxage]
 
 ARGV.each do |path|
-  path, ref = path.split(':')
+  name, path, ref = path.split(':')
+  path ||= name
   ref ||= 'HEAD'
-  stat << [path, ref]
+  stat << [name, path, ref]
 end
 
 if $options[:cache]

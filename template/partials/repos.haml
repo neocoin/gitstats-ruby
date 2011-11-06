@@ -2,10 +2,12 @@
   .blocktable
     %table.simpletable
       %thead
+        %th Name
         %th Path
         %th Ref
       %tbody
         - stats.repos.each do |repo|
           %tr
+            %td&= repo.name
             %td&= repo.base
             %td&= repo.ref
