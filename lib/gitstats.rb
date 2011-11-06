@@ -1,0 +1,10 @@
+require 'gitstats/author'
+require 'gitstats/yearmonth'
+require 'gitstats/git'
+require 'gitstats/stats'
+require 'gitstats/statgen'
+require 'gitstats/renderer'
+require 'gitstats/renderer/haml'
+require 'gitstats/renderer/sass'
+require 'gitstats/renderer/gnuplot'
+

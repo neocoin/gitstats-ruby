@@ -1,25 +1,17 @@
 #!/usr/bin/env ruby
 
+require 'optparse'
+require 'ftools'
 require 'rubygems'
+
 require 'haml'
 require 'sass'
 require 'compass'
 require 'gnuplot'
-require 'ftools'
-require 'optparse'
 
-$: << File.dirname($0)
+$LOAD_PATH.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib')))
 
-require 'lib/author'
-require 'lib/yearmonth'
-require 'lib/git'
-require 'lib/stats'
-require 'lib/statgen'
-require 'lib/renderer'
-require 'lib/renderer/haml'
-require 'lib/renderer/sass'
-require 'lib/renderer/gnuplot'
-
+require 'gitstats'
 
 $options = {
   :out => 'out',
@@ -104,7 +96,7 @@ end
 
 $options[:statcache] = File.join($options[:out], '.statcache') if $options[:statcache].nil?
 $options[:commitcache_dir] = $options[:out] if $options[:commitcache_dir].nil?
-$options[:template] = File.join(File.dirname($0), 'template') if $options[:template].nil?
+$options[:template] = File.expand_path(File.join(File.dirname(__FILE__), '..', 'template')) if $options[:template].nil?
 
 stat = nil
 if $options[:cache]
