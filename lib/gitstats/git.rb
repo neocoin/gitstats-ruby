@@ -15,6 +15,13 @@ class Git
     @cache = File.new(@cachefile, 'a')
   end
 
+  def close_cache
+    unless @cache.nil?
+      @cache.close
+      @cache = nil
+    end
+  end
+
   def write_cache(commit)
     obj = Marshal.dump(commit)
     raise "Object too large" if obj.size > 65535
@@ -105,6 +112,9 @@ class Git
       write_cache(commit) unless @cachefile.nil?
       block.call(commit)
     end
+
+  ensure
+    close_cache unless @cachefile.nil?
   end
 
   def get_files(ref = nil, &block)
