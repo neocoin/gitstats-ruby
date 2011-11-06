@@ -14,7 +14,7 @@ $LOAD_PATH.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib
 require 'gitstats'
 
 $options = {
-  :out => 'out',
+  :out => 'stats',
   :template => nil,
   :verbose => false,
   :debug => false,
@@ -148,6 +148,8 @@ ensure
     File.new($options[:statcache], 'w').write(cache)
   end
 end
+
+FileUtils.mkdir_p($options[:out])
 
 puts 'rendering ...' unless $options[:quiet]
 renderer = Renderer.new($options[:template], $options[:out], $options[:verbose])
