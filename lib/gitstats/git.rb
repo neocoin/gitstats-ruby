@@ -68,6 +68,11 @@ class Git
     commit = nil
     sh("git log --reverse --summary --numstat --pretty=format:\"HEADER: %at %ai %H %T %aN <%aE>\" #{range}") do |line|
       if line =~ /^HEADER:/
+        unless commit.nil?
+          write_cache(commit) unless @cachefile.nil?
+          block.call(commit)
+        end
+
         parts = line.split(' ', 8)
         parts.shift
 
@@ -92,6 +97,7 @@ class Git
       elsif line == ''
         write_cache(commit) unless @cachefile.nil?
         block.call(commit)
+        commit = nil
       elsif line =~ /^ /
         if line =~ /^ create/
           commit[:files_added] += 1
