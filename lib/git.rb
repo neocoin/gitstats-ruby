@@ -73,12 +73,15 @@ class Git
         commit[:timezone] = parts[3]
         commit[:hash] = parts[4]
         commit[:tree] = parts[5]
+        name = nil
+        email = ''
         match = /^(.+) <(.+)>$/.match(parts[6])
         if match.nil?
-          commit[:name], commit[:email] = parts[6], ''
+          name = parts[6]
         else
-          commit[:name], commit[:email] = match.captures
+          name, email = match.captures
         end
+        commit[:author] = Author.new(name, email)
         commit[:files_added] = 0
         commit[:files_deleted] = 0
         commit[:lines_added] = 0

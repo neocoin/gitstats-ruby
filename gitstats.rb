@@ -10,6 +10,7 @@ require 'optparse'
 
 $: << File.dirname($0)
 
+require 'lib/author'
 require 'lib/yearmonth'
 require 'lib/git'
 require 'lib/stats'
@@ -31,7 +32,8 @@ $options = {
   :commitcache => nil,
   :commitcache_dir => nil,
   :future => true,
-  :maxage => 0
+  :maxage => 0,
+  :withmail => false,
 }
 
 parser = OptionParser.new do |opts|
@@ -69,6 +71,10 @@ parser = OptionParser.new do |opts|
     $options[:maxage] = arg
   end
 
+  opts.on('--[no-]mail', 'include mail in author names') do |arg|
+    $options[:withmail] = arg
+  end
+
   opts.on('-v', '--[no-]verbose', 'verbose mode') do |arg|
     $options[:verbose] = arg
   end
@@ -89,6 +95,7 @@ end
 
 parser.parse!
 
+Author::include_mail = $options[:withmail]
 
 if $options[:quiet] && $options[:verbose]
   STDERR.puts 'cannot specify --quiet and --verbose at the same time!'

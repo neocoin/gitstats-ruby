@@ -69,9 +69,9 @@ class AuthorsStats < GeneralStats
   def update(commit)
     super(commit)
 
-    name = "#{commit[:name]} <#{commit[:email]}>"
-    @hash[name] ||= GeneralStats.new
-    @hash[name].update(commit)
+    author = commit[:author]
+    @hash[author] ||= GeneralStats.new
+    @hash[author].update(commit)
   end
 end
 
