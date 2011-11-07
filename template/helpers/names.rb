@@ -45,29 +45,30 @@ module NamesHelper
   def monthname(month)
     case month
     when 1
-      'Jan',
+      'Jan'
     when 2
-      'Feb',
+      'Feb'
     when 3
-      'Mar',
+      'Mar'
     when 4
-      'Apr',
+      'Apr'
     when 5
-      'May',
+      'May'
     when 6
-      'Jun',
+      'Jun'
     when 7
-      'Jul',
+      'Jul'
     when 8
-      'Aug',
+      'Aug'
     when 9
-      'Sep',
+      'Sep'
     when 10
-      'Oct',
+      'Oct'
     when 11
-      'Nov',
+      'Nov'
     when 12
       'Dec'
+    end
   end
 end
 
