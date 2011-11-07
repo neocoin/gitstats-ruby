@@ -6,7 +6,7 @@ defplot do |plotter|
   plotter.add_boxes(:setrange => false, :limitlabels => false) do |x, l, y|
     for i in 0..6
       s = stats.wday_stats[i]
-      day = (i + 1) % 7
+      day = (i + 6) % 7
       names = [
         'Mon',
         'Tue',

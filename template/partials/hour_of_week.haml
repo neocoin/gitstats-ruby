@@ -15,7 +15,7 @@
           %tr
             %th= names[wday]
             - for hour in 0..23
-              - d = stats.wday_stats[wday]
+              - d = stats.wday_stats[(wday + 1) % 7]
               - s = d.nil? ? nil : d[hour]
               - cnt = s.nil? ? 0 : s.commits
               - percent = (100 * cnt / max).to_i
