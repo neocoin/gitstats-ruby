@@ -9,7 +9,7 @@
         %th Total
       %tbody
         - stats.year_stats.sort{ |a, b| b[0] <=> a[0] }.each do |year, authorstats|
-          - authors = authorstats.sort{ |a, b| b[1].commits <=> a[1].commits }[0, 5]
+          - authors = authorstats.sort{ |a, b| b[1].commits <=> a[1].commits }[0, top_author_count]
           - authors.each do |author|
             - c = author[1].commits
             - first = author == authors.first
