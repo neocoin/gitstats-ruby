@@ -1,3 +1,24 @@
 - block(:lastweeks) do
   .blockdiagram
     %img{ :src => 'lastweeks.png' }
+  %a.toggle{:href => '#'} Table
+  .blocktable.toggleable
+    %table.striped
+      %thead
+        %tr
+          %th Week
+          %th Commits
+          %th Files added
+          %th Files deleted
+          %th Lines added
+          %th Lines deleted
+      %tbody
+        - for week in 0..51
+          - s = stats.lastweeks_stats[week]
+          %tr
+            %th&= week + 1
+            %td&= (s.nil? ? 0 : s.commits)
+            %td&= (s.nil? ? 0 : s.files_added)
+            %td&= (s.nil? ? 0 : s.files_deleted)
+            %td&= (s.nil? ? 0 : s.lines_added)
+            %td&= (s.nil? ? 0 : s.lines_deleted)

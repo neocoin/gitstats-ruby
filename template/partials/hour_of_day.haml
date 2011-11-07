@@ -1,3 +1,28 @@
+:javascript
+  $(document).ready(function() {
+    $("#hourofday_table").tablesorter({sortList: [[0, 0]]});
+  });
 - block(:hour_of_day) do
   .blockdiagram
     %img{ :src => 'commits_per_hour.png' }
+  %a.toggle{:href => '#'} Table
+  .blocktable.toggleable
+    %table#hourofday_table.tablesorter.striped
+      %thead
+        %tr
+          %th Hour
+          %th Commits
+          %th Files added
+          %th Files deleted
+          %th Lines added
+          %th Lines deleted
+      %tbody
+        - for hour in 0..23
+          - s = stats.hour_stats[hour]
+          %tr
+            %th&= hour
+            %td&= (s.nil? ? 0 : s.commits)
+            %td&= (s.nil? ? 0 : s.files_added)
+            %td&= (s.nil? ? 0 : s.files_deleted)
+            %td&= (s.nil? ? 0 : s.lines_added)
+            %td&= (s.nil? ? 0 : s.lines_deleted)
