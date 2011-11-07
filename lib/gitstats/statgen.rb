@@ -5,6 +5,7 @@ class StatGen
   attr_accessor :future
   attr_accessor :maxage
   attr_accessor :commitcache
+  attr_accessor :include_mail
   attr_reader :repos
 
   attr_reader :num_commits
@@ -31,6 +32,7 @@ class StatGen
     @future = true
     @maxage = 0
     @commitcache = nil
+    @include_mail = false
 
     @num_commits = 0
     @general_stats = CommitStats.new

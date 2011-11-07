@@ -39,7 +39,7 @@ parser = OptionParser.new do |opts|
     $options[:template] = arg
   end
 
-  opts.on('-c', '--[no-]cache', 'use the cache file') do |arg|
+  opts.on('-c', '--[no-]cache', 'use the statcache file') do |arg|
     $options[:cache] = arg
   end
 
@@ -87,8 +87,6 @@ end
 
 parser.parse!
 
-Author::include_mail = $options[:withmail]
-
 if $options[:quiet] && $options[:verbose]
   STDERR.puts 'cannot specify --quiet and --verbose at the same time!'
   exit 1
@@ -101,11 +99,13 @@ $options[:template] = File.expand_path(File.join(File.dirname(__FILE__), '..', '
 FileUtils.mkdir_p($options[:out])
 
 stat = nil
+cache_loaded = false
 if $options[:cache]
   begin
     puts 'trying to load cache ...' unless $options[:quiet]
     stat = Marshal::load(IO::readlines($options[:statcache]).join(''))
     stat.clear_repos
+    cache_loaded = true
   rescue
   end
 end
@@ -119,6 +119,25 @@ if stat.nil?
   stat = StatGen.new
 end
 
+if cache_loaded
+  if stat.include_mail != $options[:withmail]
+    puts 'cannot change --[no-]mail option when using statcache'
+    exit 1
+  end
+
+  if stat.future != $options[:future]
+    puts 'cannot change --[no-]future option when using statcache'
+    exit 1
+  end
+
+  if stat.maxage != $options[:maxage] * 24 * 60 * 60
+    puts 'cannot change --max-age option when using statcache'
+    exit 1
+  end
+end
+
+Author::include_mail = $options[:withmail]
+stat.include_mail = $options[:withmail]
 stat.verbose = $options[:verbose]
 stat.debug = $options[:debug]
 stat.quiet = $options[:quiet]
@@ -133,7 +152,7 @@ ARGV.each do |path|
   stat << [name, path, ref]
 end
 
-if $options[:cache]
+if cache_loaded
   unless stat.check_repostate
     puts 'cannot use cache when working on different repositories!'
     exit 1
