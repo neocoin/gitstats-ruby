@@ -10,6 +10,17 @@
     %script{:type => 'text/javascript', :src => 'jquery.tablesorter.js'}
   %body
     :javascript
+      $.tablesorter.addParser({
+        id: 'size',
+        is: function(s) {
+            return false;
+        },
+        format: function(s) {
+            return $.tablesorter.formatFloat(s.replace(/k/,'000').replace(/M/,'000000').replace(/G/,'000000000'));
+        },
+        type: 'numeric'
+      });
+
       $(document).ready(function() {
         $(".toggleable").hide();
         $(".toggle").click(function() {

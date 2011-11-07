@@ -1,6 +1,11 @@
 :javascript
   $(document).ready(function() {
-    $("#filetypes_table").tablesorter({sortList: [[0, 0]]});
+    $("#filetypes_table").tablesorter({
+      sortList: [[1, 1]],
+      headers: {
+        2: { sorter: 'size' }
+      }
+    });
   });
 - block(:filetypes) do
   .blocktable
@@ -15,4 +20,4 @@
           %tr
             %td&= type
             %td&= file.count
-            %td&= file.size
+            %td&= filesize(file.size)
