@@ -2,7 +2,6 @@
   $(document).ready(function() {
     $("#dayofweek_table").tablesorter();
   });
-- names = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 - block(:day_of_week) do
   .blockdiagram
     %img{ :src => 'commits_per_wday.png' }
@@ -21,7 +20,7 @@
         - for wday in 0..6
           - s = stats.wday_stats[(wday + 1) % 7]
           %tr
-            %th&= names[wday]
+            %th&= weekday(wday)
             %td&= (s.nil? ? 0 : s.commits)
             %td&= (s.nil? ? 0 : s.files_added)
             %td&= (s.nil? ? 0 : s.files_deleted)

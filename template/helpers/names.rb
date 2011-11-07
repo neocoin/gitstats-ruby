@@ -22,6 +22,53 @@ module NamesHelper
 
     @names[name].nil? ? name.to_s : @names[name]
   end
+
+  def weekday(wday)
+    case wday
+    when 0
+      'Mon'
+    when 1
+      'Tue'
+    when 2
+      'Wed'
+    when 3
+      'Thu'
+    when 4
+      'Fri'
+    when 5
+      'Sat'
+    when 6
+      'Sun'
+    end
+  end
+
+  def monthname(month)
+    case month
+    when 1
+      'Jan',
+    when 2
+      'Feb',
+    when 3
+      'Mar',
+    when 4
+      'Apr',
+    when 5
+      'May',
+    when 6
+      'Jun',
+    when 7
+      'Jul',
+    when 8
+      'Aug',
+    when 9
+      'Sep',
+    when 10
+      'Oct',
+    when 11
+      'Nov',
+    when 12
+      'Dec'
+  end
 end
 
 self.extend NamesHelper
