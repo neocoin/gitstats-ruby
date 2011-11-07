@@ -10,7 +10,10 @@ Right now you have to clone this repository until I upload a gem to rubygems.
 
 ## Usage
 
+## Examples
 
+* [gitstats-ruby](http://chrisistuff.github.com/gitstats-ruby/gitstats-ruby/)
+* [Linux](http://chrisistuff.github.com/gitstats-ruby/linux/)
 
 ## Dependencies
 
