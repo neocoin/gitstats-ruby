@@ -6,12 +6,24 @@
       Statistics
     </title>
     <link href='style.css' rel='stylesheet' type='text/css' />
+    <meta content='text/html; charset=UTF-8' http-equiv='content-type' />
     <script src='jquery.js' type='text/javascript'></script>
     <script src='jquery.tablesorter.js' type='text/javascript'></script>
   </head>
   <body>
     <script type='text/javascript'>
       //<![CDATA[
+        $.tablesorter.addParser({
+          id: 'size',
+          is: function(s) {
+              return false;
+          },
+          format: function(s) {
+              return $.tablesorter.formatFloat(s.replace(/k/,'000').replace(/M/,'000000').replace(/G/,'000000000'));
+          },
+          type: 'numeric'
+        });
+        
         $(document).ready(function() {
           $(".toggleable").hide();
           $(".toggle").click(function() {
@@ -47,12 +59,60 @@
         </h2>
         <ul>
           <li>
-            <a href='#repos'>Repositories</a>
-          </li>
-          <li>
             <a href='#general'>Stats</a>
           </li>
+          <li>
+            <a href='#repos'>Repositories</a>
+          </li>
         </ul>
+      </div>
+      <h2 class='blockheader'>
+        <a name='general'>Stats</a>
+      </h2>
+      
+      <div id="block-general" class="blockcontainer">
+      <div class='blocktable'>
+        <table class='simpletable'>
+          <tbody>
+            <tr>
+              <th>Generation time</th>
+              <td>Mon Nov 07 21:05:45 +0100 2011</td>
+            </tr>
+            <tr>
+              <th>Authors</th>
+              <td>1 (average 79.0 commits per author)</td>
+            </tr>
+            <tr>
+              <th>Commits</th>
+              <td>79 (average 15.0 commits per active day, 15.0 per all days)</td>
+            </tr>
+            <tr>
+              <th>Files</th>
+              <td>65 (77 added, 12 deleted)</td>
+            </tr>
+            <tr>
+              <th>Lines</th>
+              <td>2580 (5208 added, 2628 deleted)</td>
+            </tr>
+            <tr>
+              <th>Size</th>
+              <td>190007 bytes</td>
+            </tr>
+            <tr>
+              <th>First commit</th>
+              <td>Thu Nov 03 15:55:27 +0100 2011</td>
+            </tr>
+            <tr>
+              <th>Last commit</th>
+              <td>Mon Nov 07 20:34:13 +0100 2011</td>
+            </tr>
+            <tr>
+              <th>Age</th>
+              <td>5 / 5 active days (100.00%)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       </div>
       <h2 class='blockheader'>
         <a name='repos'>Repositories</a>
@@ -68,57 +128,9 @@
           </thead>
           <tbody>
             <tr>
-              <td>gitstats-ruby</td>
+              <td>.</td>
               <td>.</td>
               <td>HEAD</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      </div>
-      <h2 class='blockheader'>
-        <a name='general'>Stats</a>
-      </h2>
-      
-      <div id="block-general" class="blockcontainer">
-      <div class='blocktable'>
-        <table class='simpletable'>
-          <tbody>
-            <tr>
-              <th>Generation time</th>
-              <td>Sun Nov 06 21:04:35 +0100 2011</td>
-            </tr>
-            <tr>
-              <th>Authors</th>
-              <td>1 (average 66.0 commits per author)</td>
-            </tr>
-            <tr>
-              <th>Commits</th>
-              <td>66 (average 16.0 commits per active day, 16.0 per all days)</td>
-            </tr>
-            <tr>
-              <th>Files</th>
-              <td>64 (76 added, 12 deleted)</td>
-            </tr>
-            <tr>
-              <th>Lines</th>
-              <td>2424 (4992 added, 2568 deleted)</td>
-            </tr>
-            <tr>
-              <th>Size</th>
-              <td>186156 bytes</td>
-            </tr>
-            <tr>
-              <th>First commit</th>
-              <td>Thu Nov 03 15:55:27 +0100 2011</td>
-            </tr>
-            <tr>
-              <th>Last commit</th>
-              <td>Sun Nov 06 21:02:52 +0100 2011</td>
-            </tr>
-            <tr>
-              <th>Age</th>
-              <td>4 / 4 active days (100.00%)</td>
             </tr>
           </tbody>
         </table>
