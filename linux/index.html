@@ -6,12 +6,24 @@
       Statistics
     </title>
     <link href='style.css' rel='stylesheet' type='text/css' />
+    <meta content='text/html; charset=UTF-8' http-equiv='content-type' />
     <script src='jquery.js' type='text/javascript'></script>
     <script src='jquery.tablesorter.js' type='text/javascript'></script>
   </head>
   <body>
     <script type='text/javascript'>
       //<![CDATA[
+        $.tablesorter.addParser({
+          id: 'size',
+          is: function(s) {
+              return false;
+          },
+          format: function(s) {
+              return $.tablesorter.formatFloat(s.replace(/k/,'000').replace(/M/,'000000').replace(/G/,'000000000'));
+          },
+          type: 'numeric'
+        });
+        
         $(document).ready(function() {
           $(".toggleable").hide();
           $(".toggle").click(function() {
@@ -47,12 +59,60 @@
         </h2>
         <ul>
           <li>
-            <a href='#repos'>Repositories</a>
-          </li>
-          <li>
             <a href='#general'>Stats</a>
           </li>
+          <li>
+            <a href='#repos'>Repositories</a>
+          </li>
         </ul>
+      </div>
+      <h2 class='blockheader'>
+        <a name='general'>Stats</a>
+      </h2>
+      
+      <div id="block-general" class="blockcontainer">
+      <div class='blocktable'>
+        <table class='simpletable'>
+          <tbody>
+            <tr>
+              <th>Generation time</th>
+              <td>Mon Nov 07 20:59:10 +0100 2011</td>
+            </tr>
+            <tr>
+              <th>Authors</th>
+              <td>8653 (average 31.0 commits per author)</td>
+            </tr>
+            <tr>
+              <th>Commits</th>
+              <td>275459 (average 110.0 commits per active day, 78.0 per all days)</td>
+            </tr>
+            <tr>
+              <th>Files</th>
+              <td>37546 (61812 added, 24266 deleted)</td>
+            </tr>
+            <tr>
+              <th>Lines</th>
+              <td>14956084 (30973778 added, 16017694 deleted)</td>
+            </tr>
+            <tr>
+              <th>Size</th>
+              <td>430392500 bytes</td>
+            </tr>
+            <tr>
+              <th>First commit</th>
+              <td>Tue Apr 09 21:14:34 +0200 2002</td>
+            </tr>
+            <tr>
+              <th>Last commit</th>
+              <td>Mon Nov 07 19:01:56 +0100 2011</td>
+            </tr>
+            <tr>
+              <th>Age</th>
+              <td>2494 / 3499 active days (71.28%)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       </div>
       <h2 class='blockheader'>
         <a name='repos'>Repositories</a>
@@ -69,56 +129,8 @@
           <tbody>
             <tr>
               <td>Linux</td>
-              <td>../linux/</td>
+              <td>.</td>
               <td>HEAD</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      </div>
-      <h2 class='blockheader'>
-        <a name='general'>Stats</a>
-      </h2>
-      
-      <div id="block-general" class="blockcontainer">
-      <div class='blocktable'>
-        <table class='simpletable'>
-          <tbody>
-            <tr>
-              <th>Generation time</th>
-              <td>Sun Nov 06 20:20:22 +0100 2011</td>
-            </tr>
-            <tr>
-              <th>Authors</th>
-              <td>8631 (average 31.0 commits per author)</td>
-            </tr>
-            <tr>
-              <th>Commits</th>
-              <td>273912 (average 109.0 commits per active day, 78.0 per all days)</td>
-            </tr>
-            <tr>
-              <th>Files</th>
-              <td>37521 (61586 added, 24065 deleted)</td>
-            </tr>
-            <tr>
-              <th>Lines</th>
-              <td>14918306 (30873119 added, 15954813 deleted)</td>
-            </tr>
-            <tr>
-              <th>Size</th>
-              <td>429764306 bytes</td>
-            </tr>
-            <tr>
-              <th>First commit</th>
-              <td>Tue Apr 09 21:14:34 +0200 2002</td>
-            </tr>
-            <tr>
-              <th>Last commit</th>
-              <td>Sat Nov 05 03:08:54 +0100 2011</td>
-            </tr>
-            <tr>
-              <th>Age</th>
-              <td>2492 / 3497 active days (71.26%)</td>
             </tr>
           </tbody>
         </table>

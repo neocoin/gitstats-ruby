@@ -6,12 +6,24 @@
       Statistics
     </title>
     <link href='style.css' rel='stylesheet' type='text/css' />
+    <meta content='text/html; charset=UTF-8' http-equiv='content-type' />
     <script src='jquery.js' type='text/javascript'></script>
     <script src='jquery.tablesorter.js' type='text/javascript'></script>
   </head>
   <body>
     <script type='text/javascript'>
       //<![CDATA[
+        $.tablesorter.addParser({
+          id: 'size',
+          is: function(s) {
+              return false;
+          },
+          format: function(s) {
+              return $.tablesorter.formatFloat(s.replace(/k/,'000').replace(/M/,'000000').replace(/G/,'000000000'));
+          },
+          type: 'numeric'
+        });
+        
         $(document).ready(function() {
           $(".toggleable").hide();
           $(".toggle").click(function() {
@@ -78,7 +90,12 @@
       <script type='text/javascript'>
         //<![CDATA[
           $(document).ready(function() {
-            $("#filetypes_table").tablesorter({sortList: [[0, 0]]});
+            $("#filetypes_table").tablesorter({
+              sortList: [[1, 1]],
+              headers: {
+                2: { sorter: 'size' }
+              }
+            });
           });
         //]]>
       </script>
@@ -105,82 +122,82 @@
             <tr>
               <td>.1995-2002</td>
               <td>1</td>
-              <td>16249</td>
+              <td>16k</td>
             </tr>
             <tr>
               <td>.qla3xxx</td>
               <td>1</td>
-              <td>2131</td>
+              <td>2k</td>
             </tr>
             <tr>
               <td>.pl</td>
               <td>33</td>
-              <td>436765</td>
+              <td>437k</td>
             </tr>
             <tr>
               <td>.sh</td>
               <td>45</td>
-              <td>67877</td>
+              <td>67k</td>
             </tr>
             <tr>
               <td></td>
-              <td>3674</td>
-              <td>9295060</td>
+              <td>3676</td>
+              <td>9M</td>
             </tr>
             <tr>
               <td>.pm</td>
               <td>3</td>
-              <td>6814</td>
+              <td>6k</td>
             </tr>
             <tr>
               <td>.iosched</td>
               <td>1</td>
-              <td>1836</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.megaraid</td>
               <td>2</td>
-              <td>27008</td>
+              <td>27k</td>
             </tr>
             <tr>
               <td>.img</td>
               <td>2</td>
-              <td>586184</td>
+              <td>586k</td>
             </tr>
             <tr>
               <td>.act2000</td>
               <td>1</td>
-              <td>3564</td>
+              <td>3k</td>
             </tr>
             <tr>
               <td>.opsp_defconfig</td>
               <td>1</td>
-              <td>1456</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.ids</td>
               <td>2</td>
-              <td>71142</td>
+              <td>71k</td>
             </tr>
             <tr>
               <td>.freeze</td>
               <td>1</td>
-              <td>2944</td>
+              <td>2k</td>
             </tr>
             <tr>
               <td>.vim</td>
               <td>1</td>
-              <td>1355</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.wimax</td>
               <td>1</td>
-              <td>3207</td>
+              <td>3k</td>
             </tr>
             <tr>
               <td>.po</td>
               <td>5</td>
-              <td>126047</td>
+              <td>126k</td>
             </tr>
             <tr>
               <td>.libfdt</td>
@@ -195,12 +212,12 @@
             <tr>
               <td>.uni</td>
               <td>1</td>
-              <td>4426</td>
+              <td>4k</td>
             </tr>
             <tr>
               <td>.saa7134</td>
               <td>2</td>
-              <td>12924</td>
+              <td>12k</td>
             </tr>
             <tr>
               <td>.SRC</td>
@@ -210,22 +227,22 @@
             <tr>
               <td>.agh</td>
               <td>1</td>
-              <td>299097</td>
+              <td>299k</td>
             </tr>
             <tr>
               <td>.rules</td>
               <td>1</td>
-              <td>1164</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.OSS</td>
               <td>1</td>
-              <td>68641</td>
+              <td>68k</td>
             </tr>
             <tr>
               <td>.nommu_defconfig</td>
               <td>1</td>
-              <td>1093</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.cfg</td>
@@ -235,52 +252,52 @@
             <tr>
               <td>.lpfc</td>
               <td>1</td>
-              <td>89676</td>
+              <td>89k</td>
             </tr>
             <tr>
               <td>.preempt</td>
               <td>1</td>
-              <td>2093</td>
+              <td>2k</td>
             </tr>
             <tr>
               <td>.pbm</td>
               <td>2</td>
-              <td>25692</td>
+              <td>25k</td>
             </tr>
             <tr>
               <td>.c</td>
-              <td>16622</td>
-              <td>302932697</td>
+              <td>16601</td>
+              <td>303M</td>
             </tr>
             <tr>
               <td>.vdec2_defconfig</td>
               <td>1</td>
-              <td>1435</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.sed</td>
               <td>1</td>
-              <td>2073</td>
+              <td>2k</td>
             </tr>
             <tr>
               <td>.ihex</td>
               <td>115</td>
-              <td>4988547</td>
+              <td>4M</td>
             </tr>
             <tr>
               <td>.1996-2002</td>
               <td>1</td>
-              <td>4068</td>
+              <td>4k</td>
             </tr>
             <tr>
               <td>.awk</td>
               <td>6</td>
-              <td>17909</td>
+              <td>17k</td>
             </tr>
             <tr>
               <td>.modinst</td>
               <td>1</td>
-              <td>1045</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.powerpc</td>
@@ -295,22 +312,22 @@
             <tr>
               <td>.avmb1</td>
               <td>1</td>
-              <td>5673</td>
+              <td>5k</td>
             </tr>
             <tr>
               <td>.DAC960</td>
               <td>1</td>
-              <td>34734</td>
+              <td>34k</td>
             </tr>
             <tr>
               <td>.lds</td>
               <td>16</td>
-              <td>11499</td>
+              <td>11k</td>
             </tr>
             <tr>
               <td>.html</td>
               <td>2</td>
-              <td>16246</td>
+              <td>16k</td>
             </tr>
             <tr>
               <td>.help</td>
@@ -320,97 +337,97 @@
             <tr>
               <td>.tlg2300</td>
               <td>1</td>
-              <td>1158</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.glade</td>
               <td>1</td>
-              <td>25642</td>
+              <td>25k</td>
             </tr>
             <tr>
               <td>.cpu</td>
               <td>5</td>
-              <td>36472</td>
+              <td>36k</td>
             </tr>
             <tr>
               <td>.ubuntu</td>
               <td>1</td>
-              <td>6673</td>
+              <td>6k</td>
             </tr>
             <tr>
               <td>.clean</td>
               <td>1</td>
-              <td>3310</td>
+              <td>3k</td>
             </tr>
             <tr>
               <td>.davinci-vpbe</td>
               <td>1</td>
-              <td>3994</td>
+              <td>3k</td>
             </tr>
             <tr>
               <td>.smp_defconfig</td>
               <td>3</td>
-              <td>4782</td>
+              <td>4k</td>
             </tr>
             <tr>
               <td>.bttv</td>
               <td>1</td>
-              <td>9101</td>
+              <td>9k</td>
             </tr>
             <tr>
               <td>.ld</td>
               <td>4</td>
-              <td>2091</td>
+              <td>2k</td>
             </tr>
             <tr>
               <td>.x25</td>
               <td>1</td>
-              <td>7281</td>
+              <td>7k</td>
             </tr>
             <tr>
               <td>.ucode</td>
               <td>2</td>
-              <td>6995</td>
+              <td>6k</td>
             </tr>
             <tr>
               <td>.vdec2</td>
               <td>1</td>
-              <td>5442</td>
+              <td>5k</td>
             </tr>
             <tr>
               <td>.cert</td>
               <td>1</td>
-              <td>3990</td>
+              <td>3k</td>
             </tr>
             <tr>
               <td>.h</td>
-              <td>13891</td>
-              <td>83494458</td>
+              <td>13895</td>
+              <td>83M</td>
             </tr>
             <tr>
               <td>.dvb-usb</td>
               <td>1</td>
-              <td>9928</td>
+              <td>9k</td>
             </tr>
             <tr>
               <td>.diversion</td>
               <td>1</td>
-              <td>6223</td>
+              <td>6k</td>
             </tr>
             <tr>
               <td>.Early-stage</td>
               <td>1</td>
-              <td>10828</td>
+              <td>10k</td>
             </tr>
             <tr>
               <td>.Intro</td>
               <td>1</td>
-              <td>14975</td>
+              <td>14k</td>
             </tr>
             <tr>
               <td>.vbi</td>
               <td>1</td>
-              <td>2353</td>
+              <td>2k</td>
             </tr>
             <tr>
               <td>.gate</td>
@@ -420,27 +437,27 @@
             <tr>
               <td>.HEX</td>
               <td>26</td>
-              <td>842018</td>
+              <td>842k</td>
             </tr>
             <tr>
               <td>.bus</td>
               <td>1</td>
-              <td>1384</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.history</td>
               <td>1</td>
-              <td>25741</td>
+              <td>25k</td>
             </tr>
             <tr>
               <td>.fig</td>
               <td>2</td>
-              <td>3357</td>
+              <td>3k</td>
             </tr>
             <tr>
               <td>.py</td>
               <td>19</td>
-              <td>107962</td>
+              <td>107k</td>
             </tr>
             <tr>
               <td>.dat</td>
@@ -450,42 +467,42 @@
             <tr>
               <td>.dts</td>
               <td>163</td>
-              <td>1238310</td>
+              <td>1M</td>
             </tr>
             <tr>
               <td>.cpia2</td>
               <td>1</td>
-              <td>5718</td>
+              <td>5k</td>
             </tr>
             <tr>
               <td>.modpost</td>
               <td>1</td>
-              <td>5256</td>
+              <td>5k</td>
             </tr>
             <tr>
               <td>.l</td>
               <td>5</td>
-              <td>39124</td>
+              <td>39k</td>
             </tr>
             <tr>
               <td>.headersinst</td>
               <td>1</td>
-              <td>3757</td>
+              <td>3k</td>
             </tr>
             <tr>
               <td>.in</td>
               <td>6</td>
-              <td>4245</td>
+              <td>4k</td>
             </tr>
             <tr>
               <td>.nommu</td>
               <td>2</td>
-              <td>10204</td>
+              <td>10k</td>
             </tr>
             <tr>
               <td>.modes</td>
               <td>1</td>
-              <td>31542</td>
+              <td>31k</td>
             </tr>
             <tr>
               <td>.platforms</td>
@@ -495,87 +512,87 @@
             <tr>
               <td>.cx88</td>
               <td>2</td>
-              <td>8418</td>
+              <td>8k</td>
             </tr>
             <tr>
               <td>.ips</td>
               <td>1</td>
-              <td>5304</td>
+              <td>5k</td>
             </tr>
             <tr>
               <td>.arcmsr</td>
               <td>1</td>
-              <td>6754</td>
+              <td>6k</td>
             </tr>
             <tr>
               <td>.lib</td>
               <td>1</td>
-              <td>12285</td>
+              <td>12k</td>
             </tr>
             <tr>
               <td>.seq</td>
               <td>3</td>
-              <td>189963</td>
+              <td>189k</td>
             </tr>
             <tr>
               <td>.icn</td>
               <td>1</td>
-              <td>5099</td>
+              <td>5k</td>
             </tr>
             <tr>
               <td>.gigaset</td>
               <td>1</td>
-              <td>18123</td>
+              <td>18k</td>
             </tr>
             <tr>
               <td>.mak</td>
               <td>2</td>
-              <td>7270</td>
+              <td>7k</td>
             </tr>
             <tr>
               <td>.tst</td>
               <td>13</td>
-              <td>21433</td>
+              <td>21k</td>
             </tr>
             <tr>
               <td>.x86</td>
               <td>1</td>
-              <td>7367</td>
+              <td>7k</td>
             </tr>
             <tr>
               <td>.ir</td>
               <td>1</td>
-              <td>2312</td>
+              <td>2k</td>
             </tr>
             <tr>
               <td>.modbuiltin</td>
               <td>1</td>
-              <td>1826</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.uc</td>
               <td>4</td>
-              <td>20835</td>
+              <td>20k</td>
             </tr>
             <tr>
               <td>.DOC</td>
               <td>1</td>
-              <td>7905</td>
+              <td>7k</td>
             </tr>
             <tr>
               <td>.README</td>
               <td>1</td>
-              <td>4038</td>
+              <td>4k</td>
             </tr>
             <tr>
               <td>.1</td>
               <td>6</td>
-              <td>15450</td>
+              <td>15k</td>
             </tr>
             <tr>
               <td>.auto</td>
               <td>1</td>
-              <td>1657</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.normal</td>
@@ -585,102 +602,102 @@
             <tr>
               <td>.qlcnic</td>
               <td>1</td>
-              <td>15372</td>
+              <td>15k</td>
             </tr>
             <tr>
               <td>.include</td>
               <td>1</td>
-              <td>10292</td>
+              <td>10k</td>
             </tr>
             <tr>
               <td>.FlashPoint</td>
               <td>1</td>
-              <td>2713</td>
+              <td>2k</td>
             </tr>
             <tr>
               <td>.pdf</td>
               <td>8</td>
-              <td>60844</td>
+              <td>60k</td>
             </tr>
             <tr>
               <td>.maya44</td>
               <td>1</td>
-              <td>5839</td>
+              <td>5k</td>
             </tr>
             <tr>
               <td>.lirc_zilog</td>
               <td>1</td>
-              <td>1691</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.binfmt</td>
               <td>1</td>
-              <td>6543</td>
+              <td>6k</td>
             </tr>
             <tr>
               <td>.asm</td>
               <td>2</td>
-              <td>3998</td>
+              <td>3k</td>
             </tr>
             <tr>
               <td>.4</td>
               <td>1</td>
-              <td>19218</td>
+              <td>19k</td>
             </tr>
             <tr>
               <td>.gdbinit_300MHz_32MB</td>
               <td>1</td>
-              <td>5763</td>
+              <td>5k</td>
             </tr>
             <tr>
               <td>.devices</td>
               <td>1</td>
-              <td>3901</td>
+              <td>3k</td>
             </tr>
             <tr>
               <td>.map</td>
               <td>4</td>
-              <td>25377</td>
+              <td>25k</td>
             </tr>
             <tr>
               <td>.fuc</td>
               <td>4</td>
-              <td>59441</td>
+              <td>59k</td>
             </tr>
             <tr>
               <td>.5</td>
               <td>1</td>
-              <td>2126</td>
+              <td>2k</td>
             </tr>
             <tr>
               <td>.ChangeLog</td>
               <td>1</td>
-              <td>1889</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.asp</td>
               <td>1</td>
-              <td>4528</td>
+              <td>4k</td>
             </tr>
             <tr>
               <td>.i2400m</td>
               <td>1</td>
-              <td>9750</td>
+              <td>9k</td>
             </tr>
             <tr>
               <td>.8</td>
               <td>5</td>
-              <td>12838</td>
+              <td>12k</td>
             </tr>
             <tr>
               <td>.y</td>
               <td>5</td>
-              <td>78706</td>
+              <td>78k</td>
             </tr>
             <tr>
               <td>.HiSax</td>
               <td>1</td>
-              <td>23865</td>
+              <td>23k</td>
             </tr>
             <tr>
               <td>.script</td>
@@ -690,7 +707,7 @@
             <tr>
               <td>.um</td>
               <td>2</td>
-              <td>7068</td>
+              <td>7k</td>
             </tr>
             <tr>
               <td>.asm-generic</td>
@@ -700,52 +717,52 @@
             <tr>
               <td>.1994-2004</td>
               <td>1</td>
-              <td>15586</td>
+              <td>15k</td>
             </tr>
             <tr>
               <td>.ncr53c8xx</td>
               <td>1</td>
-              <td>22787</td>
+              <td>22k</td>
             </tr>
             <tr>
               <td>.megaraid_sas</td>
               <td>1</td>
-              <td>20930</td>
+              <td>20k</td>
             </tr>
             <tr>
               <td>.cocci</td>
               <td>22</td>
-              <td>31940</td>
+              <td>31k</td>
             </tr>
             <tr>
               <td>.sym53c8xx_2</td>
               <td>1</td>
-              <td>6011</td>
+              <td>6k</td>
             </tr>
             <tr>
               <td>.concap</td>
               <td>1</td>
-              <td>10745</td>
+              <td>10k</td>
             </tr>
             <tr>
               <td>.AddingFirmware</td>
               <td>1</td>
-              <td>1460</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.copyright</td>
               <td>1</td>
-              <td>2785</td>
+              <td>2k</td>
             </tr>
             <tr>
               <td>.netlink</td>
               <td>1</td>
-              <td>6935</td>
+              <td>6k</td>
             </tr>
             <tr>
               <td>.xml</td>
               <td>142</td>
-              <td>1547884</td>
+              <td>1M</td>
             </tr>
             <tr>
               <td>.WARNING</td>
@@ -760,32 +777,32 @@
             <tr>
               <td>.up_defconfig</td>
               <td>2</td>
-              <td>3301</td>
+              <td>3k</td>
             </tr>
             <tr>
               <td>.net</td>
               <td>1</td>
-              <td>8677</td>
+              <td>8k</td>
             </tr>
             <tr>
               <td>.hm12</td>
               <td>1</td>
-              <td>4079</td>
+              <td>4k</td>
             </tr>
             <tr>
               <td>.char</td>
               <td>1</td>
-              <td>4572</td>
+              <td>4k</td>
             </tr>
             <tr>
               <td>.doc</td>
               <td>4</td>
-              <td>33097</td>
+              <td>33k</td>
             </tr>
             <tr>
               <td>.gif</td>
               <td>1</td>
-              <td>16335</td>
+              <td>16k</td>
             </tr>
             <tr>
               <td>.PL</td>
@@ -795,17 +812,17 @@
             <tr>
               <td>.host</td>
               <td>1</td>
-              <td>6613</td>
+              <td>6k</td>
             </tr>
             <tr>
               <td>.tmpl</td>
               <td>31</td>
-              <td>798336</td>
+              <td>797k</td>
             </tr>
             <tr>
               <td>.ac</td>
               <td>1</td>
-              <td>3024</td>
+              <td>3k</td>
             </tr>
             <tr>
               <td>.common</td>
@@ -815,42 +832,42 @@
             <tr>
               <td>.pvrusb2</td>
               <td>1</td>
-              <td>9818</td>
+              <td>9k</td>
             </tr>
             <tr>
               <td>.wlags49</td>
               <td>1</td>
-              <td>25714</td>
+              <td>25k</td>
             </tr>
             <tr>
               <td>.xs</td>
               <td>1</td>
-              <td>1240</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.quirks</td>
               <td>1</td>
-              <td>3765</td>
+              <td>3k</td>
             </tr>
             <tr>
               <td>.xsl</td>
               <td>6</td>
-              <td>3937</td>
+              <td>3k</td>
             </tr>
             <tr>
               <td>.FAQ</td>
               <td>2</td>
-              <td>8784</td>
+              <td>8k</td>
             </tr>
             <tr>
               <td>.ipw2100</td>
               <td>1</td>
-              <td>11207</td>
+              <td>11k</td>
             </tr>
             <tr>
               <td>.openrisc</td>
               <td>2</td>
-              <td>3645</td>
+              <td>3k</td>
             </tr>
             <tr>
               <td>.hp300</td>
@@ -860,47 +877,47 @@
             <tr>
               <td>.Process</td>
               <td>1</td>
-              <td>23757</td>
+              <td>23k</td>
             </tr>
             <tr>
               <td>.modules</td>
               <td>1</td>
-              <td>4679</td>
+              <td>4k</td>
             </tr>
             <tr>
               <td>.inc</td>
               <td>5</td>
-              <td>11082</td>
+              <td>11k</td>
             </tr>
             <tr>
               <td>.dino</td>
               <td>1</td>
-              <td>1044</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.em28xx</td>
               <td>1</td>
-              <td>5550</td>
+              <td>5k</td>
             </tr>
             <tr>
               <td>.CAPI</td>
               <td>1</td>
-              <td>14486</td>
+              <td>14k</td>
             </tr>
             <tr>
               <td>.ivtv</td>
               <td>2</td>
-              <td>7458</td>
+              <td>7k</td>
             </tr>
             <tr>
               <td>.ppm</td>
               <td>14</td>
-              <td>894598</td>
+              <td>894k</td>
             </tr>
             <tr>
               <td>.build</td>
               <td>1</td>
-              <td>14877</td>
+              <td>14k</td>
             </tr>
             <tr>
               <td>.arm</td>
@@ -910,17 +927,17 @@
             <tr>
               <td>.fwinst</td>
               <td>1</td>
-              <td>2058</td>
+              <td>2k</td>
             </tr>
             <tr>
               <td>.inf</td>
               <td>2</td>
-              <td>5558</td>
+              <td>5k</td>
             </tr>
             <tr>
               <td>.hfc-pci</td>
               <td>1</td>
-              <td>1812</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.def</td>
@@ -930,12 +947,12 @@
             <tr>
               <td>.usbvision</td>
               <td>1</td>
-              <td>5092</td>
+              <td>5k</td>
             </tr>
             <tr>
               <td>.txt</td>
-              <td>1072</td>
-              <td>9099246</td>
+              <td>1075</td>
+              <td>9M</td>
             </tr>
             <tr>
               <td>.am</td>
@@ -945,112 +962,112 @@
             <tr>
               <td>.FPE</td>
               <td>1</td>
-              <td>6169</td>
+              <td>6k</td>
             </tr>
             <tr>
               <td>.tm6000</td>
               <td>1</td>
-              <td>1190</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.generic</td>
               <td>1</td>
-              <td>5079</td>
+              <td>5k</td>
             </tr>
             <tr>
               <td>.pcbit</td>
               <td>1</td>
-              <td>1670</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.hz</td>
               <td>1</td>
-              <td>1706</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.AdvancedTopics</td>
               <td>1</td>
-              <td>9647</td>
+              <td>9k</td>
             </tr>
             <tr>
               <td>.tex</td>
               <td>1</td>
-              <td>51371</td>
+              <td>51k</td>
             </tr>
             <tr>
               <td>.WINVIEW</td>
               <td>1</td>
-              <td>1493</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.smp</td>
               <td>1</td>
-              <td>8938</td>
+              <td>8k</td>
             </tr>
             <tr>
               <td>.drm</td>
               <td>1</td>
-              <td>1744</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.gperf</td>
               <td>2</td>
-              <td>2985</td>
+              <td>2k</td>
             </tr>
             <tr>
               <td>.reg</td>
               <td>3</td>
-              <td>141360</td>
+              <td>141k</td>
             </tr>
             <tr>
               <td>.Coding</td>
               <td>1</td>
-              <td>21069</td>
+              <td>21k</td>
             </tr>
             <tr>
               <td>.Locking</td>
               <td>1</td>
-              <td>7202</td>
+              <td>7k</td>
             </tr>
             <tr>
               <td>.Posting</td>
               <td>1</td>
-              <td>15433</td>
+              <td>15k</td>
             </tr>
             <tr>
               <td>.cache</td>
               <td>1</td>
-              <td>4580</td>
+              <td>4k</td>
             </tr>
             <tr>
               <td>.conf</td>
               <td>7</td>
-              <td>35138</td>
+              <td>35k</td>
             </tr>
             <tr>
               <td>.svg</td>
               <td>2</td>
-              <td>39649</td>
+              <td>39k</td>
             </tr>
             <tr>
               <td>.inl</td>
               <td>2</td>
-              <td>3859</td>
+              <td>3k</td>
             </tr>
             <tr>
               <td>.ioctl</td>
               <td>1</td>
-              <td>13659</td>
+              <td>13k</td>
             </tr>
             <tr>
               <td>.dot</td>
               <td>4</td>
-              <td>4873</td>
+              <td>4k</td>
             </tr>
             <tr>
               <td>.locks</td>
               <td>1</td>
-              <td>4562</td>
+              <td>4k</td>
             </tr>
             <tr>
               <td>.ide</td>
@@ -1060,17 +1077,17 @@
             <tr>
               <td>.machine</td>
               <td>1</td>
-              <td>15209</td>
+              <td>15k</td>
             </tr>
             <tr>
               <td>.cx23885</td>
               <td>1</td>
-              <td>2361</td>
+              <td>2k</td>
             </tr>
             <tr>
               <td>.kmemcheck</td>
               <td>1</td>
-              <td>2967</td>
+              <td>2k</td>
             </tr>
             <tr>
               <td>.mISDN</td>
@@ -1080,87 +1097,87 @@
             <tr>
               <td>.audio</td>
               <td>1</td>
-              <td>5953</td>
+              <td>5k</td>
             </tr>
             <tr>
               <td>.inc_shipped</td>
               <td>1</td>
-              <td>12641</td>
+              <td>12k</td>
             </tr>
             <tr>
               <td>.c_shipped</td>
               <td>11</td>
-              <td>424531</td>
+              <td>427k</td>
             </tr>
             <tr>
               <td>.aic79xx</td>
               <td>1</td>
-              <td>3255</td>
+              <td>3k</td>
             </tr>
             <tr>
               <td>.gdbinit_200MHz_16MB</td>
               <td>1</td>
-              <td>5763</td>
+              <td>5k</td>
             </tr>
             <tr>
               <td>.LIB</td>
               <td>1</td>
-              <td>25265</td>
+              <td>25k</td>
             </tr>
             <tr>
               <td>.S</td>
-              <td>1256</td>
-              <td>8762424</td>
+              <td>1257</td>
+              <td>8M</td>
             </tr>
             <tr>
               <td>.platform</td>
               <td>1</td>
-              <td>1736</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.tuner</td>
               <td>1</td>
-              <td>3199</td>
+              <td>3k</td>
             </tr>
             <tr>
               <td>.debug</td>
               <td>27</td>
-              <td>111258</td>
+              <td>112k</td>
             </tr>
             <tr>
               <td>.gdbinit_400MHz_32MB</td>
               <td>1</td>
-              <td>5764</td>
+              <td>5k</td>
             </tr>
             <tr>
               <td>.cputype</td>
               <td>1</td>
-              <td>9385</td>
+              <td>9k</td>
             </tr>
             <tr>
               <td>.sa</td>
               <td>7</td>
-              <td>443177</td>
+              <td>443k</td>
             </tr>
             <tr>
               <td>.kgdb</td>
               <td>1</td>
-              <td>2403</td>
+              <td>2k</td>
             </tr>
             <tr>
               <td>.boot</td>
               <td>59</td>
-              <td>7929</td>
+              <td>7k</td>
             </tr>
             <tr>
               <td>.qla4xxx</td>
               <td>1</td>
-              <td>16547</td>
+              <td>16k</td>
             </tr>
             <tr>
               <td>.sb1000</td>
               <td>1</td>
-              <td>9783</td>
+              <td>9k</td>
             </tr>
             <tr>
               <td>.freezer</td>
@@ -1175,77 +1192,77 @@
             <tr>
               <td>.sc</td>
               <td>1</td>
-              <td>12158</td>
+              <td>12k</td>
             </tr>
             <tr>
               <td>.hysdn</td>
               <td>1</td>
-              <td>7945</td>
+              <td>7k</td>
             </tr>
             <tr>
               <td>.scr</td>
               <td>6</td>
-              <td>11542</td>
+              <td>11k</td>
             </tr>
             <tr>
               <td>.H16</td>
               <td>7</td>
-              <td>161323</td>
+              <td>161k</td>
             </tr>
             <tr>
               <td>.buddha</td>
               <td>1</td>
-              <td>7704</td>
+              <td>7k</td>
             </tr>
             <tr>
               <td>.syncppp</td>
               <td>1</td>
-              <td>2167</td>
+              <td>2k</td>
             </tr>
             <tr>
               <td>.mk</td>
               <td>1</td>
-              <td>1028</td>
+              <td>1k</td>
             </tr>
             <tr>
               <td>.aic7xxx</td>
               <td>1</td>
-              <td>3617</td>
+              <td>3k</td>
             </tr>
             <tr>
               <td>.cc</td>
               <td>1</td>
-              <td>44390</td>
+              <td>44k</td>
             </tr>
             <tr>
               <td>.sym53c8xx</td>
               <td>1</td>
-              <td>29465</td>
+              <td>29k</td>
             </tr>
             <tr>
               <td>.gdbinit</td>
               <td>3</td>
-              <td>18113</td>
+              <td>18k</td>
             </tr>
             <tr>
               <td>.ymfsb</td>
               <td>1</td>
-              <td>3142</td>
+              <td>3k</td>
             </tr>
             <tr>
               <td>.qla2xxx</td>
               <td>1</td>
-              <td>17268</td>
+              <td>17k</td>
             </tr>
             <tr>
               <td>.dtsi</td>
-              <td>19</td>
-              <td>142837</td>
+              <td>20</td>
+              <td>167k</td>
             </tr>
             <tr>
               <td>.Conclusion</td>
               <td>1</td>
-              <td>3137</td>
+              <td>3k</td>
             </tr>
             <tr>
               <td>.cycladesZ</td>
@@ -1255,12 +1272,12 @@
             <tr>
               <td>.Followthrough</td>
               <td>1</td>
-              <td>11965</td>
+              <td>11k</td>
             </tr>
             <tr>
               <td>.mm</td>
               <td>1</td>
-              <td>10878</td>
+              <td>10k</td>
             </tr>
             <tr>
               <td>.dtc</td>
@@ -1270,32 +1287,32 @@
             <tr>
               <td>.fax</td>
               <td>2</td>
-              <td>5695</td>
+              <td>5k</td>
             </tr>
             <tr>
               <td>.h_shipped</td>
               <td>9</td>
-              <td>211773</td>
+              <td>211k</td>
             </tr>
             <tr>
               <td>.qlge</td>
               <td>1</td>
-              <td>2131</td>
+              <td>2k</td>
             </tr>
             <tr>
               <td>.ipw2200</td>
               <td>1</td>
-              <td>15968</td>
+              <td>15k</td>
             </tr>
             <tr>
               <td>.1992-1997</td>
               <td>1</td>
-              <td>59954</td>
+              <td>59k</td>
             </tr>
             <tr>
               <td>.b64</td>
               <td>11</td>
-              <td>165410</td>
+              <td>165k</td>
             </tr>
           </tbody>
         </table>
