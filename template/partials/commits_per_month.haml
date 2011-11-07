@@ -1,6 +1,6 @@
 :javascript
   $(document).ready(function() {
-    $("#month_table").tablesorter({sortList: [[0, 0]]});
+    $("#month_table").tablesorter();
   });
 - block(:commits_per_month) do
   .blockdiagram
@@ -19,7 +19,7 @@
       %tbody
         - stats.month_stats.each do |month, commits|
           %tr
-            %td&= month
+            %td&= monthname(month)
             %td&= commits.commits
             %td&= commits.files_added
             %td&= commits.files_deleted
