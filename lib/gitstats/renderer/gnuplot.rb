@@ -103,11 +103,15 @@ class GnuplotRenderer
     attr_reader :stats
     attr_reader :verbose
 
-    def initialize(filename, outdir, stats, verbose)
+    def initialize(templatedir, filename, outdir, stats, verbose)
       @filename = filename
       @outdir = outdir
       @stats = stats
       @verbose = verbose
+
+      Dir.glob(File.join(templatedir, 'helpers', '*.rb')).sort.each do |file|
+        eval(IO::readlines(file).join(''))
+      end
     end
 
     def run(lines)
@@ -139,7 +143,7 @@ class GnuplotRenderer
 
     lines = IO::readlines(ifile).join('')
 
-    PlotHelper.new(file, @outdir, stats, @verbose).run(lines)
+    PlotHelper.new(@templatedir, file, @outdir, stats, @verbose).run(lines)
   end
 end
 

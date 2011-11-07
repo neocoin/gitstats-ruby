@@ -7,17 +7,8 @@ defplot do |plotter|
     for i in 0..6
       s = stats.wday_stats[i]
       day = (i + 6) % 7
-      names = [
-        'Mon',
-        'Tue',
-        'Wed',
-        'Thu',
-        'Fri',
-        'Sat',
-        'Sun'
-      ]
       x << day + 1
-      l << names[day]
+      l << weekday(day)
       y << (s.nil? ? 0 : s.commits)
     end
   end
