@@ -83,7 +83,7 @@ class LastWeeksCommitStats
     return if commit[:time] > @base
 
     diff = ((@base - commit[:time]) / 604800).to_i
-    return if diff > 52
+    return if diff >= 52
 
     @hash[diff] ||= CommitStats.new
     @hash[diff].update(commit)
