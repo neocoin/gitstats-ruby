@@ -30,7 +30,7 @@ Please note that this cache can only be used when working on the same repositori
 
 ### commit-cache
 
-As already mentioned this cache is only useful if you want to develope new statistic classes. It works by caching the internal commit objects to a per repository file that can be reread when running again. This is especially useful if you experiment with big repositories (a la linux kernel) where this cache is about twice as fast as the `git log` command used internally.
+As already mentioned this cache is only useful if you want to develope new statistic classes. It works by caching the internal commit objects to a per repository file that can be reread when running again. This is especially useful if you experiment with big repositories (i.e. the linux kernel with ~275000 commits) where this cache is about twice as fast as the `git log` command used internally.
 
 This cache can be activated with the `-C` command line flag. By default the commitcache is written into the output directory (./stats by default). If you want to use another directory you can specify it by using `--commitcache <directory name>`.
 
