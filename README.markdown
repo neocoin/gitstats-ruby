@@ -14,7 +14,7 @@ The basic usage is quite simple. Just run gitstats with the git directory as par
 Additionally you can also specify a name and a ref for each repository. To do this please use the following format: `<name>:<path to repository>:<ref>`.
 For example:
 
-    gitstats-ruby:.:master
+    gitstats gitstats-ruby:.:master
 
 For more options please read sections about caching below or run `gitstats -h`.
 
