@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.email       = ['chrisistuff@gmail.com']
   s.homepage    = 'http://rubygems.org/gems/gitstats-ruby'
   s.summary     = %q{Generates statistics of git repositories}
-  s.description = %q{Generates statistics of git repositories}
+  s.description = %q{Generates statistics of git repositories like http://gitstats.sourceforge.net but with a more extendable and flexible backend system}
   s.has_rdoc    = false
 
   s.add_dependency 'haml'
