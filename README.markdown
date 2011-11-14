@@ -4,9 +4,7 @@ gitstats-ruby is a clone of http://gitstats.sourceforce.net written in ruby. It'
 
 ## Installation
 
-Right now you have to clone this repository until I upload a gem to rubygems.
-
-    git clone https://github.com/chrisistuff/gitstats-ruby.git
+    gem install gitstats-ruby
 
 ## Getting started
 
