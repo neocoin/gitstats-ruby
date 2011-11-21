@@ -2,6 +2,7 @@
 
 require 'optparse'
 require 'ftools'
+require 'date'
 require 'rubygems'
 
 require 'haml'

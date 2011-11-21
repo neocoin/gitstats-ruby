@@ -40,6 +40,21 @@ class YearMonthCommitStats
   end
 end
 
+class DateCommitStats
+  include StatsHash
+
+  def initialize
+    @hash = Hash.new
+  end
+
+  def update(commit)
+    t = commit[:time]
+    date = Date.civil(t.year, t.month, t.day)
+    @hash[date] ||= AuthorsCommitStats.new
+    @hash[date].update(commit)
+  end
+end
+
 class HourCommitStats < CommitStats
   include StatsHash
 

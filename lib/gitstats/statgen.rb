@@ -15,6 +15,7 @@ class StatGen
   attr_reader :year_stats
   attr_reader :month_stats
   attr_reader :yearmonth_stats
+  attr_reader :date_stats
   attr_reader :hour_stats
   attr_reader :wday_stats
   attr_reader :lastweeks_stats
@@ -40,6 +41,7 @@ class StatGen
     @year_stats = YearCommitStats.new
     @month_stats = MonthCommitStats.new
     @yearmonth_stats = YearMonthCommitStats.new
+    @date_stats = DateCommitStats.new
     @hour_stats = HourCommitStats.new
     @wday_stats = DayOfWeekCommitStats.new
     @lastweeks_stats = LastWeeksCommitStats.new
@@ -99,6 +101,7 @@ class StatGen
         @year_stats.update(commit)
         @month_stats.update(commit)
         @yearmonth_stats.update(commit)
+        @date_stats.update(commit)
         @hour_stats.update(commit)
         @wday_stats.update(commit)
         @lastweeks_stats.update(commit)
