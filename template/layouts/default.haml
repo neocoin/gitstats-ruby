@@ -5,9 +5,16 @@
     %title
       Statistics
     %link{:href => 'style.css', :rel => 'stylesheet', :type => 'text/css'}
+    %link{:href => 'jquery.jqplot.min.css', :rel => 'stylesheet', :type => 'text/css'}
     %meta{'http-equiv' => 'content-type', :content => 'text/html; charset=UTF-8'}
     %script{:type => 'text/javascript', :src => 'jquery.js'}
     %script{:type => 'text/javascript', :src => 'jquery.tablesorter.js'}
+    %script{:type => 'text/javascript', :src => 'jquery.jqplot.min.js'}
+    %script{:type => 'text/javascript', :src => 'jqplot.dateAxisRenderer.min.js'}
+    %script{:type => 'text/javascript', :src => 'jqplot.cursor.min.js'}
+    %script{:type => 'text/javascript', :src => 'jqplot.canvasTextRenderer.min.js'}
+    %script{:type => 'text/javascript', :src => 'jqplot.canvasAxisTickRenderer.min.js'}
+    %script{:type => 'text/javascript', :src => 'jqplot.canvasAxisLabelRenderer.min.js'}
   %body
     :javascript
       $.tablesorter.addParser({
