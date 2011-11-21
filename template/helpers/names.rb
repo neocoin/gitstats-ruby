@@ -20,6 +20,7 @@ module NamesHelper
       :lastweeks => 'Last years weeks',
       :fileschart => 'Fileschart',
       :lineschart => 'Lineschart',
+      :commitchart => 'Commitchart',
     }
 
     @names[name].nil? ? name.to_s : @names[name]

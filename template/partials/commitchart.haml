@@ -1,0 +1,57 @@
+- block(:commitchart) do
+  .blockdiagram
+    #commitchart{ :style => 'height:240px; width:640px' }
+
+- lst = Array.new
+- stats.date_stats.each_sorted do |a, b|
+  - lst << "['#{a}', #{b.commits}]"
+
+:javascript
+  $(document).ready(function(){
+    var line = [#{lst.join(',')}];
+    var plot = $.jqplot('commitchart', [line], {
+      legend: {
+        show: true,
+        rowSpacing: '0',
+        location: 'nw',
+      },
+      axes: {
+        xaxis: {
+          pad: 0,
+          renderer: $.jqplot.DateAxisRenderer,
+          tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+          tickOptions: {
+            angle: 30
+          }
+        },
+        yaxis: {
+          label: 'Commits',
+          min: 0,
+          labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+          tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+          tickOptions: {
+            angle: 30,
+            formatString: '%d'
+          }
+        }
+      },
+      series: [
+        {
+          label: 'Commits',
+          showMarker: false
+        }
+      ],
+      cursor: {
+        show: true,
+        zoom: true,
+        looseZoom: true,
+        constrainZoomTo: 'x',
+        showTooltip: true,
+        tooltipLocation: 'sw',
+        showTooltipUnitPosition: false,
+        showTooltipDataPosition: true,
+        showVerticalLine: true,
+        tooltipFormatString: '<b>%2$s</b> %1$s: %3$s'
+      }
+    });
+  });
