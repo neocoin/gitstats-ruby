@@ -1,0 +1,83 @@
+- block(:lineschart) do
+  .blockdiagram
+    #lineschart{ :style => 'height:240px; width:640px' }
+
+- old = 0
+- lst1 = Array.new
+- lst2 = Array.new
+- lst3 = Array.new
+- stats.date_stats.each_sorted do |a, b|
+  - old += b.lines
+  - lst1 << "['#{a}', #{old}]"
+  - lst2 << "['#{a}', #{b.lines_added}]"
+  - lst3 << "['#{a}', #{b.lines_deleted}]"
+
+:javascript
+  $(document).ready(function(){
+    var line1 = [#{lst1.join(',')}];
+    var line2 = [#{lst2.join(',')}];
+    var line3 = [#{lst3.join(',')}];
+    var plot = $.jqplot('lineschart', [line1, line2, line3], {
+      legend: {
+        show: true,
+        rowSpacing: '0',
+        location: 'nw',
+      },
+      axes: {
+        xaxis: {
+          pad: 0,
+          renderer: $.jqplot.DateAxisRenderer,
+          tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+          tickOptions: {
+            angle: 30
+          }
+        },
+        yaxis: {
+          label: 'Lines',
+          min: 0,
+          labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+          tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+          tickOptions: {
+            angle: 30,
+            formatString: '%d'
+          }
+        },
+        y2axis: {
+          label: 'Changes',
+          min: 0,
+          labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+          tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+          tickOptions: {
+            angle: 30,
+            formatString: '%d'
+          }
+        }
+      },
+      series: [
+        {
+          label: 'Lines',
+          showMarker: false
+        },{
+          label: 'Added',
+          showMarker: false,
+          yaxis: 'y2axis'
+        },{
+          label: 'Deleted',
+          showMarker: false,
+          yaxis: 'y2axis'
+        }
+      ],
+      cursor: {
+        show: true,
+        zoom: true,
+        looseZoom: true,
+        constrainZoomTo: 'x',
+        showTooltip: true,
+        tooltipLocation: 'sw',
+        showTooltipUnitPosition: false,
+        showTooltipDataPosition: true,
+        showVerticalLine: true,
+        tooltipFormatString: '<b>%2$s</b> %1$s: %3$s'
+      }
+    });
+  });
