@@ -6,9 +6,16 @@
       Statistics
     </title>
     <link href='style.css' rel='stylesheet' type='text/css' />
+    <link href='jquery.jqplot.min.css' rel='stylesheet' type='text/css' />
     <meta content='text/html; charset=UTF-8' http-equiv='content-type' />
     <script src='jquery.js' type='text/javascript'></script>
+    <script src='jquery.jqplot.min.js' type='text/javascript'></script>
+    <script src='jqplot.cursor.min.js' type='text/javascript'></script>
     <script src='jquery.tablesorter.js' type='text/javascript'></script>
+    <script src='jqplot.dateAxisRenderer.min.js' type='text/javascript'></script>
+    <script src='jqplot.canvasTextRenderer.min.js' type='text/javascript'></script>
+    <script src='jqplot.canvasAxisTickRenderer.min.js' type='text/javascript'></script>
+    <script src='jqplot.canvasAxisLabelRenderer.min.js' type='text/javascript'></script>
   </head>
   <body>
     <script type='text/javascript'>
@@ -31,6 +38,73 @@
             return false;
           });
         });
+        
+        var jqplot_zoom_reset = function(evt, p, cursor) {
+          for(var i = 0;i < p.series.length;i++) {
+            p.series[i].showMarker = false;
+            p.series[i].markerOptions.show = false;
+            p.series[i].markerRenderer.show = false;
+          }
+        
+          p.redraw();
+        };
+        
+        var jqplot_zoom = function(evt, gridpos, datapos, p, cursor) {
+          var min = p.axes['xaxis'].min;
+          var max = p.axes['xaxis'].max;
+        
+          var maxaxis = {
+            yaxis: null,
+            y2axis: null,
+            y3axis: null,
+            y4axis: null,
+            y5axis: null,
+            y6axis: null,
+            y7axis: null,
+            y8axis: null,
+            y9axis: null
+          };
+        
+          var cnt = [];
+        
+          var maxlen = 0;
+          for(var i = 0;i < p.series.length;i++) {
+            var len = p.series[i].data.length;
+            if(len > maxlen)
+              maxlen = len;
+            cnt[i] = 0;
+          }
+        
+          for(var i = 0;i < maxlen;i++) {
+            for(var j = 0;j < p.series.length;j++) {
+              if(i < p.series[j].data.length) {
+                if((p.series[j].data[i][0] >= min) && (p.series[j].data[i][0] <= max)) {
+                  cnt[j]++;
+                  if(maxaxis[p.series[j].yaxis] == null)
+                    maxaxis[p.series[j].yaxis] = p.series[j].data[i][1];
+                  else if(p.series[j].data[i][1] > maxaxis[p.series[j].yaxis])
+                    maxaxis[p.series[j].yaxis] = p.series[j].data[i][1];
+                }
+              }
+            }
+          }
+        
+          for(var i = 0;i < p.series.length;i++) {
+            p.series[i].showMarker = cnt[i] <= 100;
+            p.series[i].markerOptions.show = cnt[i] <= 100;
+            p.series[i].markerRenderer.show = cnt[i] <= 100;
+          }
+        
+          for(var ax in maxaxis) {
+            if(maxaxis[ax] != null) {
+              p.axes[ax].max = maxaxis[ax] * p.axes[ax].pad;
+              p.axes[ax].tickInterval = null;
+              p.axes[ax].numberTicks = null;
+              p.axes[ax]._ticks = [];
+            }
+          }
+          p.redraw();
+        };
       //]]>
     </script>
     <div id='menu'>
@@ -76,27 +150,27 @@
           <tbody>
             <tr>
               <th>Generation time</th>
-              <td>Mon Nov 07 20:59:10 +0100 2011</td>
+              <td>Wed Nov 23 23:34:01 +0100 2011</td>
             </tr>
             <tr>
               <th>Authors</th>
-              <td>8653 (average 31.0 commits per author)</td>
+              <td>8681 (average 31.0 commits per author)</td>
             </tr>
             <tr>
               <th>Commits</th>
-              <td>275459 (average 110.0 commits per active day, 78.0 per all days)</td>
+              <td>276359 (average 110.0 commits per active day, 78.0 per all days)</td>
             </tr>
             <tr>
               <th>Files</th>
-              <td>37546 (61812 added, 24266 deleted)</td>
+              <td>37541 (61815 added, 24274 deleted)</td>
             </tr>
             <tr>
               <th>Lines</th>
-              <td>14956084 (30973778 added, 16017694 deleted)</td>
+              <td>14958038 (30984148 added, 16026110 deleted)</td>
             </tr>
             <tr>
               <th>Size</th>
-              <td>430392500 bytes</td>
+              <td>430441316 bytes</td>
             </tr>
             <tr>
               <th>First commit</th>
@@ -104,11 +178,11 @@
             </tr>
             <tr>
               <th>Last commit</th>
-              <td>Mon Nov 07 19:01:56 +0100 2011</td>
+              <td>Wed Nov 23 18:50:42 +0100 2011</td>
             </tr>
             <tr>
               <th>Age</th>
-              <td>2494 / 3499 active days (71.28%)</td>
+              <td>2510 / 3515 active days (71.41%)</td>
             </tr>
           </tbody>
         </table>

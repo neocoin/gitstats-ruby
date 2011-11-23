@@ -6,9 +6,16 @@
       Statistics
     </title>
     <link href='style.css' rel='stylesheet' type='text/css' />
+    <link href='jquery.jqplot.min.css' rel='stylesheet' type='text/css' />
     <meta content='text/html; charset=UTF-8' http-equiv='content-type' />
     <script src='jquery.js' type='text/javascript'></script>
+    <script src='jquery.jqplot.min.js' type='text/javascript'></script>
+    <script src='jqplot.cursor.min.js' type='text/javascript'></script>
     <script src='jquery.tablesorter.js' type='text/javascript'></script>
+    <script src='jqplot.dateAxisRenderer.min.js' type='text/javascript'></script>
+    <script src='jqplot.canvasTextRenderer.min.js' type='text/javascript'></script>
+    <script src='jqplot.canvasAxisTickRenderer.min.js' type='text/javascript'></script>
+    <script src='jqplot.canvasAxisLabelRenderer.min.js' type='text/javascript'></script>
   </head>
   <body>
     <script type='text/javascript'>
@@ -31,6 +38,73 @@
             return false;
           });
         });
+        
+        var jqplot_zoom_reset = function(evt, p, cursor) {
+          for(var i = 0;i < p.series.length;i++) {
+            p.series[i].showMarker = false;
+            p.series[i].markerOptions.show = false;
+            p.series[i].markerRenderer.show = false;
+          }
+        
+          p.redraw();
+        };
+        
+        var jqplot_zoom = function(evt, gridpos, datapos, p, cursor) {
+          var min = p.axes['xaxis'].min;
+          var max = p.axes['xaxis'].max;
+        
+          var maxaxis = {
+            yaxis: null,
+            y2axis: null,
+            y3axis: null,
+            y4axis: null,
+            y5axis: null,
+            y6axis: null,
+            y7axis: null,
+            y8axis: null,
+            y9axis: null
+          };
+        
+          var cnt = [];
+        
+          var maxlen = 0;
+          for(var i = 0;i < p.series.length;i++) {
+            var len = p.series[i].data.length;
+            if(len > maxlen)
+              maxlen = len;
+            cnt[i] = 0;
+          }
+        
+          for(var i = 0;i < maxlen;i++) {
+            for(var j = 0;j < p.series.length;j++) {
+              if(i < p.series[j].data.length) {
+                if((p.series[j].data[i][0] >= min) && (p.series[j].data[i][0] <= max)) {
+                  cnt[j]++;
+                  if(maxaxis[p.series[j].yaxis] == null)
+                    maxaxis[p.series[j].yaxis] = p.series[j].data[i][1];
+                  else if(p.series[j].data[i][1] > maxaxis[p.series[j].yaxis])
+                    maxaxis[p.series[j].yaxis] = p.series[j].data[i][1];
+                }
+              }
+            }
+          }
+        
+          for(var i = 0;i < p.series.length;i++) {
+            p.series[i].showMarker = cnt[i] <= 100;
+            p.series[i].markerOptions.show = cnt[i] <= 100;
+            p.series[i].markerRenderer.show = cnt[i] <= 100;
+          }
+        
+          for(var ax in maxaxis) {
+            if(maxaxis[ax] != null) {
+              p.axes[ax].max = maxaxis[ax] * p.axes[ax].pad;
+              p.axes[ax].tickInterval = null;
+              p.axes[ax].numberTicks = null;
+              p.axes[ax]._ticks = [];
+            }
+          }
+          p.redraw();
+        };
       //]]>
     </script>
     <div id='menu'>
@@ -71,6 +145,9 @@
             <a href='#hour_of_week'>Hour of week</a>
           </li>
           <li>
+            <a href='#commitchart'>Commitchart</a>
+          </li>
+          <li>
             <a href='#commits_per_year'>Commits per year</a>
           </li>
           <li>
@@ -105,419 +182,419 @@
           <tbody>
             <tr>
               <th>1</th>
-              <td>528</td>
-              <td>332</td>
-              <td>179</td>
-              <td>104180</td>
-              <td>73590</td>
+              <td>156</td>
+              <td>0</td>
+              <td>3</td>
+              <td>1364</td>
+              <td>1523</td>
             </tr>
             <tr>
               <th>2</th>
-              <td>404</td>
-              <td>28</td>
-              <td>4</td>
-              <td>16575</td>
-              <td>10914</td>
+              <td>253</td>
+              <td>1</td>
+              <td>1</td>
+              <td>2238</td>
+              <td>1795</td>
             </tr>
             <tr>
               <th>3</th>
-              <td>507</td>
-              <td>19</td>
-              <td>21</td>
-              <td>25411</td>
-              <td>19279</td>
+              <td>680</td>
+              <td>333</td>
+              <td>182</td>
+              <td>105386</td>
+              <td>74776</td>
             </tr>
             <tr>
               <th>4</th>
-              <td>769</td>
-              <td>35</td>
-              <td>10</td>
-              <td>32446</td>
-              <td>19906</td>
+              <td>493</td>
+              <td>28</td>
+              <td>4</td>
+              <td>18514</td>
+              <td>11958</td>
             </tr>
             <tr>
               <th>5</th>
-              <td>783</td>
-              <td>145</td>
-              <td>110</td>
-              <td>140908</td>
-              <td>124608</td>
+              <td>535</td>
+              <td>19</td>
+              <td>21</td>
+              <td>25570</td>
+              <td>19398</td>
             </tr>
             <tr>
               <th>6</th>
-              <td>744</td>
-              <td>66</td>
-              <td>74</td>
-              <td>28929</td>
-              <td>18566</td>
+              <td>796</td>
+              <td>35</td>
+              <td>10</td>
+              <td>32747</td>
+              <td>20084</td>
             </tr>
             <tr>
               <th>7</th>
-              <td>776</td>
-              <td>66</td>
-              <td>45</td>
-              <td>57303</td>
-              <td>30665</td>
+              <td>822</td>
+              <td>145</td>
+              <td>110</td>
+              <td>141480</td>
+              <td>124951</td>
             </tr>
             <tr>
               <th>8</th>
-              <td>720</td>
-              <td>64</td>
-              <td>15</td>
-              <td>44427</td>
-              <td>31377</td>
+              <td>760</td>
+              <td>66</td>
+              <td>74</td>
+              <td>29354</td>
+              <td>18682</td>
             </tr>
             <tr>
               <th>9</th>
-              <td>562</td>
-              <td>51</td>
-              <td>19</td>
-              <td>32926</td>
-              <td>16320</td>
+              <td>778</td>
+              <td>66</td>
+              <td>45</td>
+              <td>57307</td>
+              <td>30597</td>
             </tr>
             <tr>
               <th>10</th>
+              <td>728</td>
+              <td>64</td>
+              <td>15</td>
+              <td>44540</td>
+              <td>31466</td>
+            </tr>
+            <tr>
+              <th>11</th>
+              <td>572</td>
+              <td>51</td>
+              <td>19</td>
+              <td>32959</td>
+              <td>17238</td>
+            </tr>
+            <tr>
+              <th>12</th>
               <td>887</td>
               <td>43</td>
               <td>27</td>
               <td>44213</td>
-              <td>34158</td>
-            </tr>
-            <tr>
-              <th>11</th>
-              <td>1117</td>
-              <td>120</td>
-              <td>78</td>
-              <td>137432</td>
-              <td>106490</td>
-            </tr>
-            <tr>
-              <th>12</th>
-              <td>674</td>
-              <td>262</td>
-              <td>280</td>
-              <td>52501</td>
-              <td>42610</td>
+              <td>34157</td>
             </tr>
             <tr>
               <th>13</th>
-              <td>851</td>
-              <td>81</td>
-              <td>289</td>
-              <td>59427</td>
-              <td>150886</td>
+              <td>1152</td>
+              <td>120</td>
+              <td>78</td>
+              <td>137587</td>
+              <td>106634</td>
             </tr>
             <tr>
               <th>14</th>
-              <td>970</td>
-              <td>64</td>
-              <td>55</td>
-              <td>64645</td>
-              <td>56426</td>
+              <td>694</td>
+              <td>262</td>
+              <td>280</td>
+              <td>52697</td>
+              <td>42935</td>
             </tr>
             <tr>
               <th>15</th>
-              <td>1106</td>
-              <td>140</td>
-              <td>83</td>
-              <td>95566</td>
-              <td>73420</td>
+              <td>860</td>
+              <td>81</td>
+              <td>289</td>
+              <td>59781</td>
+              <td>150992</td>
             </tr>
             <tr>
               <th>16</th>
-              <td>1245</td>
-              <td>184</td>
-              <td>36</td>
-              <td>118798</td>
-              <td>51082</td>
+              <td>970</td>
+              <td>64</td>
+              <td>55</td>
+              <td>64637</td>
+              <td>56419</td>
             </tr>
             <tr>
               <th>17</th>
-              <td>978</td>
-              <td>123</td>
-              <td>162</td>
-              <td>89221</td>
-              <td>101776</td>
+              <td>1093</td>
+              <td>136</td>
+              <td>83</td>
+              <td>94576</td>
+              <td>72977</td>
             </tr>
             <tr>
               <th>18</th>
-              <td>1391</td>
-              <td>133</td>
-              <td>262</td>
-              <td>97093</td>
-              <td>157998</td>
+              <td>1252</td>
+              <td>188</td>
+              <td>36</td>
+              <td>119812</td>
+              <td>51461</td>
             </tr>
             <tr>
               <th>19</th>
-              <td>1005</td>
+              <td>978</td>
+              <td>123</td>
               <td>162</td>
-              <td>22</td>
-              <td>131742</td>
-              <td>58644</td>
+              <td>88920</td>
+              <td>101923</td>
             </tr>
             <tr>
               <th>20</th>
-              <td>1052</td>
-              <td>81</td>
-              <td>71</td>
-              <td>72445</td>
-              <td>48936</td>
+              <td>1405</td>
+              <td>133</td>
+              <td>262</td>
+              <td>97757</td>
+              <td>158107</td>
             </tr>
             <tr>
               <th>21</th>
-              <td>1025</td>
-              <td>144</td>
-              <td>60</td>
-              <td>104958</td>
-              <td>82793</td>
+              <td>1001</td>
+              <td>162</td>
+              <td>22</td>
+              <td>131774</td>
+              <td>58672</td>
             </tr>
             <tr>
               <th>22</th>
-              <td>1039</td>
-              <td>142</td>
-              <td>54</td>
-              <td>112409</td>
-              <td>80040</td>
+              <td>1058</td>
+              <td>81</td>
+              <td>69</td>
+              <td>72472</td>
+              <td>47454</td>
             </tr>
             <tr>
               <th>23</th>
-              <td>1034</td>
-              <td>460</td>
-              <td>422</td>
-              <td>236162</td>
-              <td>223456</td>
+              <td>1024</td>
+              <td>144</td>
+              <td>62</td>
+              <td>104858</td>
+              <td>84178</td>
             </tr>
             <tr>
               <th>24</th>
-              <td>1470</td>
-              <td>68</td>
-              <td>25</td>
-              <td>61853</td>
-              <td>32024</td>
+              <td>1035</td>
+              <td>142</td>
+              <td>54</td>
+              <td>112150</td>
+              <td>79913</td>
             </tr>
             <tr>
               <th>25</th>
-              <td>1365</td>
-              <td>225</td>
-              <td>166</td>
-              <td>186868</td>
-              <td>175377</td>
+              <td>1041</td>
+              <td>460</td>
+              <td>422</td>
+              <td>236732</td>
+              <td>223786</td>
             </tr>
             <tr>
               <th>26</th>
-              <td>1314</td>
-              <td>389</td>
-              <td>367</td>
-              <td>307416</td>
-              <td>271509</td>
+              <td>1472</td>
+              <td>68</td>
+              <td>25</td>
+              <td>61869</td>
+              <td>32043</td>
             </tr>
             <tr>
               <th>27</th>
-              <td>1073</td>
-              <td>179</td>
-              <td>100</td>
-              <td>111823</td>
-              <td>77433</td>
+              <td>1368</td>
+              <td>225</td>
+              <td>166</td>
+              <td>186857</td>
+              <td>175348</td>
             </tr>
             <tr>
               <th>28</th>
-              <td>960</td>
-              <td>54</td>
-              <td>196</td>
-              <td>42947</td>
-              <td>69938</td>
+              <td>1293</td>
+              <td>389</td>
+              <td>367</td>
+              <td>306675</td>
+              <td>270569</td>
             </tr>
             <tr>
               <th>29</th>
-              <td>848</td>
-              <td>55</td>
-              <td>29</td>
-              <td>56210</td>
-              <td>37627</td>
+              <td>1092</td>
+              <td>180</td>
+              <td>100</td>
+              <td>112751</td>
+              <td>78396</td>
             </tr>
             <tr>
               <th>30</th>
-              <td>985</td>
-              <td>60</td>
-              <td>19</td>
-              <td>35117</td>
-              <td>24149</td>
+              <td>957</td>
+              <td>54</td>
+              <td>196</td>
+              <td>42993</td>
+              <td>69934</td>
             </tr>
             <tr>
               <th>31</th>
-              <td>851</td>
-              <td>276</td>
-              <td>415</td>
-              <td>354727</td>
-              <td>421104</td>
+              <td>858</td>
+              <td>55</td>
+              <td>29</td>
+              <td>56336</td>
+              <td>37645</td>
             </tr>
             <tr>
               <th>32</th>
-              <td>1003</td>
-              <td>241</td>
-              <td>116</td>
-              <td>156291</td>
-              <td>140778</td>
+              <td>987</td>
+              <td>60</td>
+              <td>19</td>
+              <td>35318</td>
+              <td>24314</td>
             </tr>
             <tr>
               <th>33</th>
-              <td>1485</td>
-              <td>225</td>
-              <td>169</td>
-              <td>117667</td>
-              <td>104020</td>
+              <td>852</td>
+              <td>276</td>
+              <td>415</td>
+              <td>354740</td>
+              <td>421118</td>
             </tr>
             <tr>
               <th>34</th>
-              <td>995</td>
-              <td>123</td>
-              <td>59</td>
-              <td>52586</td>
-              <td>35144</td>
+              <td>1000</td>
+              <td>241</td>
+              <td>116</td>
+              <td>156233</td>
+              <td>140785</td>
             </tr>
             <tr>
               <th>35</th>
-              <td>1192</td>
-              <td>104</td>
-              <td>15</td>
-              <td>85952</td>
-              <td>39328</td>
+              <td>1487</td>
+              <td>225</td>
+              <td>169</td>
+              <td>117661</td>
+              <td>103972</td>
             </tr>
             <tr>
               <th>36</th>
-              <td>1119</td>
-              <td>62</td>
-              <td>23</td>
-              <td>63054</td>
-              <td>41860</td>
+              <td>999</td>
+              <td>123</td>
+              <td>59</td>
+              <td>52683</td>
+              <td>35203</td>
             </tr>
             <tr>
               <th>37</th>
-              <td>1305</td>
-              <td>268</td>
-              <td>140</td>
-              <td>177554</td>
-              <td>131368</td>
+              <td>1191</td>
+              <td>104</td>
+              <td>15</td>
+              <td>85951</td>
+              <td>39328</td>
             </tr>
             <tr>
               <th>38</th>
-              <td>1057</td>
-              <td>133</td>
-              <td>30</td>
-              <td>109307</td>
-              <td>49479</td>
+              <td>1118</td>
+              <td>61</td>
+              <td>22</td>
+              <td>62809</td>
+              <td>41621</td>
             </tr>
             <tr>
               <th>39</th>
-              <td>1033</td>
-              <td>156</td>
-              <td>81</td>
-              <td>83868</td>
-              <td>42144</td>
+              <td>1307</td>
+              <td>269</td>
+              <td>141</td>
+              <td>177800</td>
+              <td>131607</td>
             </tr>
             <tr>
               <th>40</th>
-              <td>1001</td>
-              <td>112</td>
-              <td>38</td>
-              <td>78079</td>
-              <td>53588</td>
+              <td>1055</td>
+              <td>133</td>
+              <td>30</td>
+              <td>109303</td>
+              <td>49475</td>
             </tr>
             <tr>
               <th>41</th>
-              <td>1036</td>
-              <td>143</td>
-              <td>133</td>
-              <td>63927</td>
-              <td>48518</td>
+              <td>1033</td>
+              <td>155</td>
+              <td>81</td>
+              <td>83704</td>
+              <td>42138</td>
             </tr>
             <tr>
               <th>42</th>
-              <td>1024</td>
-              <td>198</td>
-              <td>181</td>
-              <td>176408</td>
-              <td>145921</td>
+              <td>1001</td>
+              <td>113</td>
+              <td>38</td>
+              <td>78219</td>
+              <td>53589</td>
             </tr>
             <tr>
               <th>43</th>
-              <td>1531</td>
-              <td>362</td>
-              <td>148</td>
-              <td>180214</td>
-              <td>136907</td>
+              <td>1032</td>
+              <td>143</td>
+              <td>133</td>
+              <td>63908</td>
+              <td>48496</td>
             </tr>
             <tr>
               <th>44</th>
-              <td>1154</td>
-              <td>101</td>
-              <td>17</td>
-              <td>51906</td>
-              <td>24182</td>
+              <td>1029</td>
+              <td>198</td>
+              <td>181</td>
+              <td>176330</td>
+              <td>145940</td>
             </tr>
             <tr>
               <th>45</th>
-              <td>474</td>
-              <td>46</td>
-              <td>20</td>
-              <td>34247</td>
-              <td>26629</td>
+              <td>1526</td>
+              <td>360</td>
+              <td>148</td>
+              <td>179268</td>
+              <td>136000</td>
             </tr>
             <tr>
               <th>46</th>
-              <td>784</td>
-              <td>113</td>
-              <td>67</td>
-              <td>65100</td>
-              <td>54156</td>
+              <td>1152</td>
+              <td>103</td>
+              <td>17</td>
+              <td>52471</td>
+              <td>24799</td>
             </tr>
             <tr>
               <th>47</th>
-              <td>891</td>
-              <td>143</td>
-              <td>82</td>
-              <td>134389</td>
-              <td>90476</td>
+              <td>481</td>
+              <td>46</td>
+              <td>20</td>
+              <td>34751</td>
+              <td>26931</td>
             </tr>
             <tr>
               <th>48</th>
-              <td>1063</td>
-              <td>165</td>
-              <td>25</td>
-              <td>83977</td>
-              <td>28105</td>
+              <td>784</td>
+              <td>113</td>
+              <td>67</td>
+              <td>65074</td>
+              <td>54156</td>
             </tr>
             <tr>
               <th>49</th>
-              <td>1055</td>
-              <td>49</td>
-              <td>13</td>
-              <td>40898</td>
-              <td>20832</td>
+              <td>889</td>
+              <td>143</td>
+              <td>82</td>
+              <td>134407</td>
+              <td>90466</td>
             </tr>
             <tr>
               <th>50</th>
-              <td>929</td>
-              <td>61</td>
-              <td>9</td>
-              <td>44925</td>
-              <td>21421</td>
+              <td>1063</td>
+              <td>165</td>
+              <td>25</td>
+              <td>83959</td>
+              <td>28111</td>
             </tr>
             <tr>
               <th>51</th>
-              <td>1067</td>
-              <td>117</td>
-              <td>84</td>
-              <td>67465</td>
-              <td>47365</td>
+              <td>1056</td>
+              <td>49</td>
+              <td>13</td>
+              <td>40920</td>
+              <td>20835</td>
             </tr>
             <tr>
               <th>52</th>
-              <td>984</td>
-              <td>179</td>
-              <td>138</td>
-              <td>69419</td>
-              <td>47684</td>
+              <td>928</td>
+              <td>61</td>
+              <td>9</td>
+              <td>44926</td>
+              <td>21417</td>
             </tr>
           </tbody>
         </table>
@@ -554,195 +631,195 @@
           <tbody>
             <tr>
               <th>0</th>
-              <td>15293</td>
-              <td>19494</td>
+              <td>15311</td>
+              <td>19495</td>
               <td>796</td>
-              <td>7903640</td>
-              <td>686252</td>
+              <td>7904134</td>
+              <td>686525</td>
             </tr>
             <tr>
               <th>1</th>
-              <td>11952</td>
+              <td>11984</td>
               <td>1998</td>
               <td>1216</td>
-              <td>1143483</td>
-              <td>737483</td>
+              <td>1143855</td>
+              <td>737700</td>
             </tr>
             <tr>
               <th>2</th>
-              <td>10144</td>
+              <td>10187</td>
               <td>1969</td>
               <td>966</td>
-              <td>1250122</td>
-              <td>714810</td>
+              <td>1250477</td>
+              <td>714948</td>
             </tr>
             <tr>
               <th>3</th>
-              <td>8085</td>
-              <td>1544</td>
-              <td>946</td>
-              <td>656402</td>
-              <td>567171</td>
+              <td>8131</td>
+              <td>1545</td>
+              <td>948</td>
+              <td>657329</td>
+              <td>568251</td>
             </tr>
             <tr>
               <th>4</th>
-              <td>7646</td>
+              <td>7665</td>
               <td>1168</td>
               <td>869</td>
-              <td>694903</td>
-              <td>520352</td>
+              <td>695077</td>
+              <td>520461</td>
             </tr>
             <tr>
               <th>5</th>
-              <td>7932</td>
+              <td>7948</td>
               <td>1220</td>
               <td>535</td>
-              <td>779148</td>
-              <td>456175</td>
+              <td>779230</td>
+              <td>456228</td>
             </tr>
             <tr>
               <th>6</th>
-              <td>8294</td>
+              <td>8313</td>
               <td>1431</td>
               <td>1459</td>
-              <td>912036</td>
-              <td>695790</td>
+              <td>912186</td>
+              <td>695874</td>
             </tr>
             <tr>
               <th>7</th>
-              <td>9515</td>
-              <td>1804</td>
-              <td>920</td>
-              <td>858905</td>
-              <td>711979</td>
+              <td>9540</td>
+              <td>1805</td>
+              <td>921</td>
+              <td>859191</td>
+              <td>712157</td>
             </tr>
             <tr>
               <th>8</th>
-              <td>9648</td>
+              <td>9685</td>
               <td>1540</td>
               <td>600</td>
-              <td>764166</td>
-              <td>474899</td>
+              <td>764413</td>
+              <td>475097</td>
             </tr>
             <tr>
               <th>9</th>
-              <td>12209</td>
+              <td>12239</td>
               <td>1511</td>
               <td>996</td>
-              <td>893083</td>
-              <td>615341</td>
+              <td>893293</td>
+              <td>615554</td>
             </tr>
             <tr>
               <th>10</th>
-              <td>12750</td>
+              <td>12785</td>
               <td>1788</td>
               <td>754</td>
-              <td>1165627</td>
-              <td>676157</td>
+              <td>1165867</td>
+              <td>676320</td>
             </tr>
             <tr>
               <th>11</th>
-              <td>12928</td>
+              <td>12984</td>
               <td>2916</td>
-              <td>2041</td>
-              <td>1157152</td>
-              <td>903236</td>
+              <td>2044</td>
+              <td>1158122</td>
+              <td>904996</td>
             </tr>
             <tr>
               <th>12</th>
-              <td>10618</td>
+              <td>10652</td>
               <td>1682</td>
-              <td>1060</td>
-              <td>898486</td>
-              <td>557568</td>
+              <td>1061</td>
+              <td>899711</td>
+              <td>558282</td>
             </tr>
             <tr>
               <th>13</th>
-              <td>10766</td>
+              <td>10803</td>
               <td>1933</td>
               <td>772</td>
-              <td>1103539</td>
-              <td>666930</td>
+              <td>1103924</td>
+              <td>667204</td>
             </tr>
             <tr>
               <th>14</th>
-              <td>9931</td>
+              <td>9987</td>
               <td>1691</td>
               <td>638</td>
-              <td>894342</td>
-              <td>478250</td>
+              <td>894935</td>
+              <td>478476</td>
             </tr>
             <tr>
               <th>15</th>
-              <td>11469</td>
+              <td>11511</td>
               <td>2215</td>
               <td>933</td>
-              <td>1306185</td>
-              <td>743343</td>
+              <td>1306711</td>
+              <td>743766</td>
             </tr>
             <tr>
               <th>16</th>
-              <td>12301</td>
+              <td>12333</td>
               <td>1600</td>
               <td>730</td>
-              <td>1069493</td>
-              <td>999251</td>
+              <td>1069902</td>
+              <td>999388</td>
             </tr>
             <tr>
               <th>17</th>
-              <td>12658</td>
+              <td>12699</td>
               <td>2666</td>
               <td>1591</td>
-              <td>999148</td>
-              <td>599716</td>
+              <td>999600</td>
+              <td>599997</td>
             </tr>
             <tr>
               <th>18</th>
-              <td>12566</td>
+              <td>12612</td>
               <td>1891</td>
               <td>983</td>
-              <td>900355</td>
-              <td>563746</td>
+              <td>900739</td>
+              <td>564062</td>
             </tr>
             <tr>
               <th>19</th>
-              <td>12055</td>
+              <td>12101</td>
               <td>1955</td>
               <td>1321</td>
-              <td>937033</td>
-              <td>649460</td>
+              <td>937305</td>
+              <td>649855</td>
             </tr>
             <tr>
               <th>20</th>
-              <td>12888</td>
+              <td>12936</td>
               <td>2062</td>
               <td>1104</td>
-              <td>1279320</td>
-              <td>789134</td>
+              <td>1279623</td>
+              <td>789356</td>
             </tr>
             <tr>
               <th>21</th>
-              <td>13740</td>
+              <td>13794</td>
               <td>2042</td>
               <td>1236</td>
-              <td>1233146</td>
-              <td>895018</td>
+              <td>1233667</td>
+              <td>895264</td>
             </tr>
             <tr>
               <th>22</th>
-              <td>14516</td>
+              <td>14565</td>
               <td>1469</td>
-              <td>493</td>
-              <td>1019776</td>
-              <td>720245</td>
+              <td>494</td>
+              <td>1020392</td>
+              <td>720752</td>
             </tr>
             <tr>
               <th>23</th>
-              <td>15555</td>
+              <td>15594</td>
               <td>2223</td>
               <td>1307</td>
-              <td>1154288</td>
-              <td>595388</td>
+              <td>1154465</td>
+              <td>595597</td>
             </tr>
           </tbody>
         </table>
@@ -779,59 +856,59 @@
           <tbody>
             <tr>
               <th>Mon</th>
-              <td>41400</td>
+              <td>41538</td>
               <td>5379</td>
-              <td>3212</td>
-              <td>3049741</td>
-              <td>2075336</td>
+              <td>3213</td>
+              <td>3050992</td>
+              <td>2075993</td>
             </tr>
             <tr>
               <th>Tue</th>
-              <td>49668</td>
-              <td>8893</td>
-              <td>5172</td>
-              <td>4186913</td>
-              <td>2553501</td>
+              <td>49830</td>
+              <td>8894</td>
+              <td>5173</td>
+              <td>4188541</td>
+              <td>2554717</td>
             </tr>
             <tr>
               <th>Wed</th>
-              <td>49824</td>
+              <td>49984</td>
               <td>7205</td>
               <td>3591</td>
-              <td>4514225</td>
-              <td>2602983</td>
+              <td>4516264</td>
+              <td>2604059</td>
             </tr>
             <tr>
               <th>Thu</th>
-              <td>47279</td>
+              <td>47446</td>
               <td>8374</td>
               <td>4845</td>
-              <td>4676849</td>
-              <td>3201574</td>
+              <td>4678238</td>
+              <td>3202817</td>
             </tr>
             <tr>
               <th>Fri</th>
-              <td>45712</td>
-              <td>7914</td>
-              <td>4050</td>
-              <td>4246065</td>
-              <td>2922630</td>
+              <td>45880</td>
+              <td>7916</td>
+              <td>4056</td>
+              <td>4249089</td>
+              <td>2925401</td>
             </tr>
             <tr>
               <th>Sat</th>
-              <td>21863</td>
+              <td>21923</td>
               <td>3646</td>
               <td>1585</td>
-              <td>1942719</td>
-              <td>1411631</td>
+              <td>1943453</td>
+              <td>1412005</td>
             </tr>
             <tr>
               <th>Sun</th>
-              <td>19713</td>
+              <td>19758</td>
               <td>20401</td>
               <td>1811</td>
-              <td>8357266</td>
-              <td>1250039</td>
+              <td>8357571</td>
+              <td>1251118</td>
             </tr>
           </tbody>
         </table>
@@ -876,197 +953,261 @@
           <tbody>
             <tr>
               <th>Mon</th>
-              <td class='gradient-29'>980</td>
-              <td class='gradient-29'>984</td>
-              <td class='gradient-24'>816</td>
-              <td class='gradient-26'>908</td>
-              <td class='gradient-25'>875</td>
-              <td class='gradient-27'>910</td>
-              <td class='gradient-26'>893</td>
-              <td class='gradient-31'>1073</td>
-              <td class='gradient-49'>1675</td>
-              <td class='gradient-65'>2195</td>
-              <td class='gradient-50'>1701</td>
-              <td class='gradient-75'>2534</td>
-              <td class='gradient-52'>1776</td>
-              <td class='gradient-54'>1850</td>
-              <td class='gradient-50'>1688</td>
-              <td class='gradient-62'>2121</td>
-              <td class='gradient-64'>2172</td>
-              <td class='gradient-63'>2129</td>
-              <td class='gradient-71'>2399</td>
-              <td class='gradient-59'>2008</td>
-              <td class='gradient-62'>2115</td>
-              <td class='gradient-76'>2584</td>
-              <td class='gradient-69'>2343</td>
-              <td class='gradient-79'>2671</td>
+              <td class='gradient-28'>980</td>
+              <td class='gradient-29'>986</td>
+              <td class='gradient-24'>817</td>
+              <td class='gradient-26'>910</td>
+              <td class='gradient-25'>879</td>
+              <td class='gradient-26'>911</td>
+              <td class='gradient-26'>898</td>
+              <td class='gradient-31'>1077</td>
+              <td class='gradient-49'>1679</td>
+              <td class='gradient-64'>2198</td>
+              <td class='gradient-50'>1703</td>
+              <td class='gradient-75'>2549</td>
+              <td class='gradient-52'>1777</td>
+              <td class='gradient-54'>1855</td>
+              <td class='gradient-50'>1696</td>
+              <td class='gradient-62'>2131</td>
+              <td class='gradient-64'>2177</td>
+              <td class='gradient-63'>2140</td>
+              <td class='gradient-71'>2410</td>
+              <td class='gradient-59'>2019</td>
+              <td class='gradient-62'>2124</td>
+              <td class='gradient-76'>2595</td>
+              <td class='gradient-69'>2350</td>
+              <td class='gradient-79'>2677</td>
             </tr>
             <tr>
               <th>Tue</th>
-              <td class='gradient-68'>2313</td>
-              <td class='gradient-60'>2035</td>
-              <td class='gradient-63'>2138</td>
-              <td class='gradient-47'>1609</td>
-              <td class='gradient-39'>1316</td>
-              <td class='gradient-43'>1468</td>
-              <td class='gradient-45'>1549</td>
-              <td class='gradient-65'>2219</td>
-              <td class='gradient-51'>1742</td>
-              <td class='gradient-72'>2449</td>
-              <td class='gradient-83'>2813</td>
-              <td class='gradient-60'>2043</td>
-              <td class='gradient-49'>1667</td>
-              <td class='gradient-49'>1680</td>
-              <td class='gradient-45'>1539</td>
-              <td class='gradient-57'>1947</td>
-              <td class='gradient-67'>2263</td>
-              <td class='gradient-64'>2164</td>
-              <td class='gradient-58'>1985</td>
-              <td class='gradient-64'>2178</td>
-              <td class='gradient-68'>2303</td>
-              <td class='gradient-70'>2362</td>
-              <td class='gradient-74'>2518</td>
-              <td class='gradient-100'>3368</td>
+              <td class='gradient-68'>2316</td>
+              <td class='gradient-60'>2040</td>
+              <td class='gradient-63'>2141</td>
+              <td class='gradient-47'>1620</td>
+              <td class='gradient-38'>1318</td>
+              <td class='gradient-43'>1476</td>
+              <td class='gradient-45'>1552</td>
+              <td class='gradient-65'>2224</td>
+              <td class='gradient-51'>1755</td>
+              <td class='gradient-72'>2453</td>
+              <td class='gradient-83'>2816</td>
+              <td class='gradient-60'>2048</td>
+              <td class='gradient-49'>1670</td>
+              <td class='gradient-49'>1688</td>
+              <td class='gradient-45'>1546</td>
+              <td class='gradient-57'>1952</td>
+              <td class='gradient-66'>2267</td>
+              <td class='gradient-64'>2179</td>
+              <td class='gradient-58'>1993</td>
+              <td class='gradient-64'>2184</td>
+              <td class='gradient-68'>2312</td>
+              <td class='gradient-70'>2373</td>
+              <td class='gradient-74'>2523</td>
+              <td class='gradient-100'>3384</td>
             </tr>
             <tr>
               <th>Wed</th>
-              <td class='gradient-98'>3307</td>
-              <td class='gradient-64'>2188</td>
-              <td class='gradient-61'>2056</td>
-              <td class='gradient-43'>1479</td>
-              <td class='gradient-40'>1371</td>
+              <td class='gradient-97'>3310</td>
+              <td class='gradient-64'>2196</td>
+              <td class='gradient-60'>2060</td>
+              <td class='gradient-43'>1488</td>
+              <td class='gradient-40'>1375</td>
               <td class='gradient-44'>1493</td>
-              <td class='gradient-51'>1730</td>
-              <td class='gradient-44'>1513</td>
-              <td class='gradient-55'>1875</td>
-              <td class='gradient-64'>2188</td>
-              <td class='gradient-72'>2458</td>
-              <td class='gradient-61'>2071</td>
-              <td class='gradient-51'>1744</td>
-              <td class='gradient-71'>2399</td>
-              <td class='gradient-48'>1635</td>
-              <td class='gradient-62'>2104</td>
-              <td class='gradient-59'>1989</td>
-              <td class='gradient-58'>1955</td>
-              <td class='gradient-67'>2266</td>
-              <td class='gradient-67'>2268</td>
-              <td class='gradient-71'>2398</td>
-              <td class='gradient-71'>2402</td>
-              <td class='gradient-74'>2499</td>
-              <td class='gradient-72'>2436</td>
+              <td class='gradient-51'>1734</td>
+              <td class='gradient-44'>1517</td>
+              <td class='gradient-55'>1879</td>
+              <td class='gradient-65'>2201</td>
+              <td class='gradient-72'>2470</td>
+              <td class='gradient-61'>2085</td>
+              <td class='gradient-51'>1755</td>
+              <td class='gradient-70'>2402</td>
+              <td class='gradient-48'>1644</td>
+              <td class='gradient-62'>2107</td>
+              <td class='gradient-59'>1998</td>
+              <td class='gradient-57'>1958</td>
+              <td class='gradient-67'>2276</td>
+              <td class='gradient-67'>2275</td>
+              <td class='gradient-70'>2401</td>
+              <td class='gradient-71'>2407</td>
+              <td class='gradient-74'>2514</td>
+              <td class='gradient-72'>2439</td>
             </tr>
             <tr>
               <th>Thu</th>
-              <td class='gradient-83'>2826</td>
-              <td class='gradient-64'>2166</td>
-              <td class='gradient-54'>1849</td>
-              <td class='gradient-48'>1640</td>
-              <td class='gradient-36'>1238</td>
-              <td class='gradient-46'>1574</td>
-              <td class='gradient-49'>1674</td>
-              <td class='gradient-53'>1797</td>
-              <td class='gradient-41'>1389</td>
-              <td class='gradient-62'>2103</td>
-              <td class='gradient-59'>1994</td>
-              <td class='gradient-66'>2256</td>
-              <td class='gradient-55'>1872</td>
-              <td class='gradient-48'>1643</td>
-              <td class='gradient-56'>1911</td>
-              <td class='gradient-61'>2085</td>
-              <td class='gradient-61'>2061</td>
-              <td class='gradient-61'>2061</td>
-              <td class='gradient-61'>2066</td>
-              <td class='gradient-57'>1922</td>
-              <td class='gradient-66'>2241</td>
-              <td class='gradient-68'>2298</td>
-              <td class='gradient-65'>2195</td>
-              <td class='gradient-71'>2418</td>
+              <td class='gradient-83'>2833</td>
+              <td class='gradient-64'>2169</td>
+              <td class='gradient-54'>1853</td>
+              <td class='gradient-48'>1646</td>
+              <td class='gradient-36'>1243</td>
+              <td class='gradient-46'>1576</td>
+              <td class='gradient-49'>1676</td>
+              <td class='gradient-53'>1801</td>
+              <td class='gradient-41'>1391</td>
+              <td class='gradient-62'>2109</td>
+              <td class='gradient-59'>2000</td>
+              <td class='gradient-66'>2262</td>
+              <td class='gradient-55'>1878</td>
+              <td class='gradient-48'>1646</td>
+              <td class='gradient-57'>1930</td>
+              <td class='gradient-61'>2091</td>
+              <td class='gradient-61'>2065</td>
+              <td class='gradient-61'>2067</td>
+              <td class='gradient-61'>2075</td>
+              <td class='gradient-57'>1931</td>
+              <td class='gradient-66'>2263</td>
+              <td class='gradient-68'>2312</td>
+              <td class='gradient-65'>2208</td>
+              <td class='gradient-71'>2421</td>
             </tr>
             <tr>
               <th>Fri</th>
-              <td class='gradient-78'>2651</td>
-              <td class='gradient-67'>2275</td>
-              <td class='gradient-45'>1533</td>
-              <td class='gradient-37'>1267</td>
-              <td class='gradient-43'>1450</td>
-              <td class='gradient-38'>1302</td>
-              <td class='gradient-36'>1245</td>
-              <td class='gradient-51'>1750</td>
-              <td class='gradient-52'>1768</td>
-              <td class='gradient-59'>2014</td>
-              <td class='gradient-62'>2112</td>
-              <td class='gradient-68'>2318</td>
-              <td class='gradient-56'>1916</td>
-              <td class='gradient-46'>1560</td>
-              <td class='gradient-48'>1648</td>
-              <td class='gradient-51'>1736</td>
-              <td class='gradient-58'>1966</td>
-              <td class='gradient-66'>2253</td>
-              <td class='gradient-57'>1945</td>
-              <td class='gradient-50'>1704</td>
-              <td class='gradient-55'>1871</td>
-              <td class='gradient-61'>2063</td>
-              <td class='gradient-88'>2993</td>
-              <td class='gradient-70'>2372</td>
+              <td class='gradient-78'>2653</td>
+              <td class='gradient-67'>2278</td>
+              <td class='gradient-45'>1556</td>
+              <td class='gradient-37'>1279</td>
+              <td class='gradient-42'>1450</td>
+              <td class='gradient-38'>1305</td>
+              <td class='gradient-36'>1249</td>
+              <td class='gradient-51'>1756</td>
+              <td class='gradient-52'>1781</td>
+              <td class='gradient-59'>2017</td>
+              <td class='gradient-62'>2124</td>
+              <td class='gradient-68'>2329</td>
+              <td class='gradient-56'>1925</td>
+              <td class='gradient-46'>1571</td>
+              <td class='gradient-48'>1654</td>
+              <td class='gradient-51'>1745</td>
+              <td class='gradient-58'>1971</td>
+              <td class='gradient-66'>2258</td>
+              <td class='gradient-57'>1953</td>
+              <td class='gradient-50'>1713</td>
+              <td class='gradient-55'>1873</td>
+              <td class='gradient-61'>2066</td>
+              <td class='gradient-88'>2997</td>
+              <td class='gradient-70'>2377</td>
             </tr>
             <tr>
               <th>Sat</th>
-              <td class='gradient-58'>1977</td>
-              <td class='gradient-50'>1707</td>
-              <td class='gradient-34'>1155</td>
-              <td class='gradient-21'>723</td>
-              <td class='gradient-26'>909</td>
-              <td class='gradient-16'>545</td>
+              <td class='gradient-58'>1980</td>
+              <td class='gradient-50'>1717</td>
+              <td class='gradient-34'>1163</td>
+              <td class='gradient-21'>728</td>
+              <td class='gradient-26'>912</td>
+              <td class='gradient-16'>546</td>
               <td class='gradient-21'>720</td>
-              <td class='gradient-18'>608</td>
+              <td class='gradient-17'>609</td>
               <td class='gradient-17'>582</td>
-              <td class='gradient-17'>604</td>
+              <td class='gradient-17'>605</td>
               <td class='gradient-24'>828</td>
-              <td class='gradient-19'>661</td>
-              <td class='gradient-26'>878</td>
-              <td class='gradient-24'>834</td>
-              <td class='gradient-17'>603</td>
-              <td class='gradient-17'>581</td>
-              <td class='gradient-24'>841</td>
-              <td class='gradient-33'>1120</td>
+              <td class='gradient-19'>664</td>
+              <td class='gradient-26'>881</td>
+              <td class='gradient-24'>835</td>
+              <td class='gradient-17'>605</td>
+              <td class='gradient-17'>588</td>
+              <td class='gradient-24'>845</td>
+              <td class='gradient-33'>1121</td>
               <td class='gradient-26'>894</td>
-              <td class='gradient-30'>1019</td>
+              <td class='gradient-30'>1022</td>
               <td class='gradient-29'>984</td>
-              <td class='gradient-29'>1003</td>
+              <td class='gradient-29'>1006</td>
               <td class='gradient-28'>964</td>
-              <td class='gradient-33'>1123</td>
+              <td class='gradient-33'>1124</td>
             </tr>
             <tr>
               <th>Sun</th>
               <td class='gradient-36'>1239</td>
+              <td class='gradient-17'>598</td>
               <td class='gradient-17'>597</td>
-              <td class='gradient-17'>597</td>
-              <td class='gradient-13'>459</td>
-              <td class='gradient-14'>487</td>
-              <td class='gradient-19'>640</td>
-              <td class='gradient-14'>483</td>
-              <td class='gradient-16'>555</td>
-              <td class='gradient-18'>617</td>
+              <td class='gradient-13'>460</td>
+              <td class='gradient-14'>488</td>
+              <td class='gradient-18'>641</td>
+              <td class='gradient-14'>484</td>
+              <td class='gradient-16'>556</td>
+              <td class='gradient-18'>618</td>
               <td class='gradient-19'>656</td>
-              <td class='gradient-25'>844</td>
-              <td class='gradient-31'>1045</td>
-              <td class='gradient-22'>765</td>
-              <td class='gradient-23'>800</td>
-              <td class='gradient-26'>907</td>
-              <td class='gradient-26'>895</td>
+              <td class='gradient-24'>844</td>
+              <td class='gradient-30'>1047</td>
+              <td class='gradient-22'>766</td>
+              <td class='gradient-23'>806</td>
+              <td class='gradient-26'>912</td>
+              <td class='gradient-26'>897</td>
+              <td class='gradient-29'>1010</td>
+              <td class='gradient-28'>976</td>
+              <td class='gradient-29'>1011</td>
+              <td class='gradient-28'>957</td>
+              <td class='gradient-28'>979</td>
+              <td class='gradient-30'>1035</td>
               <td class='gradient-29'>1009</td>
-              <td class='gradient-28'>976</td>
-              <td class='gradient-30'>1011</td>
-              <td class='gradient-28'>956</td>
-              <td class='gradient-28'>976</td>
-              <td class='gradient-30'>1028</td>
-              <td class='gradient-29'>1004</td>
-              <td class='gradient-34'>1167</td>
+              <td class='gradient-34'>1172</td>
             </tr>
           </tbody>
         </table>
       </div>
       </div>
+      <h2 class='blockheader'>
+        <a name='commitchart'>Commitchart</a>
+      </h2>
+      
+      <div id="block-commitchart" class="blockcontainer">
+      <div class='blockdiagram'>
+        <div id='commitchart' style='height:240px; width:640px'></div>
+      </div>
+      </div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function(){
+            var line = [['2002-04-09', 12],['2003-02-20', 1],['2004-07-29', 1],['2004-08-19', 1],['2004-09-16', 1],['2004-11-11', 3],['2004-11-17', 1],['2004-11-18', 3],['2004-11-19', 1],['2004-12-04', 1],['2004-12-08', 1],['2004-12-10', 1],['2004-12-23', 1],['2004-12-28', 2],['2005-01-06', 1],['2005-01-12', 2],['2005-01-13', 3],['2005-01-14', 1],['2005-01-17', 4],['2005-01-18', 2],['2005-01-19', 1],['2005-01-21', 1],['2005-01-22', 1],['2005-01-23', 2],['2005-01-24', 6],['2005-01-25', 1],['2005-01-26', 2],['2005-01-28', 1],['2005-01-31', 3],['2005-02-01', 3],['2005-02-02', 4],['2005-02-03', 5],['2005-02-04', 5],['2005-02-05', 2],['2005-02-06', 2],['2005-02-07', 8],['2005-02-08', 3],['2005-02-09', 6],['2005-02-10', 3],['2005-02-11', 1],['2005-02-12', 1],['2005-02-13', 3],['2005-02-14', 3],['2005-02-15', 1],['2005-02-16', 10],['2005-02-17', 4],['2005-02-18', 7],['2005-02-19', 6],['2005-02-21', 8],['2005-02-22', 5],['2005-02-23', 1],['2005-02-25', 1],['2005-02-26', 1],['2005-02-27', 2],['2005-02-28', 6],['2005-03-01', 9],['2005-03-02', 5],['2005-03-03', 4],['2005-03-04', 5],['2005-03-07', 5],['2005-03-08', 1],['2005-03-09', 2],['2005-03-10', 2],['2005-03-13', 2],['2005-03-14', 4],['2005-03-15', 5],['2005-03-16', 3],['2005-03-17', 3],['2005-03-18', 13],['2005-03-19', 12],['2005-03-20', 4],['2005-03-21', 13],['2005-03-22', 3],['2005-03-23', 12],['2005-03-24', 22],['2005-03-25', 10],['2005-03-26', 4],['2005-03-27', 2],['2005-03-28', 2],['2005-03-29', 4],['2005-03-30', 11],['2005-03-31', 10],['2005-04-01', 11],['2005-04-02', 5],['2005-04-03', 15],['2005-04-04', 11],['2005-04-05', 5],['2005-04-06', 14],['2005-04-07', 9],['2005-04-08', 14],['2005-04-09', 11],['2005-04-10', 3],['2005-04-11', 19],['2005-04-12', 16],['2005-04-13', 15],['2005-04-14', 8],['2005-04-15', 3],['2005-04-16', 3],['2005-04-17', 223],['2005-04-18', 19],['2005-04-19', 78],['2005-04-20', 16],['2005-04-21', 25],['2005-04-22', 43],['2005-04-23', 27],['2005-04-24', 21],['2005-04-25', 85],['2005-04-26', 57],['2005-04-27', 9],['2005-04-28', 57],['2005-04-29', 112],['2005-04-30', 12],['2005-05-01', 188],['2005-05-02', 28],['2005-05-03', 42],['2005-05-04', 50],['2005-05-05', 41],['2005-05-06', 127],['2005-05-07', 35],['2005-05-08', 6],['2005-05-09', 10],['2005-05-10', 30],['2005-05-11', 19],['2005-05-12', 44],['2005-05-13', 51],['2005-05-14', 7],['2005-05-15', 6],['2005-05-16', 17],['2005-05-17', 149],['2005-05-18', 17],['2005-05-19', 39],['2005-05-20', 41],['2005-05-21', 18],['2005-05-22', 6],['2005-05-23', 22],['2005-05-24', 20],['2005-05-25', 42],['2005-05-26', 44],['2005-05-27', 51],['2005-05-28', 36],['2005-05-29', 83],['2005-05-30', 20],['2005-05-31', 33],['2005-06-01', 64],['2005-06-02', 23],['2005-06-03', 41],['2005-06-04', 26],['2005-06-05', 17],['2005-06-06', 37],['2005-06-07', 30],['2005-06-08', 26],['2005-06-09', 33],['2005-06-10', 18],['2005-06-11', 11],['2005-06-12', 4],['2005-06-13', 35],['2005-06-14', 31],['2005-06-15', 8],['2005-06-16', 28],['2005-06-17', 12],['2005-06-18', 29],['2005-06-19', 71],['2005-06-20', 74],['2005-06-21', 100],['2005-06-22', 275],['2005-06-23', 226],['2005-06-24', 168],['2005-06-25', 280],['2005-06-26', 29],['2005-06-27', 96],['2005-06-28', 160],['2005-06-29', 81],['2005-06-30', 92],['2005-07-01', 22],['2005-07-02', 20],['2005-07-03', 30],['2005-07-04', 29],['2005-07-05', 23],['2005-07-06', 85],['2005-07-07', 36],['2005-07-08', 212],['2005-07-09', 23],['2005-07-10', 41],['2005-07-11', 39],['2005-07-12', 82],['2005-07-13', 64],['2005-07-14', 43],['2005-07-15', 30],['2005-07-16', 16],['2005-07-17', 13],['2005-07-18', 13],['2005-07-19', 28],['2005-07-20', 9],['2005-07-21', 5],['2005-07-22', 17],['2005-07-23', 20],['2005-07-24', 10],['2005-07-25', 45],['2005-07-26', 53],['2005-07-27', 228],['2005-07-28', 78],['2005-07-29', 127],['2005-07-30', 53],['2005-07-31', 45],['2005-08-01', 31],['2005-08-02', 27],['2005-08-03', 60],['2005-08-04', 62],['2005-08-05', 60],['2005-08-06', 24],['2005-08-07', 25],['2005-08-08', 23],['2005-08-09', 39],['2005-08-10', 162],['2005-08-11', 80],['2005-08-12', 45],['2005-08-13', 11],['2005-08-14', 16],['2005-08-15', 80],['2005-08-16', 43],['2005-08-17', 89],['2005-08-18', 53],['2005-08-19', 48],['2005-08-20', 20],['2005-08-21', 22],['2005-08-22', 26],['2005-08-23', 83],['2005-08-24', 54],['2005-08-25', 54],['2005-08-26', 63],['2005-08-27', 40],['2005-08-28', 34],['2005-08-29', 57],['2005-08-30', 43],['2005-08-31', 45],['2005-09-01', 62],['2005-09-02', 101],['2005-09-03', 32],['2005-09-04', 237],['2005-09-05', 69],['2005-09-06', 80],['2005-09-07', 266],['2005-09-08', 101],['2005-09-09', 334],['2005-09-10', 166],['2005-09-11', 34],['2005-09-12', 170],['2005-09-13', 118],['2005-09-14', 60],['2005-09-15', 78],['2005-09-16', 41],['2005-09-17', 70],['2005-09-18', 21],['2005-09-19', 29],['2005-09-20', 63],['2005-09-21', 87],['2005-09-22', 80],['2005-09-23', 120],['2005-09-24', 23],['2005-09-25', 30],['2005-09-26', 39],['2005-09-27', 54],['2005-09-28', 81],['2005-09-29', 72],['2005-09-30', 86],['2005-10-01', 23],['2005-10-02', 12],['2005-10-03', 44],['2005-10-04', 75],['2005-10-05', 50],['2005-10-06', 34],['2005-10-07', 33],['2005-10-08', 16],['2005-10-09', 27],['2005-10-10', 88],['2005-10-11', 66],['2005-10-12', 40],['2005-10-13', 59],['2005-10-14', 29],['2005-10-15', 33],['2005-10-16', 10],['2005-10-17', 44],['2005-10-18', 67],['2005-10-19', 53],['2005-10-20', 81],['2005-10-21', 68],['2005-10-22', 83],['2005-10-23', 30],['2005-10-24', 65],['2005-10-25', 28],['2005-10-26', 69],['2005-10-27', 41],['2005-10-28', 185],['2005-10-29', 156],['2005-10-30', 175],['2005-10-31', 211],['2005-11-01', 71],['2005-11-02', 165],['2005-11-03', 79],['2005-11-04', 82],['2005-11-05', 125],['2005-11-06', 33],['2005-11-07', 425],['2005-11-08', 102],['2005-11-09', 445],['2005-11-10', 113],['2005-11-11', 105],['2005-11-12', 58],['2005-11-13', 33],['2005-11-14', 142],['2005-11-15', 71],['2005-11-16', 57],['2005-11-17', 283],['2005-11-18', 106],['2005-11-19', 25],['2005-11-20', 55],['2005-11-21', 36],['2005-11-22', 58],['2005-11-23', 53],['2005-11-24', 54],['2005-11-25', 24],['2005-11-26', 28],['2005-11-27', 9],['2005-11-28', 71],['2005-11-29', 71],['2005-11-30', 104],['2005-12-01', 105],['2005-12-02', 30],['2005-12-03', 22],['2005-12-04', 21],['2005-12-05', 56],['2005-12-06', 44],['2005-12-07', 31],['2005-12-08', 17],['2005-12-09', 48],['2005-12-10', 11],['2005-12-11', 14],['2005-12-12', 67],['2005-12-13', 81],['2005-12-14', 76],['2005-12-15', 77],['2005-12-16', 33],['2005-12-17', 13],['2005-12-18', 21],['2005-12-19', 37],['2005-12-20', 36],['2005-12-21', 45],['2005-12-22', 45],['2005-12-23', 22],['2005-12-24', 21],['2005-12-25', 3],['2005-12-26', 9],['2005-12-27', 15],['2005-12-28', 22],['2005-12-29', 17],['2005-12-30', 12],['2005-12-31', 8],['2006-01-01', 4],['2006-01-02', 20],['2006-01-03', 100],['2006-01-04', 78],['2006-01-05', 96],['2006-01-06', 391],['2006-01-07', 60],['2006-01-08', 260],['2006-01-09', 244],['2006-01-10', 313],['2006-01-11', 299],['2006-01-12', 192],['2006-01-13', 139],['2006-01-14', 149],['2006-01-15', 61],['2006-01-16', 89],['2006-01-17', 153],['2006-01-18', 116],['2006-01-19', 166],['2006-01-20', 48],['2006-01-21', 16],['2006-01-22', 14],['2006-01-23', 83],['2006-01-24', 76],['2006-01-25', 34],['2006-01-26', 32],['2006-01-27', 52],['2006-01-28', 22],['2006-01-29', 16],['2006-01-30', 59],['2006-01-31', 54],['2006-02-01', 275],['2006-02-02', 60],['2006-02-03', 163],['2006-02-04', 49],['2006-02-05', 62],['2006-02-06', 22],['2006-02-07', 131],['2006-02-08', 94],['2006-02-09', 56],['2006-02-10', 69],['2006-02-11', 27],['2006-02-12', 64],['2006-02-13', 38],['2006-02-14', 100],['2006-02-15', 52],['2006-02-16', 67],['2006-02-17', 69],['2006-02-18', 21],['2006-02-19', 31],['2006-02-20', 37],['2006-02-21', 63],['2006-02-22', 53],['2006-02-23', 42],['2006-02-24', 69],['2006-02-25', 18],['2006-02-26', 22],['2006-02-27', 125],['2006-02-28', 72],['2006-03-01', 90],['2006-03-02', 43],['2006-03-03', 73],['2006-03-04', 26],['2006-03-05', 48],['2006-03-06', 34],['2006-03-07', 56],['2006-03-08', 93],['2006-03-09', 42],['2006-03-10', 55],['2006-03-11', 49],['2006-03-12', 39],['2006-03-13', 33],['2006-03-14', 103],['2006-03-15', 50],['2006-03-16', 34],['2006-03-17', 66],['2006-03-18', 35],['2006-03-19', 29],['2006-03-20', 185],['2006-03-21', 338],['2006-03-22', 222],['2006-03-23', 244],['2006-03-24', 188],['2006-03-25', 274],['2006-03-26', 227],['2006-03-27', 286],['2006-03-28', 147],['2006-03-29', 149],['2006-03-30', 65],['2006-03-31', 187],['2006-04-01', 79],['2006-04-02', 151],['2006-04-03', 39],['2006-04-04', 45],['2006-04-05', 29],['2006-04-06', 34],['2006-04-07', 88],['2006-04-08', 4],['2006-04-09', 22],['2006-04-10', 45],['2006-04-11', 278],['2006-04-12', 42],['2006-04-13', 70],['2006-04-14', 21],['2006-04-15', 47],['2006-04-16', 8],['2006-04-17', 18],['2006-04-18', 109],['2006-04-19', 101],['2006-04-20', 63],['2006-04-21', 28],['2006-04-22', 49],['2006-04-23', 16],['2006-04-24', 34],['2006-04-25', 83],['2006-04-26', 51],['2006-04-27', 63],['2006-04-28', 106],['2006-04-29', 34],['2006-04-30', 23],['2006-05-01', 94],['2006-05-02', 47],['2006-05-03', 27],['2006-05-04', 61],['2006-05-05', 30],['2006-05-06', 20],['2006-05-07', 15],['2006-05-08', 33],['2006-05-09', 35],['2006-05-10', 37],['2006-05-11', 17],['2006-05-12', 53],['2006-05-13', 28],['2006-05-14', 23],['2006-05-15', 134],['2006-05-16', 43],['2006-05-17', 52],['2006-05-18', 48],['2006-05-19', 94],['2006-05-20', 31],['2006-05-21', 60],['2006-05-22', 65],['2006-05-23', 99],['2006-05-24', 65],['2006-05-25', 46],['2006-05-26', 56],['2006-05-27', 38],['2006-05-28', 13],['2006-05-29', 27],['2006-05-30', 83],['2006-05-31', 68],['2006-06-01', 42],['2006-06-02', 24],['2006-06-03', 14],['2006-06-04', 47],['2006-06-05', 40],['2006-06-06', 47],['2006-06-07', 31],['2006-06-08', 37],['2006-06-09', 115],['2006-06-10', 42],['2006-06-11', 28],['2006-06-12', 75],['2006-06-13', 78],['2006-06-14', 33],['2006-06-15', 38],['2006-06-16', 28],['2006-06-17', 20],['2006-06-18', 120],['2006-06-19', 90],['2006-06-20', 129],['2006-06-21', 100],['2006-06-22', 96],['2006-06-23', 300],['2006-06-24', 95],['2006-06-25', 271],['2006-06-26', 469],['2006-06-27', 259],['2006-06-28', 126],['2006-06-29', 188],['2006-06-30', 181],['2006-07-01', 142],['2006-07-02', 83],['2006-07-03', 200],['2006-07-04', 73],['2006-07-05', 49],['2006-07-06', 62],['2006-07-07', 22],['2006-07-08', 31],['2006-07-09', 28],['2006-07-10', 183],['2006-07-11', 41],['2006-07-12', 72],['2006-07-13', 76],['2006-07-14', 97],['2006-07-15', 38],['2006-07-16', 6],['2006-07-17', 26],['2006-07-18', 36],['2006-07-19', 35],['2006-07-20', 11],['2006-07-21', 30],['2006-07-22', 11],['2006-07-23', 23],['2006-07-24', 30],['2006-07-25', 66],['2006-07-26', 39],['2006-07-27', 25],['2006-07-28', 49],['2006-07-29', 44],['2006-07-30', 95],['2006-07-31', 43],['2006-08-01', 35],['2006-08-02', 38],['2006-08-03', 51],['2006-08-04', 42],['2006-08-05', 78],['2006-08-06', 30],['2006-08-07', 48],['2006-08-08', 146],['2006-08-09', 46],['2006-08-10', 44],['2006-08-11', 42],['2006-08-12', 27],['2006-08-13', 25],['2006-08-14', 52],['2006-08-15', 129],['2006-08-16', 56],['2006-08-17', 21],['2006-08-18', 43],['2006-08-19', 20],['2006-08-20', 9],['2006-08-21', 65],['2006-08-22', 83],['2006-08-23', 93],['2006-08-24', 115],['2006-08-25', 61],['2006-08-26', 28],['2006-08-27', 78],['2006-08-28', 71],['2006-08-29', 57],['2006-08-30', 108],['2006-08-31', 64],['2006-09-01', 80],['2006-09-02', 24],['2006-09-03', 28],['2006-09-04', 26],['2006-09-05', 27],['2006-09-06', 55],['2006-09-07', 63],['2006-09-08', 44],['2006-09-09', 16],['2006-09-10', 14],['2006-09-11', 39],['2006-09-12', 45],['2006-09-13', 79],['2006-09-14', 68],['2006-09-15', 27],['2006-09-16', 50],['2006-09-17', 25],['2006-09-18', 36],['2006-09-19', 110],['2006-09-20', 132],['2006-09-21', 76],['2006-09-22', 62],['2006-09-23', 77],['2006-09-24', 71],['2006-09-25', 96],['2006-09-26', 516],['2006-09-27', 338],['2006-09-28', 243],['2006-09-29', 250],['2006-09-30', 62],['2006-10-01', 182],['2006-10-02', 162],['2006-10-03', 287],['2006-10-04', 252],['2006-10-05', 67],['2006-10-06', 115],['2006-10-07', 37],['2006-10-08', 53],['2006-10-09', 78],['2006-10-10', 161],['2006-10-11', 169],['2006-10-12', 68],['2006-10-13', 57],['2006-10-14', 47],['2006-10-15', 21],['2006-10-16', 53],['2006-10-17', 130],['2006-10-18', 71],['2006-10-19', 57],['2006-10-20', 156],['2006-10-21', 59],['2006-10-22', 24],['2006-10-23', 36],['2006-10-24', 82],['2006-10-25', 29],['2006-10-26', 53],['2006-10-27', 43],['2006-10-28', 67],['2006-10-29', 22],['2006-10-30', 63],['2006-10-31', 85],['2006-11-01', 62],['2006-11-02', 57],['2006-11-03', 87],['2006-11-04', 18],['2006-11-05', 22],['2006-11-06', 65],['2006-11-07', 41],['2006-11-08', 95],['2006-11-09', 88],['2006-11-10', 63],['2006-11-11', 57],['2006-11-12', 10],['2006-11-13', 37],['2006-11-14', 69],['2006-11-15', 95],['2006-11-16', 78],['2006-11-17', 84],['2006-11-18', 19],['2006-11-19', 39],['2006-11-20', 90],['2006-11-21', 136],['2006-11-22', 68],['2006-11-23', 49],['2006-11-24', 61],['2006-11-25', 44],['2006-11-26', 9],['2006-11-27', 77],['2006-11-28', 43],['2006-11-29', 79],['2006-11-30', 81],['2006-12-01', 83],['2006-12-02', 56],['2006-12-03', 59],['2006-12-04', 126],['2006-12-05', 140],['2006-12-06', 62],['2006-12-07', 676],['2006-12-08', 473],['2006-12-09', 41],['2006-12-10', 159],['2006-12-11', 60],['2006-12-12', 117],['2006-12-13', 175],['2006-12-14', 40],['2006-12-15', 73],['2006-12-16', 26],['2006-12-17', 45],['2006-12-18', 62],['2006-12-19', 85],['2006-12-20', 70],['2006-12-21', 32],['2006-12-22', 78],['2006-12-23', 11],['2006-12-24', 10],['2006-12-25', 11],['2006-12-26', 9],['2006-12-27', 11],['2006-12-28', 45],['2006-12-29', 19],['2006-12-30', 59],['2006-12-31', 11],['2007-01-01', 9],['2007-01-02', 58],['2007-01-03', 25],['2007-01-04', 45],['2007-01-05', 23],['2007-01-06', 96],['2007-01-07', 20],['2007-01-08', 67],['2007-01-09', 78],['2007-01-10', 20],['2007-01-11', 85],['2007-01-12', 22],['2007-01-13', 34],['2007-01-14', 14],['2007-01-15', 24],['2007-01-16', 41],['2007-01-17', 30],['2007-01-18', 52],['2007-01-19', 32],['2007-01-20', 47],['2007-01-21', 18],['2007-01-22', 57],['2007-01-23', 73],['2007-01-24', 68],['2007-01-25', 40],['2007-01-26', 146],['2007-01-27', 57],['2007-01-28', 30],['2007-01-29', 76],['2007-01-30', 99],['2007-01-31', 67],['2007-02-01', 46],['2007-02-02', 163],['2007-02-03', 53],['2007-02-04', 24],['2007-02-05', 114],['2007-02-06', 149],['2007-02-07', 111],['2007-02-08', 126],['2007-02-09', 140],['2007-02-10', 341],['2007-02-11', 37],['2007-02-12', 287],['2007-02-13', 238],['2007-02-14', 171],['2007-02-15', 64],['2007-02-16', 175],['2007-02-17', 117],['2007-02-18', 42],['2007-02-19', 56],['2007-02-20', 152],['2007-02-21', 76],['2007-02-22', 68],['2007-02-23', 48],['2007-02-24', 28],['2007-02-25', 23],['2007-02-26', 86],['2007-02-27', 53],['2007-02-28', 53],['2007-03-01', 113],['2007-03-02', 53],['2007-03-03', 46],['2007-03-04', 36],['2007-03-05', 107],['2007-03-06', 129],['2007-03-07', 133],['2007-03-08', 89],['2007-03-09', 84],['2007-03-10', 82],['2007-03-11', 44],['2007-03-12', 89],['2007-03-13', 72],['2007-03-14', 82],['2007-03-15', 105],['2007-03-16', 130],['2007-03-17', 37],['2007-03-18', 32],['2007-03-19', 78],['2007-03-20', 99],['2007-03-21', 65],['2007-03-22', 88],['2007-03-23', 113],['2007-03-24', 24],['2007-03-25', 36],['2007-03-26', 91],['2007-03-27', 122],['2007-03-28', 70],['2007-03-29', 104],['2007-03-30', 46],['2007-03-31', 21],['2007-04-01', 15],['2007-04-02', 74],['2007-04-03', 33],['2007-04-04', 41],['2007-04-05', 50],['2007-04-06', 27],['2007-04-07', 15],['2007-04-08', 10],['2007-04-09', 43],['2007-04-10', 55],['2007-04-11', 56],['2007-04-12', 103],['2007-04-13', 34],['2007-04-14', 44],['2007-04-15', 10],['2007-04-16', 38],['2007-04-17', 80],['2007-04-18', 34],['2007-04-19', 39],['2007-04-20', 54],['2007-04-21', 67],['2007-04-22', 28],['2007-04-23', 107],['2007-04-24', 80],['2007-04-25', 77],['2007-04-26', 130],['2007-04-27', 176],['2007-04-28', 53],['2007-04-29', 44],['2007-04-30', 83],['2007-05-01', 154],['2007-05-02', 302],['2007-05-03', 99],['2007-05-04', 61],['2007-05-05', 90],['2007-05-06', 221],['2007-05-07', 102],['2007-05-08', 646],['2007-05-09', 345],['2007-05-10', 177],['2007-05-11', 221],['2007-05-12', 56],['2007-05-13', 22],['2007-05-14', 144],['2007-05-15', 80],['2007-05-16', 72],['2007-05-17', 101],['2007-05-18', 46],['2007-05-19', 50],['2007-05-20', 16],['2007-05-21', 127],['2007-05-22', 54],['2007-05-23', 161],['2007-05-24', 88],['2007-05-25', 123],['2007-05-26', 53],['2007-05-27', 46],['2007-05-28', 64],['2007-05-29', 86],['2007-05-30', 88],['2007-05-31', 91],['2007-06-01', 103],['2007-06-02', 17],['2007-06-03', 27],['2007-06-04', 101],['2007-06-05', 84],['2007-06-06', 58],['2007-06-07', 64],['2007-06-08', 90],['2007-06-09', 50],['2007-06-10', 13],['2007-06-11', 99],['2007-06-12', 64],['2007-06-13', 113],['2007-06-14', 57],['2007-06-15', 54],['2007-06-16', 108],['2007-06-17', 46],['2007-06-18', 88],['2007-06-19', 77],['2007-06-20', 54],['2007-06-21', 45],['2007-06-22', 52],['2007-06-23', 23],['2007-06-24', 62],['2007-06-25', 52],['2007-06-26', 43],['2007-06-27', 82],['2007-06-28', 59],['2007-06-29', 71],['2007-06-30', 15],['2007-07-01', 53],['2007-07-02', 50],['2007-07-03', 99],['2007-07-04', 28],['2007-07-05', 42],['2007-07-06', 76],['2007-07-07', 25],['2007-07-08', 83],['2007-07-09', 213],['2007-07-10', 168],['2007-07-11', 147],['2007-07-12', 173],['2007-07-13', 79],['2007-07-14', 41],['2007-07-15', 91],['2007-07-16', 376],['2007-07-17', 432],['2007-07-18', 267],['2007-07-19', 355],['2007-07-20', 256],['2007-07-21', 196],['2007-07-22', 119],['2007-07-23', 77],['2007-07-24', 122],['2007-07-25', 119],['2007-07-26', 192],['2007-07-27', 112],['2007-07-28', 31],['2007-07-29', 52],['2007-07-30', 109],['2007-07-31', 210],['2007-08-01', 104],['2007-08-02', 156],['2007-08-03', 82],['2007-08-04', 28],['2007-08-05', 35],['2007-08-06', 68],['2007-08-07', 64],['2007-08-08', 66],['2007-08-09', 137],['2007-08-10', 166],['2007-08-11', 49],['2007-08-12', 56],['2007-08-13', 39],['2007-08-14', 64],['2007-08-15', 77],['2007-08-16', 99],['2007-08-17', 53],['2007-08-18', 38],['2007-08-19', 27],['2007-08-20', 132],['2007-08-21', 65],['2007-08-22', 151],['2007-08-23', 95],['2007-08-24', 80],['2007-08-25', 87],['2007-08-26', 20],['2007-08-27', 48],['2007-08-28', 101],['2007-08-29', 96],['2007-08-30', 59],['2007-08-31', 87],['2007-09-01', 21],['2007-09-02', 16],['2007-09-03', 46],['2007-09-04', 31],['2007-09-05', 61],['2007-09-06', 53],['2007-09-07', 44],['2007-09-08', 13],['2007-09-09', 64],['2007-09-10', 66],['2007-09-11', 100],['2007-09-12', 119],['2007-09-13', 63],['2007-09-14', 81],['2007-09-15', 49],['2007-09-16', 31],['2007-09-17', 122],['2007-09-18', 65],['2007-09-19', 113],['2007-09-20', 113],['2007-09-21', 78],['2007-09-22', 21],['2007-09-23', 46],['2007-09-24', 44],['2007-09-25', 89],['2007-09-26', 129],['2007-09-27', 99],['2007-09-28', 71],['2007-09-29', 44],['2007-09-30', 36],['2007-10-01', 89],['2007-10-02', 151],['2007-10-03', 84],['2007-10-04', 93],['2007-10-05', 57],['2007-10-06', 37],['2007-10-07', 25],['2007-10-08', 74],['2007-10-09', 94],['2007-10-10', 135],['2007-10-11', 424],['2007-10-12', 218],['2007-10-13', 142],['2007-10-14', 106],['2007-10-15', 332],['2007-10-16', 591],['2007-10-17', 551],['2007-10-18', 337],['2007-10-19', 363],['2007-10-20', 180],['2007-10-21', 43],['2007-10-22', 198],['2007-10-23', 160],['2007-10-24', 154],['2007-10-25', 120],['2007-10-26', 155],['2007-10-27', 70],['2007-10-28', 36],['2007-10-29', 162],['2007-10-30', 134],['2007-10-31', 103],['2007-11-01', 96],['2007-11-02', 66],['2007-11-03', 37],['2007-11-04', 49],['2007-11-05', 148],['2007-11-06', 114],['2007-11-07', 130],['2007-11-08', 79],['2007-11-09', 89],['2007-11-10', 62],['2007-11-11', 65],['2007-11-12', 72],['2007-11-13', 77],['2007-11-14', 91],['2007-11-15', 245],['2007-11-16', 87],['2007-11-17', 42],['2007-11-18', 19],['2007-11-19', 123],['2007-11-20', 217],['2007-11-21', 145],['2007-11-22', 83],['2007-11-23', 68],['2007-11-24', 29],['2007-11-25', 36],['2007-11-26', 119],['2007-11-27', 134],['2007-11-28', 69],['2007-11-29', 175],['2007-11-30', 91],['2007-12-01', 54],['2007-12-02', 49],['2007-12-03', 72],['2007-12-04', 75],['2007-12-05', 182],['2007-12-06', 117],['2007-12-07', 96],['2007-12-08', 60],['2007-12-09', 35],['2007-12-10', 100],['2007-12-11', 154],['2007-12-12', 154],['2007-12-13', 131],['2007-12-14', 128],['2007-12-15', 40],['2007-12-16', 53],['2007-12-17', 134],['2007-12-18', 203],['2007-12-19', 81],['2007-12-20', 146],['2007-12-21', 157],['2007-12-22', 50],['2007-12-23', 40],['2007-12-24', 53],['2007-12-25', 29],['2007-12-26', 36],['2007-12-27', 15],['2007-12-28', 28],['2007-12-29', 11],['2007-12-30', 17],['2007-12-31', 94],['2008-01-01', 30],['2008-01-02', 49],['2008-01-03', 67],['2008-01-04', 42],['2008-01-05', 32],['2008-01-06', 46],['2008-01-07', 87],['2008-01-08', 144],['2008-01-09', 67],['2008-01-10', 133],['2008-01-11', 133],['2008-01-12', 35],['2008-01-13', 74],['2008-01-14', 98],['2008-01-15', 126],['2008-01-16', 73],['2008-01-17', 95],['2008-01-18', 110],['2008-01-19', 35],['2008-01-20', 23],['2008-01-21', 139],['2008-01-22', 124],['2008-01-23', 120],['2008-01-24', 178],['2008-01-25', 333],['2008-01-26', 157],['2008-01-27', 112],['2008-01-28', 161],['2008-01-29', 223],['2008-01-30', 1019],['2008-01-31', 204],['2008-02-01', 276],['2008-02-02', 182],['2008-02-03', 160],['2008-02-04', 145],['2008-02-05', 472],['2008-02-06', 411],['2008-02-07', 351],['2008-02-08', 421],['2008-02-09', 118],['2008-02-10', 86],['2008-02-11', 101],['2008-02-12', 73],['2008-02-13', 133],['2008-02-14', 140],['2008-02-15', 145],['2008-02-16', 53],['2008-02-17', 63],['2008-02-18', 88],['2008-02-19', 161],['2008-02-20', 131],['2008-02-21', 89],['2008-02-22', 117],['2008-02-23', 66],['2008-02-24', 113],['2008-02-25', 100],['2008-02-26', 100],['2008-02-27', 58],['2008-02-28', 105],['2008-02-29', 142],['2008-03-01', 60],['2008-03-02', 60],['2008-03-03', 123],['2008-03-04', 230],['2008-03-05', 151],['2008-03-06', 149],['2008-03-07', 83],['2008-03-08', 39],['2008-03-09', 57],['2008-03-10', 96],['2008-03-11', 76],['2008-03-12', 83],['2008-03-13', 85],['2008-03-14', 78],['2008-03-15', 21],['2008-03-16', 40],['2008-03-17', 63],['2008-03-18', 134],['2008-03-19', 167],['2008-03-20', 122],['2008-03-21', 82],['2008-03-22', 61],['2008-03-23', 191],['2008-03-24', 104],['2008-03-25', 126],['2008-03-26', 158],['2008-03-27', 151],['2008-03-28', 177],['2008-03-29', 81],['2008-03-30', 29],['2008-03-31', 64],['2008-04-01', 120],['2008-04-02', 172],['2008-04-03', 98],['2008-04-04', 106],['2008-04-05', 41],['2008-04-06', 38],['2008-04-07', 90],['2008-04-08', 92],['2008-04-09', 114],['2008-04-10', 232],['2008-04-11', 87],['2008-04-12', 40],['2008-04-13', 68],['2008-04-14', 195],['2008-04-15', 121],['2008-04-16', 165],['2008-04-17', 285],['2008-04-18', 278],['2008-04-19', 122],['2008-04-20', 59],['2008-04-21', 99],['2008-04-22', 405],['2008-04-23', 189],['2008-04-24', 236],['2008-04-25', 180],['2008-04-26', 194],['2008-04-27', 103],['2008-04-28', 454],['2008-04-29', 570],['2008-04-30', 436],['2008-05-01', 161],['2008-05-02', 125],['2008-05-03', 78],['2008-05-04', 37],['2008-05-05', 120],['2008-05-06', 81],['2008-05-07', 156],['2008-05-08', 85],['2008-05-09', 85],['2008-05-10', 45],['2008-05-11', 44],['2008-05-12', 393],['2008-05-13', 121],['2008-05-14', 81],['2008-05-15', 207],['2008-05-16', 106],['2008-05-17', 65],['2008-05-18', 77],['2008-05-19', 177],['2008-05-20', 215],['2008-05-21', 187],['2008-05-22', 112],['2008-05-23', 146],['2008-05-24', 63],['2008-05-25', 24],['2008-05-26', 71],['2008-05-27', 118],['2008-05-28', 105],['2008-05-29', 128],['2008-05-30', 115],['2008-05-31', 51],['2008-06-01', 45],['2008-06-02', 91],['2008-06-03', 73],['2008-06-04', 92],['2008-06-05', 115],['2008-06-06', 155],['2008-06-07', 21],['2008-06-08', 34],['2008-06-09', 74],['2008-06-10', 224],['2008-06-11', 112],['2008-06-12', 134],['2008-06-13', 91],['2008-06-14', 51],['2008-06-15', 51],['2008-06-16', 117],['2008-06-17', 105],['2008-06-18', 110],['2008-06-19', 82],['2008-06-20', 140],['2008-06-21', 55],['2008-06-22', 74],['2008-06-23', 123],['2008-06-24', 159],['2008-06-25', 170],['2008-06-26', 127],['2008-06-27', 142],['2008-06-28', 109],['2008-06-29', 42],['2008-06-30', 115],['2008-07-01', 128],['2008-07-02', 123],['2008-07-03', 185],['2008-07-04', 149],['2008-07-05', 61],['2008-07-06', 61],['2008-07-07', 113],['2008-07-08', 140],['2008-07-09', 216],['2008-07-10', 174],['2008-07-11', 175],['2008-07-12', 135],['2008-07-13', 51],['2008-07-14', 249],['2008-07-15', 360],['2008-07-16', 266],['2008-07-17', 212],['2008-07-18', 173],['2008-07-19', 73],['2008-07-20', 54],['2008-07-21', 169],['2008-07-22', 259],['2008-07-23', 191],['2008-07-24', 502],['2008-07-25', 405],['2008-07-26', 241],['2008-07-27', 106],['2008-07-28', 146],['2008-07-29', 185],['2008-07-30', 230],['2008-07-31', 133],['2008-08-01', 134],['2008-08-02', 80],['2008-08-03', 61],['2008-08-04', 129],['2008-08-05', 160],['2008-08-06', 112],['2008-08-07', 78],['2008-08-08', 112],['2008-08-09', 47],['2008-08-10', 48],['2008-08-11', 134],['2008-08-12', 99],['2008-08-13', 151],['2008-08-14', 147],['2008-08-15', 152],['2008-08-16', 61],['2008-08-17', 47],['2008-08-18', 141],['2008-08-19', 165],['2008-08-20', 216],['2008-08-21', 135],['2008-08-22', 108],['2008-08-23', 60],['2008-08-24', 51],['2008-08-25', 108],['2008-08-26', 142],['2008-08-27', 132],['2008-08-28', 122],['2008-08-29', 91],['2008-08-30', 63],['2008-08-31', 37],['2008-09-01', 146],['2008-09-02', 141],['2008-09-03', 211],['2008-09-04', 239],['2008-09-05', 153],['2008-09-06', 91],['2008-09-07', 64],['2008-09-08', 136],['2008-09-09', 172],['2008-09-10', 93],['2008-09-11', 115],['2008-09-12', 136],['2008-09-13', 72],['2008-09-14', 66],['2008-09-15', 43],['2008-09-16', 70],['2008-09-17', 110],['2008-09-18', 54],['2008-09-19', 56],['2008-09-20', 54],['2008-09-21', 63],['2008-09-22', 133],['2008-09-23', 160],['2008-09-24', 113],['2008-09-25', 91],['2008-09-26', 103],['2008-09-27', 54],['2008-09-28', 24],['2008-09-29', 80],['2008-09-30', 89],['2008-10-01', 96],['2008-10-02', 70],['2008-10-03', 114],['2008-10-04', 68],['2008-10-05', 62],['2008-10-06', 87],['2008-10-07', 124],['2008-10-08', 186],['2008-10-09', 187],['2008-10-10', 275],['2008-10-11', 68],['2008-10-12', 75],['2008-10-13', 312],['2008-10-14', 152],['2008-10-15', 154],['2008-10-16', 417],['2008-10-17', 312],['2008-10-18', 61],['2008-10-19', 172],['2008-10-20', 153],['2008-10-21', 214],['2008-10-22', 133],['2008-10-23', 215],['2008-10-24', 104],['2008-10-25', 45],['2008-10-26', 54],['2008-10-27', 138],['2008-10-28', 150],['2008-10-29', 231],['2008-10-30', 278],['2008-10-31', 196],['2008-11-01', 42],['2008-11-02', 56],['2008-11-03', 101],['2008-11-04', 148],['2008-11-05', 108],['2008-11-06', 162],['2008-11-07', 105],['2008-11-08', 87],['2008-11-09', 43],['2008-11-10', 91],['2008-11-11', 137],['2008-11-12', 250],['2008-11-13', 134],['2008-11-14', 218],['2008-11-15', 64],['2008-11-16', 53],['2008-11-17', 131],['2008-11-18', 227],['2008-11-19', 114],['2008-11-20', 236],['2008-11-21', 136],['2008-11-22', 147],['2008-11-23', 53],['2008-11-24', 158],['2008-11-25', 201],['2008-11-26', 257],['2008-11-27', 101],['2008-11-28', 145],['2008-11-29', 54],['2008-11-30', 84],['2008-12-01', 182],['2008-12-02', 179],['2008-12-03', 157],['2008-12-04', 149],['2008-12-05', 136],['2008-12-06', 76],['2008-12-07', 37],['2008-12-08', 144],['2008-12-09', 181],['2008-12-10', 158],['2008-12-11', 132],['2008-12-12', 142],['2008-12-13', 87],['2008-12-14', 62],['2008-12-15', 85],['2008-12-16', 192],['2008-12-17', 182],['2008-12-18', 237],['2008-12-19', 209],['2008-12-20', 73],['2008-12-21', 96],['2008-12-22', 80],['2008-12-23', 159],['2008-12-24', 54],['2008-12-25', 161],['2008-12-26', 119],['2008-12-27', 36],['2008-12-28', 55],['2008-12-29', 148],['2008-12-30', 129],['2008-12-31', 94],['2009-01-01', 69],['2009-01-02', 162],['2009-01-03', 117],['2009-01-04', 107],['2009-01-05', 206],['2009-01-06', 607],['2009-01-07', 271],['2009-01-08', 384],['2009-01-09', 252],['2009-01-10', 78],['2009-01-11', 123],['2009-01-12', 110],['2009-01-13', 137],['2009-01-14', 189],['2009-01-15', 228],['2009-01-16', 117],['2009-01-17', 73],['2009-01-18', 81],['2009-01-19', 161],['2009-01-20', 163],['2009-01-21', 137],['2009-01-22', 196],['2009-01-23', 146],['2009-01-24', 37],['2009-01-25', 77],['2009-01-26', 134],['2009-01-27', 169],['2009-01-28', 231],['2009-01-29', 205],['2009-01-30', 203],['2009-01-31', 112],['2009-02-01', 64],['2009-02-02', 96],['2009-02-03', 101],['2009-02-04', 201],['2009-02-05', 203],['2009-02-06', 157],['2009-02-07', 99],['2009-02-08', 85],['2009-02-09', 203],['2009-02-10', 131],['2009-02-11', 210],['2009-02-12', 243],['2009-02-13', 190],['2009-02-14', 104],['2009-02-15', 56],['2009-02-16', 95],['2009-02-17', 142],['2009-02-18', 197],['2009-02-19', 184],['2009-02-20', 150],['2009-02-21', 104],['2009-02-22', 100],['2009-02-23', 118],['2009-02-24', 133],['2009-02-25', 200],['2009-02-26', 150],['2009-02-27', 185],['2009-02-28', 101],['2009-03-01', 39],['2009-03-02', 138],['2009-03-03', 159],['2009-03-04', 221],['2009-03-05', 209],['2009-03-06', 162],['2009-03-07', 87],['2009-03-08', 54],['2009-03-09', 105],['2009-03-10', 173],['2009-03-11', 205],['2009-03-12', 155],['2009-03-13', 241],['2009-03-14', 71],['2009-03-15', 51],['2009-03-16', 155],['2009-03-17', 296],['2009-03-18', 128],['2009-03-19', 212],['2009-03-20', 216],['2009-03-21', 59],['2009-03-22', 63],['2009-03-23', 168],['2009-03-24', 321],['2009-03-25', 209],['2009-03-26', 266],['2009-03-27', 300],['2009-03-28', 129],['2009-03-29', 115],['2009-03-30', 201],['2009-03-31', 300],['2009-04-01', 442],['2009-04-02', 168],['2009-04-03', 405],['2009-04-04', 54],['2009-04-05', 88],['2009-04-06', 160],['2009-04-07', 279],['2009-04-08', 264],['2009-04-09', 177],['2009-04-10', 74],['2009-04-11', 41],['2009-04-12', 38],['2009-04-13', 136],['2009-04-14', 190],['2009-04-15', 210],['2009-04-16', 141],['2009-04-17', 160],['2009-04-18', 76],['2009-04-19', 102],['2009-04-20', 168],['2009-04-21', 180],['2009-04-22', 143],['2009-04-23', 177],['2009-04-24', 155],['2009-04-25', 47],['2009-04-26', 165],['2009-04-27', 175],['2009-04-28', 207],['2009-04-29', 153],['2009-04-30', 192],['2009-05-01', 126],['2009-05-02', 88],['2009-05-03', 54],['2009-05-04', 96],['2009-05-05', 111],['2009-05-06', 131],['2009-05-07', 135],['2009-05-08', 157],['2009-05-09', 65],['2009-05-10', 49],['2009-05-11', 134],['2009-05-12', 189],['2009-05-13', 142],['2009-05-14', 158],['2009-05-15', 135],['2009-05-16', 59],['2009-05-17', 94],['2009-05-18', 126],['2009-05-19', 139],['2009-05-20', 103],['2009-05-21', 113],['2009-05-22', 162],['2009-05-23', 58],['2009-05-24', 51],['2009-05-25', 121],['2009-05-26', 182],['2009-05-27', 178],['2009-05-28', 175],['2009-05-29', 89],['2009-05-30', 59],['2009-05-31', 59],['2009-06-01', 98],['2009-06-02', 202],['2009-06-03', 152],['2009-06-04', 174],['2009-06-05', 130],['2009-06-06', 74],['2009-06-07', 92],['2009-06-08', 171],['2009-06-09', 151],['2009-06-10', 258],['2009-06-11', 315],['2009-06-12', 249],['2009-06-13', 158],['2009-06-14', 102],['2009-06-15', 180],['2009-06-16', 226],['2009-06-17', 384],['2009-06-18', 322],['2009-06-19', 189],['2009-06-20', 120],['2009-06-21', 52],['2009-06-22', 236],['2009-06-23', 189],['2009-06-24', 167],['2009-06-25', 101],['2009-06-26', 104],['2009-06-27', 33],['2009-06-28', 81],['2009-06-29', 111],['2009-06-30', 113],['2009-07-01', 176],['2009-07-02', 142],['2009-07-03', 124],['2009-07-04', 62],['2009-07-05', 89],['2009-07-06', 88],['2009-07-07', 138],['2009-07-08', 130],['2009-07-09', 130],['2009-07-10', 141],['2009-07-11', 71],['2009-07-12', 50],['2009-07-13', 135],['2009-07-14', 104],['2009-07-15', 156],['2009-07-16', 144],['2009-07-17', 113],['2009-07-18', 40],['2009-07-19', 75],['2009-07-20', 79],['2009-07-21', 126],['2009-07-22', 145],['2009-07-23', 121],['2009-07-24', 150],['2009-07-25', 48],['2009-07-26', 36],['2009-07-27', 171],['2009-07-28', 150],['2009-07-29', 135],['2009-07-30', 169],['2009-07-31', 168],['2009-08-01', 52],['2009-08-02', 58],['2009-08-03', 128],['2009-08-04', 120],['2009-08-05', 120],['2009-08-06', 135],['2009-08-07', 280],['2009-08-08', 86],['2009-08-09', 98],['2009-08-10', 148],['2009-08-11', 99],['2009-08-12', 129],['2009-08-13', 165],['2009-08-14', 191],['2009-08-15', 81],['2009-08-16', 57],['2009-08-17', 120],['2009-08-18', 240],['2009-08-19', 137],['2009-08-20', 216],['2009-08-21', 119],['2009-08-22', 46],['2009-08-23', 64],['2009-08-24', 132],['2009-08-25', 210],['2009-08-26', 142],['2009-08-27', 162],['2009-08-28', 176],['2009-08-29', 94],['2009-08-30', 39],['2009-08-31', 129],['2009-09-01', 162],['2009-09-02', 122],['2009-09-03', 169],['2009-09-04', 110],['2009-09-05', 85],['2009-09-06', 77],['2009-09-07', 75],['2009-09-08', 77],['2009-09-09', 145],['2009-09-10', 165],['2009-09-11', 227],['2009-09-12', 60],['2009-09-13', 42],['2009-09-14', 159],['2009-09-15', 213],['2009-09-16', 175],['2009-09-17', 174],['2009-09-18', 220],['2009-09-19', 137],['2009-09-20', 64],['2009-09-21', 167],['2009-09-22', 342],['2009-09-23', 405],['2009-09-24', 288],['2009-09-25', 124],['2009-09-26', 50],['2009-09-27', 55],['2009-09-28', 98],['2009-09-29', 81],['2009-09-30', 79],['2009-10-01', 106],['2009-10-02', 170],['2009-10-03', 55],['2009-10-04', 53],['2009-10-05', 153],['2009-10-06', 240],['2009-10-07', 125],['2009-10-08', 156],['2009-10-09', 133],['2009-10-10', 93],['2009-10-11', 38],['2009-10-12', 151],['2009-10-13', 183],['2009-10-14', 189],['2009-10-15', 173],['2009-10-16', 153],['2009-10-17', 66],['2009-10-18', 50],['2009-10-19', 110],['2009-10-20', 92],['2009-10-21', 91],['2009-10-22', 149],['2009-10-23', 109],['2009-10-24', 63],['2009-10-25', 44],['2009-10-26', 125],['2009-10-27', 186],['2009-10-28', 160],['2009-10-29', 170],['2009-10-30', 132],['2009-10-31', 22],['2009-11-01', 29],['2009-11-02', 144],['2009-11-03', 200],['2009-11-04', 204],['2009-11-05', 152],['2009-11-06', 153],['2009-11-07', 85],['2009-11-08', 72],['2009-11-09', 114],['2009-11-10', 154],['2009-11-11', 188],['2009-11-12', 157],['2009-11-13', 165],['2009-11-14', 90],['2009-11-15', 34],['2009-11-16', 190],['2009-11-17', 226],['2009-11-18', 151],['2009-11-19', 174],['2009-11-20', 176],['2009-11-21', 110],['2009-11-22', 101],['2009-11-23', 197],['2009-11-24', 193],['2009-11-25', 163],['2009-11-26', 99],['2009-11-27', 119],['2009-11-28', 45],['2009-11-29', 84],['2009-11-30', 188],['2009-12-01', 147],['2009-12-02', 144],['2009-12-03', 312],['2009-12-04', 233],['2009-12-05', 67],['2009-12-06', 101],['2009-12-07', 212],['2009-12-08', 153],['2009-12-09', 275],['2009-12-10', 196],['2009-12-11', 284],['2009-12-12', 156],['2009-12-13', 79],['2009-12-14', 221],['2009-12-15', 396],['2009-12-16', 434],['2009-12-17', 127],['2009-12-18', 285],['2009-12-19', 50],['2009-12-20', 48],['2009-12-21', 116],['2009-12-22', 103],['2009-12-23', 168],['2009-12-24', 88],['2009-12-25', 40],['2009-12-26', 64],['2009-12-27', 43],['2009-12-28', 92],['2009-12-29', 43],['2009-12-30', 103],['2009-12-31', 58],['2010-01-01', 24],['2010-01-02', 53],['2010-01-03', 15],['2010-01-04', 142],['2010-01-05', 187],['2010-01-06', 148],['2010-01-07', 162],['2010-01-08', 226],['2010-01-09', 45],['2010-01-10', 84],['2010-01-11', 120],['2010-01-12', 145],['2010-01-13', 170],['2010-01-14', 164],['2010-01-15', 151],['2010-01-16', 95],['2010-01-17', 91],['2010-01-18', 214],['2010-01-19', 139],['2010-01-20', 170],['2010-01-21', 140],['2010-01-22', 147],['2010-01-23', 47],['2010-01-24', 34],['2010-01-25', 93],['2010-01-26', 158],['2010-01-27', 176],['2010-01-28', 114],['2010-01-29', 151],['2010-01-30', 86],['2010-01-31', 46],['2010-02-01', 125],['2010-02-02', 186],['2010-02-03', 146],['2010-02-04', 163],['2010-02-05', 157],['2010-02-06', 58],['2010-02-07', 49],['2010-02-08', 162],['2010-02-09', 147],['2010-02-10', 163],['2010-02-11', 151],['2010-02-12', 160],['2010-02-13', 33],['2010-02-14', 50],['2010-02-15', 183],['2010-02-16', 149],['2010-02-17', 260],['2010-02-18', 187],['2010-02-19', 184],['2010-02-20', 87],['2010-02-21', 43],['2010-02-22', 158],['2010-02-23', 158],['2010-02-24', 182],['2010-02-25', 165],['2010-02-26', 226],['2010-02-27', 143],['2010-02-28', 64],['2010-03-01', 159],['2010-03-02', 137],['2010-03-03', 152],['2010-03-04', 169],['2010-03-05', 283],['2010-03-06', 105],['2010-03-07', 43],['2010-03-08', 148],['2010-03-09', 143],['2010-03-10', 128],['2010-03-11', 388],['2010-03-12', 93],['2010-03-13', 93],['2010-03-14', 54],['2010-03-15', 148],['2010-03-16', 141],['2010-03-17', 176],['2010-03-18', 180],['2010-03-19', 184],['2010-03-20', 75],['2010-03-21', 56],['2010-03-22', 172],['2010-03-23', 156],['2010-03-24', 164],['2010-03-25', 177],['2010-03-26', 135],['2010-03-27', 49],['2010-03-28', 52],['2010-03-29', 226],['2010-03-30', 153],['2010-03-31', 77],['2010-04-01', 148],['2010-04-02', 131],['2010-04-03', 56],['2010-04-04', 54],['2010-04-05', 73],['2010-04-06', 150],['2010-04-07', 131],['2010-04-08', 148],['2010-04-09', 133],['2010-04-10', 47],['2010-04-11', 56],['2010-04-12', 91],['2010-04-13', 138],['2010-04-14', 117],['2010-04-15', 232],['2010-04-16', 143],['2010-04-17', 34],['2010-04-18', 17],['2010-04-19', 108],['2010-04-20', 109],['2010-04-21', 114],['2010-04-22', 172],['2010-04-23', 152],['2010-04-24', 56],['2010-04-25', 44],['2010-04-26', 133],['2010-04-27', 191],['2010-04-28', 239],['2010-04-29', 95],['2010-04-30', 146],['2010-05-01', 160],['2010-05-02', 59],['2010-05-03', 137],['2010-05-04', 156],['2010-05-05', 264],['2010-05-06', 188],['2010-05-07', 208],['2010-05-08', 79],['2010-05-09', 56],['2010-05-10', 213],['2010-05-11', 245],['2010-05-12', 130],['2010-05-13', 206],['2010-05-14', 142],['2010-05-15', 103],['2010-05-16', 81],['2010-05-17', 222],['2010-05-18', 225],['2010-05-19', 289],['2010-05-20', 210],['2010-05-21', 187],['2010-05-22', 108],['2010-05-23', 91],['2010-05-24', 275],['2010-05-25', 134],['2010-05-26', 383],['2010-05-27', 210],['2010-05-28', 129],['2010-05-29', 77],['2010-05-30', 41],['2010-05-31', 114],['2010-06-01', 204],['2010-06-02', 173],['2010-06-03', 149],['2010-06-04', 140],['2010-06-05', 85],['2010-06-06', 55],['2010-06-07', 138],['2010-06-08', 143],['2010-06-09', 112],['2010-06-10', 145],['2010-06-11', 112],['2010-06-12', 108],['2010-06-13', 34],['2010-06-14', 94],['2010-06-15', 101],['2010-06-16', 175],['2010-06-17', 152],['2010-06-18', 91],['2010-06-19', 41],['2010-06-20', 47],['2010-06-21', 113],['2010-06-22', 142],['2010-06-23', 103],['2010-06-24', 148],['2010-06-25', 103],['2010-06-26', 38],['2010-06-27', 50],['2010-06-28', 89],['2010-06-29', 158],['2010-06-30', 114],['2010-07-01', 104],['2010-07-02', 100],['2010-07-03', 56],['2010-07-04', 62],['2010-07-05', 177],['2010-07-06', 92],['2010-07-07', 110],['2010-07-08', 129],['2010-07-09', 125],['2010-07-10', 76],['2010-07-11', 81],['2010-07-12', 109],['2010-07-13', 102],['2010-07-14', 133],['2010-07-15', 144],['2010-07-16', 108],['2010-07-17', 44],['2010-07-18', 35],['2010-07-19', 157],['2010-07-20', 138],['2010-07-21', 226],['2010-07-22', 181],['2010-07-23', 194],['2010-07-24', 61],['2010-07-25', 35],['2010-07-26', 162],['2010-07-27', 227],['2010-07-28', 172],['2010-07-29', 218],['2010-07-30', 113],['2010-07-31', 127],['2010-08-01', 60],['2010-08-02', 208],['2010-08-03', 198],['2010-08-04', 204],['2010-08-05', 263],['2010-08-06', 196],['2010-08-07', 99],['2010-08-08', 66],['2010-08-09', 152],['2010-08-10', 306],['2010-08-11', 337],['2010-08-12', 212],['2010-08-13', 106],['2010-08-14', 101],['2010-08-15', 52],['2010-08-16', 102],['2010-08-17', 122],['2010-08-18', 186],['2010-08-19', 148],['2010-08-20', 168],['2010-08-21', 60],['2010-08-22', 66],['2010-08-23', 190],['2010-08-24', 164],['2010-08-25', 123],['2010-08-26', 131],['2010-08-27', 140],['2010-08-28', 72],['2010-08-29', 54],['2010-08-30', 122],['2010-08-31', 103],['2010-09-01', 140],['2010-09-02', 120],['2010-09-03', 190],['2010-09-04', 76],['2010-09-05', 94],['2010-09-06', 98],['2010-09-07', 167],['2010-09-08', 188],['2010-09-09', 117],['2010-09-10', 219],['2010-09-11', 76],['2010-09-12', 72],['2010-09-13', 144],['2010-09-14', 146],['2010-09-15', 206],['2010-09-16', 148],['2010-09-17', 176],['2010-09-18', 55],['2010-09-19', 80],['2010-09-20', 149],['2010-09-21', 195],['2010-09-22', 173],['2010-09-23', 128],['2010-09-24', 181],['2010-09-25', 51],['2010-09-26', 67],['2010-09-27', 226],['2010-09-28', 166],['2010-09-29', 158],['2010-09-30', 187],['2010-10-01', 238],['2010-10-02', 102],['2010-10-03', 44],['2010-10-04', 168],['2010-10-05', 181],['2010-10-06', 185],['2010-10-07', 178],['2010-10-08', 344],['2010-10-09', 77],['2010-10-10', 62],['2010-10-11', 153],['2010-10-12', 157],['2010-10-13', 161],['2010-10-14', 224],['2010-10-15', 204],['2010-10-16', 93],['2010-10-17', 66],['2010-10-18', 142],['2010-10-19', 180],['2010-10-20', 174],['2010-10-21', 295],['2010-10-22', 138],['2010-10-23', 133],['2010-10-24', 67],['2010-10-25', 199],['2010-10-26', 336],['2010-10-27', 237],['2010-10-28', 472],['2010-10-29', 177],['2010-10-30', 87],['2010-10-31', 51],['2010-11-01', 142],['2010-11-02', 129],['2010-11-03', 102],['2010-11-04', 129],['2010-11-05', 81],['2010-11-06', 81],['2010-11-07', 50],['2010-11-08', 125],['2010-11-09', 142],['2010-11-10', 182],['2010-11-11', 183],['2010-11-12', 142],['2010-11-13', 104],['2010-11-14', 64],['2010-11-15', 186],['2010-11-16', 194],['2010-11-17', 185],['2010-11-18', 170],['2010-11-19', 172],['2010-11-20', 51],['2010-11-21', 107],['2010-11-22', 175],['2010-11-23', 159],['2010-11-24', 241],['2010-11-25', 96],['2010-11-26', 121],['2010-11-27', 34],['2010-11-28', 53],['2010-11-29', 215],['2010-11-30', 183],['2010-12-01', 202],['2010-12-02', 249],['2010-12-03', 172],['2010-12-04', 43],['2010-12-05', 51],['2010-12-06', 163],['2010-12-07', 196],['2010-12-08', 180],['2010-12-09', 183],['2010-12-10', 168],['2010-12-11', 65],['2010-12-12', 83],['2010-12-13', 180],['2010-12-14', 207],['2010-12-15', 131],['2010-12-16', 152],['2010-12-17', 124],['2010-12-18', 99],['2010-12-19', 23],['2010-12-20', 162],['2010-12-21', 181],['2010-12-22', 226],['2010-12-23', 99],['2010-12-24', 94],['2010-12-25', 39],['2010-12-26', 28],['2010-12-27', 99],['2010-12-28', 81],['2010-12-29', 60],['2010-12-30', 64],['2010-12-31', 71],['2011-01-01', 20],['2011-01-02', 36],['2011-01-03', 195],['2011-01-04', 148],['2011-01-05', 193],['2011-01-06', 210],['2011-01-07', 243],['2011-01-08', 56],['2011-01-09', 47],['2011-01-10', 231],['2011-01-11', 248],['2011-01-12', 257],['2011-01-13', 355],['2011-01-14', 379],['2011-01-15', 82],['2011-01-16', 71],['2011-01-17', 112],['2011-01-18', 186],['2011-01-19', 189],['2011-01-20', 144],['2011-01-21', 182],['2011-01-22', 60],['2011-01-23', 95],['2011-01-24', 190],['2011-01-25', 217],['2011-01-26', 128],['2011-01-27', 134],['2011-01-28', 181],['2011-01-29', 89],['2011-01-30', 83],['2011-01-31', 204],['2011-02-01', 184],['2011-02-02', 162],['2011-02-03', 148],['2011-02-04', 155],['2011-02-05', 35],['2011-02-06', 143],['2011-02-07', 177],['2011-02-08', 132],['2011-02-09', 142],['2011-02-10', 217],['2011-02-11', 211],['2011-02-12', 84],['2011-02-13', 61],['2011-02-14', 173],['2011-02-15', 164],['2011-02-16', 198],['2011-02-17', 177],['2011-02-18', 192],['2011-02-19', 81],['2011-02-20', 73],['2011-02-21', 155],['2011-02-22', 190],['2011-02-23', 274],['2011-02-24', 218],['2011-02-25', 260],['2011-02-26', 110],['2011-02-27', 57],['2011-02-28', 219],['2011-03-01', 206],['2011-03-02', 163],['2011-03-03', 266],['2011-03-04', 142],['2011-03-05', 82],['2011-03-06', 63],['2011-03-07', 211],['2011-03-08', 165],['2011-03-09', 187],['2011-03-10', 213],['2011-03-11', 201],['2011-03-12', 90],['2011-03-13', 130],['2011-03-14', 183],['2011-03-15', 184],['2011-03-16', 152],['2011-03-17', 155],['2011-03-18', 211],['2011-03-19', 61],['2011-03-20', 59],['2011-03-21', 176],['2011-03-22', 188],['2011-03-23', 439],['2011-03-24', 322],['2011-03-25', 199],['2011-03-26', 80],['2011-03-27', 67],['2011-03-28', 178],['2011-03-29', 151],['2011-03-30', 275],['2011-03-31', 119],['2011-04-01', 169],['2011-04-02', 71],['2011-04-03', 34],['2011-04-04', 184],['2011-04-05', 205],['2011-04-06', 161],['2011-04-07', 164],['2011-04-08', 141],['2011-04-09', 41],['2011-04-10', 47],['2011-04-11', 96],['2011-04-12', 178],['2011-04-13', 211],['2011-04-14', 100],['2011-04-15', 155],['2011-04-16', 50],['2011-04-17', 70],['2011-04-18', 227],['2011-04-19', 180],['2011-04-20', 163],['2011-04-21', 177],['2011-04-22', 142],['2011-04-23', 34],['2011-04-24', 58],['2011-04-25', 94],['2011-04-26', 162],['2011-04-27', 168],['2011-04-28', 192],['2011-04-29', 147],['2011-04-30', 64],['2011-05-01', 52],['2011-05-02', 182],['2011-05-03', 247],['2011-05-04', 163],['2011-05-05', 151],['2011-05-06', 157],['2011-05-07', 81],['2011-05-08', 87],['2011-05-09', 199],['2011-05-10', 345],['2011-05-11', 169],['2011-05-12', 213],['2011-05-13', 290],['2011-05-14', 68],['2011-05-15', 87],['2011-05-16', 122],['2011-05-17', 155],['2011-05-18', 310],['2011-05-19', 206],['2011-05-20', 287],['2011-05-21', 41],['2011-05-22', 66],['2011-05-23', 308],['2011-05-24', 263],['2011-05-25', 390],['2011-05-26', 224],['2011-05-27', 292],['2011-05-28', 78],['2011-05-29', 121],['2011-05-30', 86],['2011-05-31', 153],['2011-06-01', 268],['2011-06-02', 182],['2011-06-03', 142],['2011-06-04', 77],['2011-06-05', 43],['2011-06-06', 199],['2011-06-07', 191],['2011-06-08', 221],['2011-06-09', 189],['2011-06-10', 148],['2011-06-11', 49],['2011-06-12', 64],['2011-06-13', 172],['2011-06-14', 222],['2011-06-15', 136],['2011-06-16', 203],['2011-06-17', 164],['2011-06-18', 70],['2011-06-19', 73],['2011-06-20', 146],['2011-06-21', 210],['2011-06-22', 144],['2011-06-23', 159],['2011-06-24', 162],['2011-06-25', 90],['2011-06-26', 86],['2011-06-27', 224],['2011-06-28', 125],['2011-06-29', 143],['2011-06-30', 218],['2011-07-01', 193],['2011-07-02', 59],['2011-07-03', 123],['2011-07-04', 116],['2011-07-05', 227],['2011-07-06', 312],['2011-07-07', 220],['2011-07-08', 240],['2011-07-09', 110],['2011-07-10', 153],['2011-07-11', 151],['2011-07-12', 147],['2011-07-13', 206],['2011-07-14', 157],['2011-07-15', 154],['2011-07-16', 82],['2011-07-17', 96],['2011-07-18', 131],['2011-07-19', 215],['2011-07-20', 270],['2011-07-21', 202],['2011-07-22', 192],['2011-07-23', 151],['2011-07-24', 100],['2011-07-25', 141],['2011-07-26', 316],['2011-07-27', 232],['2011-07-28', 177],['2011-07-29', 94],['2011-07-30', 84],['2011-07-31', 70],['2011-08-01', 117],['2011-08-02', 159],['2011-08-03', 145],['2011-08-04', 193],['2011-08-05', 140],['2011-08-06', 62],['2011-08-07', 32],['2011-08-08', 231],['2011-08-09', 125],['2011-08-10', 142],['2011-08-11', 112],['2011-08-12', 181],['2011-08-13', 91],['2011-08-14', 76],['2011-08-15', 123],['2011-08-16', 127],['2011-08-17', 70],['2011-08-18', 174],['2011-08-19', 104],['2011-08-20', 53],['2011-08-21', 41],['2011-08-22', 135],['2011-08-23', 153],['2011-08-24', 191],['2011-08-25', 281],['2011-08-26', 259],['2011-08-27', 114],['2011-08-28', 34],['2011-08-29', 147],['2011-08-30', 189],['2011-08-31', 170],['2011-09-01', 143],['2011-09-02', 171],['2011-09-03', 54],['2011-09-04', 36],['2011-09-05', 85],['2011-09-06', 106],['2011-09-07', 113],['2011-09-08', 104],['2011-09-09', 79],['2011-09-10', 51],['2011-09-11', 46],['2011-09-12', 74],['2011-09-13', 117],['2011-09-14', 89],['2011-09-15', 151],['2011-09-16', 175],['2011-09-17', 20],['2011-09-18', 61],['2011-09-19', 114],['2011-09-20', 134],['2011-09-21', 154],['2011-09-22', 127],['2011-09-23', 179],['2011-09-24', 31],['2011-09-25', 38],['2011-09-26', 118],['2011-09-27', 170],['2011-09-28', 124],['2011-09-29', 147],['2011-09-30', 153],['2011-10-01', 45],['2011-10-02', 51],['2011-10-03', 69],['2011-10-04', 169],['2011-10-05', 118],['2011-10-06', 118],['2011-10-07', 107],['2011-10-08', 69],['2011-10-09', 47],['2011-10-10', 198],['2011-10-11', 186],['2011-10-12', 180],['2011-10-13', 157],['2011-10-14', 142],['2011-10-15', 20],['2011-10-16', 16],['2011-10-17', 89],['2011-10-18', 109],['2011-10-19', 111],['2011-10-20', 128],['2011-10-21', 41],['2011-10-22', 40],['2011-10-23', 27],['2011-10-24', 77],['2011-10-25', 88],['2011-10-26', 90],['2011-10-27', 52],['2011-10-28', 97],['2011-10-29', 30],['2011-10-30', 85],['2011-10-31', 89],['2011-11-01', 227],['2011-11-02', 137],['2011-11-03', 77],['2011-11-04', 90],['2011-11-05', 23],['2011-11-06', 27],['2011-11-07', 67],['2011-11-08', 57],['2011-11-09', 42],['2011-11-10', 48],['2011-11-11', 44],['2011-11-12', 16],['2011-11-13', 7],['2011-11-14', 32],['2011-11-15', 41],['2011-11-16', 42],['2011-11-17', 26],['2011-11-18', 18],['2011-11-19', 10],['2011-11-20', 10],['2011-11-21', 11],['2011-11-22', 13],['2011-11-23', 10]];
+            var plot = $.jqplot('commitchart', [line], {
+              legend: {
+                show: true,
+                rowSpacing: '0',
+                location: 'nw',
+              },
+              axes: {
+                xaxis: {
+                  pad: 0,
+                  renderer: $.jqplot.DateAxisRenderer,
+                  tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                  tickOptions: {
+                    angle: 30
+                  }
+                },
+                yaxis: {
+                  label: 'Commits',
+                  min: 0,
+                  labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+                  tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                  tickOptions: {
+                    angle: 30,
+                    formatString: '%d'
+                  }
+                }
+              },
+              series: [
+                {
+                  label: 'Commits',
+                  showMarker: false
+                }
+              ],
+              cursor: {
+                show: true,
+                zoom: true,
+                looseZoom: false,
+                constrainZoomTo: 'x',
+                showTooltip: true,
+                tooltipLocation: 'sw',
+                showTooltipUnitPosition: false,
+                showTooltipDataPosition: true,
+                showVerticalLine: true,
+                tooltipFormatString: '<b>%2$s</b> %1$s: %3$s'
+              }
+            });
+          
+            plot.target.bind('jqplotZoom', jqplot_zoom);
+            plot.target.bind('jqplotResetZoom', jqplot_zoom_reset);
+          });
+        //]]>
+      </script>
       <script type='text/javascript'>
         //<![CDATA[
           $(document).ready(function() {
@@ -1162,11 +1303,11 @@
             </tr>
             <tr>
               <td>2011</td>
-              <td>44149</td>
-              <td>6496</td>
-              <td>4849</td>
-              <td>4463893</td>
-              <td>3721649</td>
+              <td>45049</td>
+              <td>6499</td>
+              <td>4857</td>
+              <td>4474263</td>
+              <td>3730065</td>
             </tr>
             <tr>
               <td>2006</td>
@@ -1211,35 +1352,27 @@
           <tbody>
             <tr>
               <td>May</td>
-              <td>24677</td>
-              <td>3903</td>
+              <td>24682</td>
+              <td>3904</td>
               <td>1557</td>
-              <td>2273470</td>
-              <td>1378870</td>
+              <td>2273766</td>
+              <td>1378928</td>
             </tr>
             <tr>
               <td>Nov</td>
-              <td>20256</td>
-              <td>3275</td>
-              <td>1558</td>
-              <td>1628284</td>
-              <td>909364</td>
+              <td>20844</td>
+              <td>3277</td>
+              <td>1566</td>
+              <td>1633142</td>
+              <td>913923</td>
             </tr>
             <tr>
               <td>Jun</td>
-              <td>22999</td>
+              <td>23003</td>
               <td>3617</td>
               <td>1648</td>
-              <td>2071474</td>
-              <td>1501652</td>
-            </tr>
-            <tr>
-              <td>Dec</td>
-              <td>19227</td>
-              <td>2553</td>
-              <td>866</td>
-              <td>1715357</td>
-              <td>846789</td>
+              <td>2071647</td>
+              <td>1501694</td>
             </tr>
             <tr>
               <td>Jan</td>
@@ -1250,12 +1383,20 @@
               <td>1203523</td>
             </tr>
             <tr>
+              <td>Dec</td>
+              <td>19227</td>
+              <td>2553</td>
+              <td>866</td>
+              <td>1715357</td>
+              <td>846789</td>
+            </tr>
+            <tr>
               <td>Jul</td>
-              <td>25880</td>
+              <td>25889</td>
               <td>4482</td>
               <td>3210</td>
-              <td>2210184</td>
-              <td>1593784</td>
+              <td>2210325</td>
+              <td>1593972</td>
             </tr>
             <tr>
               <td>Feb</td>
@@ -1267,43 +1408,43 @@
             </tr>
             <tr>
               <td>Aug</td>
-              <td>21667</td>
+              <td>21732</td>
               <td>5536</td>
               <td>4260</td>
-              <td>2124647</td>
-              <td>1792466</td>
+              <td>2125648</td>
+              <td>1793091</td>
             </tr>
             <tr>
               <td>Mar</td>
-              <td>24184</td>
+              <td>24185</td>
               <td>2631</td>
               <td>1267</td>
-              <td>1731842</td>
-              <td>1192607</td>
+              <td>1731854</td>
+              <td>1192615</td>
             </tr>
             <tr>
               <td>Sep</td>
-              <td>22328</td>
+              <td>22348</td>
               <td>4279</td>
               <td>1937</td>
-              <td>2300538</td>
-              <td>1181786</td>
+              <td>2300682</td>
+              <td>1182737</td>
             </tr>
             <tr>
               <td>Apr</td>
-              <td>22130</td>
+              <td>22137</td>
               <td>20431</td>
               <td>1762</td>
-              <td>8737047</td>
-              <td>1607430</td>
+              <td>8737388</td>
+              <td>1607626</td>
             </tr>
             <tr>
               <td>Oct</td>
-              <td>26811</td>
+              <td>27012</td>
               <td>4882</td>
               <td>3286</td>
-              <td>2494370</td>
-              <td>1862483</td>
+              <td>2497774</td>
+              <td>1864272</td>
             </tr>
           </tbody>
         </table>
@@ -1339,14 +1480,6 @@
           </thead>
           <tbody>
             <tr>
-              <td>2010-11</td>
-              <td>3998</td>
-              <td>476</td>
-              <td>312</td>
-              <td>272369</td>
-              <td>182576</td>
-            </tr>
-            <tr>
               <td>2009-04</td>
               <td>4967</td>
               <td>1018</td>
@@ -1361,6 +1494,14 @@
               <td>0</td>
               <td>9</td>
               <td>0</td>
+            </tr>
+            <tr>
+              <td>2010-11</td>
+              <td>3998</td>
+              <td>476</td>
+              <td>312</td>
+              <td>272369</td>
+              <td>182576</td>
             </tr>
             <tr>
               <td>2006-02</td>
@@ -1379,20 +1520,20 @@
               <td>68767</td>
             </tr>
             <tr>
-              <td>2010-12</td>
-              <td>3875</td>
-              <td>487</td>
-              <td>198</td>
-              <td>337990</td>
-              <td>210648</td>
-            </tr>
-            <tr>
               <td>2004-08</td>
               <td>1</td>
               <td>0</td>
               <td>0</td>
               <td>4</td>
               <td>2</td>
+            </tr>
+            <tr>
+              <td>2010-12</td>
+              <td>3875</td>
+              <td>487</td>
+              <td>198</td>
+              <td>337990</td>
+              <td>210648</td>
             </tr>
             <tr>
               <td>2006-03</td>
@@ -1419,20 +1560,20 @@
               <td>79229</td>
             </tr>
             <tr>
-              <td>2011-01</td>
-              <td>4965</td>
-              <td>839</td>
-              <td>499</td>
-              <td>490942</td>
-              <td>368441</td>
-            </tr>
-            <tr>
               <td>2004-09</td>
               <td>1</td>
               <td>0</td>
               <td>0</td>
               <td>108</td>
               <td>93</td>
+            </tr>
+            <tr>
+              <td>2011-01</td>
+              <td>4965</td>
+              <td>839</td>
+              <td>499</td>
+              <td>490942</td>
+              <td>368441</td>
             </tr>
             <tr>
               <td>2006-04</td>
@@ -1499,14 +1640,6 @@
               <td>166455</td>
             </tr>
             <tr>
-              <td>2011-03</td>
-              <td>5317</td>
-              <td>684</td>
-              <td>328</td>
-              <td>396111</td>
-              <td>290037</td>
-            </tr>
-            <tr>
               <td>2006-06</td>
               <td>3163</td>
               <td>541</td>
@@ -1539,12 +1672,12 @@
               <td>104</td>
             </tr>
             <tr>
-              <td>2011-04</td>
-              <td>3878</td>
-              <td>495</td>
-              <td>674</td>
-              <td>555625</td>
-              <td>585667</td>
+              <td>2011-03</td>
+              <td>5318</td>
+              <td>684</td>
+              <td>328</td>
+              <td>396123</td>
+              <td>290045</td>
             </tr>
             <tr>
               <td>2006-07</td>
@@ -1579,12 +1712,12 @@
               <td>45</td>
             </tr>
             <tr>
-              <td>2011-05</td>
-              <td>5588</td>
-              <td>1050</td>
-              <td>860</td>
-              <td>726374</td>
-              <td>640340</td>
+              <td>2011-04</td>
+              <td>3885</td>
+              <td>495</td>
+              <td>674</td>
+              <td>555966</td>
+              <td>585863</td>
             </tr>
             <tr>
               <td>2008-03</td>
@@ -1611,20 +1744,20 @@
               <td>260</td>
             </tr>
             <tr>
+              <td>2011-05</td>
+              <td>5593</td>
+              <td>1051</td>
+              <td>860</td>
+              <td>726670</td>
+              <td>640398</td>
+            </tr>
+            <tr>
               <td>2006-08</td>
               <td>1805</td>
               <td>224</td>
               <td>47</td>
               <td>161838</td>
               <td>73765</td>
-            </tr>
-            <tr>
-              <td>2011-06</td>
-              <td>4516</td>
-              <td>684</td>
-              <td>454</td>
-              <td>505393</td>
-              <td>414098</td>
             </tr>
             <tr>
               <td>2008-04</td>
@@ -1651,28 +1784,20 @@
               <td>5530</td>
             </tr>
             <tr>
+              <td>2011-06</td>
+              <td>4520</td>
+              <td>684</td>
+              <td>454</td>
+              <td>505566</td>
+              <td>414140</td>
+            </tr>
+            <tr>
               <td>2006-09</td>
               <td>2779</td>
               <td>599</td>
               <td>210</td>
               <td>223699</td>
               <td>123825</td>
-            </tr>
-            <tr>
-              <td>2011-07</td>
-              <td>5112</td>
-              <td>703</td>
-              <td>551</td>
-              <td>500427</td>
-              <td>416450</td>
-            </tr>
-            <tr>
-              <td>2009-12</td>
-              <td>4838</td>
-              <td>538</td>
-              <td>126</td>
-              <td>371497</td>
-              <td>190419</td>
             </tr>
             <tr>
               <td>2008-05</td>
@@ -1683,6 +1808,14 @@
               <td>199389</td>
             </tr>
             <tr>
+              <td>2009-12</td>
+              <td>4838</td>
+              <td>538</td>
+              <td>126</td>
+              <td>371497</td>
+              <td>190419</td>
+            </tr>
+            <tr>
               <td>2005-03</td>
               <td>172</td>
               <td>49</td>
@@ -1691,20 +1824,20 @@
               <td>4153</td>
             </tr>
             <tr>
+              <td>2011-07</td>
+              <td>5121</td>
+              <td>703</td>
+              <td>551</td>
+              <td>500568</td>
+              <td>416638</td>
+            </tr>
+            <tr>
               <td>2006-10</td>
               <td>2786</td>
               <td>266</td>
               <td>150</td>
               <td>168281</td>
               <td>140344</td>
-            </tr>
-            <tr>
-              <td>2011-08</td>
-              <td>4106</td>
-              <td>552</td>
-              <td>719</td>
-              <td>334740</td>
-              <td>373794</td>
             </tr>
             <tr>
               <td>2010-01</td>
@@ -1723,6 +1856,14 @@
               <td>45086</td>
             </tr>
             <tr>
+              <td>2011-08</td>
+              <td>4171</td>
+              <td>552</td>
+              <td>719</td>
+              <td>335741</td>
+              <td>374419</td>
+            </tr>
+            <tr>
               <td>2006-11</td>
               <td>1823</td>
               <td>239</td>
@@ -1737,14 +1878,6 @@
               <td>536</td>
               <td>248113</td>
               <td>277277</td>
-            </tr>
-            <tr>
-              <td>2011-09</td>
-              <td>3144</td>
-              <td>260</td>
-              <td>123</td>
-              <td>184850</td>
-              <td>109628</td>
             </tr>
             <tr>
               <td>2010-02</td>
@@ -1763,6 +1896,14 @@
               <td>41657</td>
             </tr>
             <tr>
+              <td>2011-09</td>
+              <td>3164</td>
+              <td>260</td>
+              <td>123</td>
+              <td>184994</td>
+              <td>110579</td>
+            </tr>
+            <tr>
               <td>2006-12</td>
               <td>2924</td>
               <td>340</td>
@@ -1779,14 +1920,6 @@
               <td>360980</td>
             </tr>
             <tr>
-              <td>2011-10</td>
-              <td>2644</td>
-              <td>271</td>
-              <td>187</td>
-              <td>234684</td>
-              <td>180911</td>
-            </tr>
-            <tr>
               <td>2010-03</td>
               <td>4416</td>
               <td>349</td>
@@ -1801,6 +1934,14 @@
               <td>70</td>
               <td>177961</td>
               <td>83611</td>
+            </tr>
+            <tr>
+              <td>2011-10</td>
+              <td>2845</td>
+              <td>271</td>
+              <td>187</td>
+              <td>238088</td>
+              <td>182700</td>
             </tr>
             <tr>
               <td>2007-01</td>
@@ -1827,28 +1968,20 @@
               <td>415082</td>
             </tr>
             <tr>
-              <td>2011-11</td>
-              <td>487</td>
-              <td>304</td>
-              <td>179</td>
-              <td>91637</td>
-              <td>72563</td>
-            </tr>
-            <tr>
-              <td>2010-04</td>
-              <td>3458</td>
-              <td>554</td>
-              <td>147</td>
-              <td>270843</td>
-              <td>110843</td>
-            </tr>
-            <tr>
               <td>2005-07</td>
               <td>1539</td>
               <td>527</td>
               <td>125</td>
               <td>252179</td>
               <td>151651</td>
+            </tr>
+            <tr>
+              <td>2011-11</td>
+              <td>1075</td>
+              <td>306</td>
+              <td>187</td>
+              <td>96495</td>
+              <td>77122</td>
             </tr>
             <tr>
               <td>2007-02</td>
@@ -1867,28 +2000,12 @@
               <td>175837</td>
             </tr>
             <tr>
-              <td>2010-05</td>
-              <td>5122</td>
-              <td>805</td>
-              <td>179</td>
-              <td>426867</td>
-              <td>181415</td>
-            </tr>
-            <tr>
-              <td>2005-08</td>
-              <td>1519</td>
-              <td>183</td>
-              <td>73</td>
-              <td>139785</td>
-              <td>85790</td>
-            </tr>
-            <tr>
-              <td>2007-03</td>
-              <td>2420</td>
-              <td>154</td>
-              <td>140</td>
-              <td>106822</td>
-              <td>97600</td>
+              <td>2010-04</td>
+              <td>3458</td>
+              <td>554</td>
+              <td>147</td>
+              <td>270843</td>
+              <td>110843</td>
             </tr>
             <tr>
               <td>2008-10</td>
@@ -1899,28 +2016,28 @@
               <td>312688</td>
             </tr>
             <tr>
-              <td>2010-06</td>
-              <td>3357</td>
-              <td>459</td>
-              <td>139</td>
-              <td>245505</td>
-              <td>323528</td>
+              <td>2007-03</td>
+              <td>2420</td>
+              <td>154</td>
+              <td>140</td>
+              <td>106822</td>
+              <td>97600</td>
             </tr>
             <tr>
-              <td>2007-04</td>
-              <td>1700</td>
-              <td>202</td>
-              <td>74</td>
-              <td>134142</td>
-              <td>84302</td>
+              <td>2005-08</td>
+              <td>1519</td>
+              <td>183</td>
+              <td>73</td>
+              <td>139785</td>
+              <td>85790</td>
             </tr>
             <tr>
-              <td>2008-11</td>
-              <td>3843</td>
-              <td>883</td>
-              <td>394</td>
-              <td>379218</td>
-              <td>168715</td>
+              <td>2010-05</td>
+              <td>5122</td>
+              <td>805</td>
+              <td>179</td>
+              <td>426867</td>
+              <td>181415</td>
             </tr>
             <tr>
               <td>2005-09</td>
@@ -1931,28 +2048,28 @@
               <td>151387</td>
             </tr>
             <tr>
-              <td>2010-07</td>
-              <td>3798</td>
-              <td>335</td>
-              <td>77</td>
-              <td>257196</td>
-              <td>161164</td>
+              <td>2008-11</td>
+              <td>3843</td>
+              <td>883</td>
+              <td>394</td>
+              <td>379218</td>
+              <td>168715</td>
             </tr>
             <tr>
-              <td>2007-05</td>
-              <td>3986</td>
-              <td>783</td>
-              <td>136</td>
-              <td>345414</td>
-              <td>164360</td>
+              <td>2007-04</td>
+              <td>1700</td>
+              <td>202</td>
+              <td>74</td>
+              <td>134142</td>
+              <td>84302</td>
             </tr>
             <tr>
-              <td>2008-12</td>
-              <td>3931</td>
-              <td>835</td>
-              <td>325</td>
-              <td>559167</td>
-              <td>213876</td>
+              <td>2010-06</td>
+              <td>3357</td>
+              <td>459</td>
+              <td>139</td>
+              <td>245505</td>
+              <td>323528</td>
             </tr>
             <tr>
               <td>2005-10</td>
@@ -1963,28 +2080,28 @@
               <td>166461</td>
             </tr>
             <tr>
-              <td>2010-08</td>
-              <td>4511</td>
-              <td>592</td>
-              <td>201</td>
-              <td>340814</td>
-              <td>498117</td>
+              <td>2008-12</td>
+              <td>3931</td>
+              <td>835</td>
+              <td>325</td>
+              <td>559167</td>
+              <td>213876</td>
             </tr>
             <tr>
-              <td>2007-06</td>
-              <td>1871</td>
-              <td>157</td>
-              <td>87</td>
-              <td>114015</td>
-              <td>92361</td>
+              <td>2007-05</td>
+              <td>3986</td>
+              <td>783</td>
+              <td>136</td>
+              <td>345414</td>
+              <td>164360</td>
             </tr>
             <tr>
-              <td>2009-01</td>
-              <td>5282</td>
-              <td>947</td>
-              <td>690</td>
-              <td>397286</td>
-              <td>286167</td>
+              <td>2010-07</td>
+              <td>3798</td>
+              <td>335</td>
+              <td>77</td>
+              <td>257196</td>
+              <td>161164</td>
             </tr>
             <tr>
               <td>2005-11</td>
@@ -1995,28 +2112,28 @@
               <td>202134</td>
             </tr>
             <tr>
-              <td>2010-09</td>
-              <td>4193</td>
-              <td>766</td>
-              <td>285</td>
-              <td>562032</td>
-              <td>182686</td>
+              <td>2009-01</td>
+              <td>5282</td>
+              <td>947</td>
+              <td>690</td>
+              <td>397286</td>
+              <td>286167</td>
             </tr>
             <tr>
-              <td>2009-02</td>
-              <td>4002</td>
-              <td>642</td>
-              <td>135</td>
-              <td>557122</td>
-              <td>191891</td>
+              <td>2007-06</td>
+              <td>1871</td>
+              <td>157</td>
+              <td>87</td>
+              <td>114015</td>
+              <td>92361</td>
             </tr>
             <tr>
-              <td>2005-12</td>
-              <td>1059</td>
-              <td>178</td>
-              <td>24</td>
-              <td>105273</td>
-              <td>32663</td>
+              <td>2010-08</td>
+              <td>4511</td>
+              <td>592</td>
+              <td>201</td>
+              <td>340814</td>
+              <td>498117</td>
             </tr>
             <tr>
               <td>2007-07</td>
@@ -2027,20 +2144,36 @@
               <td>291109</td>
             </tr>
             <tr>
-              <td>2010-10</td>
-              <td>5325</td>
-              <td>671</td>
-              <td>446</td>
-              <td>418034</td>
-              <td>437630</td>
+              <td>2005-12</td>
+              <td>1059</td>
+              <td>178</td>
+              <td>24</td>
+              <td>105273</td>
+              <td>32663</td>
             </tr>
             <tr>
-              <td>2009-03</td>
-              <td>5208</td>
-              <td>659</td>
-              <td>249</td>
-              <td>423521</td>
-              <td>263718</td>
+              <td>2009-02</td>
+              <td>4002</td>
+              <td>642</td>
+              <td>135</td>
+              <td>557122</td>
+              <td>191891</td>
+            </tr>
+            <tr>
+              <td>2010-09</td>
+              <td>4193</td>
+              <td>766</td>
+              <td>285</td>
+              <td>562032</td>
+              <td>182686</td>
+            </tr>
+            <tr>
+              <td>2007-08</td>
+              <td>2429</td>
+              <td>319</td>
+              <td>163</td>
+              <td>178683</td>
+              <td>126970</td>
             </tr>
             <tr>
               <td>2006-01</td>
@@ -2051,12 +2184,20 @@
               <td>155931</td>
             </tr>
             <tr>
-              <td>2007-08</td>
-              <td>2429</td>
-              <td>319</td>
-              <td>163</td>
-              <td>178683</td>
-              <td>126970</td>
+              <td>2009-03</td>
+              <td>5208</td>
+              <td>659</td>
+              <td>249</td>
+              <td>423521</td>
+              <td>263718</td>
+            </tr>
+            <tr>
+              <td>2010-10</td>
+              <td>5325</td>
+              <td>671</td>
+              <td>446</td>
+              <td>418034</td>
+              <td>437630</td>
             </tr>
           </tbody>
         </table>
