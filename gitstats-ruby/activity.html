@@ -6,9 +6,16 @@
       Statistics
     </title>
     <link href='style.css' rel='stylesheet' type='text/css' />
+    <link href='jquery.jqplot.min.css' rel='stylesheet' type='text/css' />
     <meta content='text/html; charset=UTF-8' http-equiv='content-type' />
     <script src='jquery.js' type='text/javascript'></script>
+    <script src='jquery.jqplot.min.js' type='text/javascript'></script>
+    <script src='jqplot.cursor.min.js' type='text/javascript'></script>
     <script src='jquery.tablesorter.js' type='text/javascript'></script>
+    <script src='jqplot.dateAxisRenderer.min.js' type='text/javascript'></script>
+    <script src='jqplot.canvasTextRenderer.min.js' type='text/javascript'></script>
+    <script src='jqplot.canvasAxisTickRenderer.min.js' type='text/javascript'></script>
+    <script src='jqplot.canvasAxisLabelRenderer.min.js' type='text/javascript'></script>
   </head>
   <body>
     <script type='text/javascript'>
@@ -31,6 +38,73 @@
             return false;
           });
         });
+        
+        var jqplot_zoom_reset = function(evt, p, cursor) {
+          for(var i = 0;i < p.series.length;i++) {
+            p.series[i].showMarker = false;
+            p.series[i].markerOptions.show = false;
+            p.series[i].markerRenderer.show = false;
+          }
+        
+          p.redraw();
+        };
+        
+        var jqplot_zoom = function(evt, gridpos, datapos, p, cursor) {
+          var min = p.axes['xaxis'].min;
+          var max = p.axes['xaxis'].max;
+        
+          var maxaxis = {
+            yaxis: null,
+            y2axis: null,
+            y3axis: null,
+            y4axis: null,
+            y5axis: null,
+            y6axis: null,
+            y7axis: null,
+            y8axis: null,
+            y9axis: null
+          };
+        
+          var cnt = [];
+        
+          var maxlen = 0;
+          for(var i = 0;i < p.series.length;i++) {
+            var len = p.series[i].data.length;
+            if(len > maxlen)
+              maxlen = len;
+            cnt[i] = 0;
+          }
+        
+          for(var i = 0;i < maxlen;i++) {
+            for(var j = 0;j < p.series.length;j++) {
+              if(i < p.series[j].data.length) {
+                if((p.series[j].data[i][0] >= min) && (p.series[j].data[i][0] <= max)) {
+                  cnt[j]++;
+                  if(maxaxis[p.series[j].yaxis] == null)
+                    maxaxis[p.series[j].yaxis] = p.series[j].data[i][1];
+                  else if(p.series[j].data[i][1] > maxaxis[p.series[j].yaxis])
+                    maxaxis[p.series[j].yaxis] = p.series[j].data[i][1];
+                }
+              }
+            }
+          }
+        
+          for(var i = 0;i < p.series.length;i++) {
+            p.series[i].showMarker = cnt[i] <= 100;
+            p.series[i].markerOptions.show = cnt[i] <= 100;
+            p.series[i].markerRenderer.show = cnt[i] <= 100;
+          }
+        
+          for(var ax in maxaxis) {
+            if(maxaxis[ax] != null) {
+              p.axes[ax].max = maxaxis[ax] * p.axes[ax].pad;
+              p.axes[ax].tickInterval = null;
+              p.axes[ax].numberTicks = null;
+              p.axes[ax]._ticks = [];
+            }
+          }
+          p.redraw();
+        };
       //]]>
     </script>
     <div id='menu'>
@@ -71,6 +145,9 @@
             <a href='#hour_of_week'>Hour of week</a>
           </li>
           <li>
+            <a href='#commitchart'>Commitchart</a>
+          </li>
+          <li>
             <a href='#commits_per_year'>Commits per year</a>
           </li>
           <li>
@@ -105,27 +182,27 @@
           <tbody>
             <tr>
               <th>1</th>
-              <td>79</td>
-              <td>77</td>
-              <td>12</td>
-              <td>5208</td>
-              <td>2628</td>
+              <td>6</td>
+              <td>10</td>
+              <td>0</td>
+              <td>680</td>
+              <td>9</td>
             </tr>
             <tr>
               <th>2</th>
+              <td>2</td>
               <td>0</td>
               <td>0</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
+              <td>2</td>
+              <td>4</td>
             </tr>
             <tr>
               <th>3</th>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
+              <td>83</td>
+              <td>77</td>
+              <td>12</td>
+              <td>5238</td>
+              <td>2631</td>
             </tr>
             <tr>
               <th>4</th>
@@ -634,11 +711,11 @@
             </tr>
             <tr>
               <th>10</th>
-              <td>1</td>
+              <td>2</td>
               <td>7</td>
               <td>0</td>
-              <td>311</td>
-              <td>71</td>
+              <td>312</td>
+              <td>72</td>
             </tr>
             <tr>
               <th>11</th>
@@ -706,26 +783,26 @@
             </tr>
             <tr>
               <th>19</th>
-              <td>2</td>
+              <td>7</td>
+              <td>10</td>
               <td>0</td>
-              <td>0</td>
-              <td>106</td>
-              <td>25</td>
+              <td>706</td>
+              <td>32</td>
             </tr>
             <tr>
               <th>20</th>
-              <td>7</td>
+              <td>10</td>
               <td>2</td>
               <td>0</td>
-              <td>122</td>
-              <td>48</td>
+              <td>149</td>
+              <td>51</td>
             </tr>
             <tr>
               <th>21</th>
-              <td>5</td>
+              <td>6</td>
               <td>4</td>
               <td>0</td>
-              <td>123</td>
+              <td>126</td>
               <td>62</td>
             </tr>
             <tr>
@@ -738,11 +815,11 @@
             </tr>
             <tr>
               <th>23</th>
-              <td>4</td>
+              <td>6</td>
               <td>0</td>
               <td>0</td>
-              <td>7</td>
-              <td>7</td>
+              <td>88</td>
+              <td>12</td>
             </tr>
           </tbody>
         </table>
@@ -779,11 +856,11 @@
           <tbody>
             <tr>
               <th>Mon</th>
-              <td>13</td>
-              <td>1</td>
+              <td>19</td>
+              <td>11</td>
               <td>0</td>
-              <td>216</td>
-              <td>60</td>
+              <td>819</td>
+              <td>67</td>
             </tr>
             <tr>
               <th>Tue</th>
@@ -795,11 +872,11 @@
             </tr>
             <tr>
               <th>Wed</th>
+              <td>5</td>
               <td>0</td>
               <td>0</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
+              <td>108</td>
+              <td>8</td>
             </tr>
             <tr>
               <th>Thu</th>
@@ -819,11 +896,11 @@
             </tr>
             <tr>
               <th>Sat</th>
-              <td>21</td>
+              <td>22</td>
               <td>10</td>
               <td>0</td>
-              <td>861</td>
-              <td>523</td>
+              <td>862</td>
+              <td>524</td>
             </tr>
             <tr>
               <th>Sun</th>
@@ -895,9 +972,9 @@
               <td></td>
               <td></td>
               <td></td>
-              <td></td>
+              <td class='gradient-41'>5</td>
               <td class='gradient-8'>1</td>
-              <td></td>
+              <td class='gradient-8'>1</td>
               <td></td>
               <td></td>
             </tr>
@@ -950,10 +1027,10 @@
               <td></td>
               <td></td>
               <td></td>
+              <td class='gradient-25'>3</td>
               <td></td>
               <td></td>
-              <td></td>
-              <td></td>
+              <td class='gradient-16'>2</td>
             </tr>
             <tr>
               <th>Thu</th>
@@ -1021,7 +1098,7 @@
               <td></td>
               <td></td>
               <td></td>
-              <td></td>
+              <td class='gradient-8'>1</td>
               <td></td>
               <td class='gradient-8'>1</td>
               <td class='gradient-16'>2</td>
@@ -1067,6 +1144,70 @@
         </table>
       </div>
       </div>
+      <h2 class='blockheader'>
+        <a name='commitchart'>Commitchart</a>
+      </h2>
+      
+      <div id="block-commitchart" class="blockcontainer">
+      <div class='blockdiagram'>
+        <div id='commitchart' style='height:240px; width:640px'></div>
+      </div>
+      </div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          $(document).ready(function(){
+            var line = [['2011-11-03', 2],['2011-11-04', 16],['2011-11-05', 21],['2011-11-06', 27],['2011-11-07', 14],['2011-11-09', 3],['2011-11-12', 1],['2011-11-14', 1],['2011-11-21', 4],['2011-11-23', 2]];
+            var plot = $.jqplot('commitchart', [line], {
+              legend: {
+                show: true,
+                rowSpacing: '0',
+                location: 'nw',
+              },
+              axes: {
+                xaxis: {
+                  pad: 0,
+                  renderer: $.jqplot.DateAxisRenderer,
+                  tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                  tickOptions: {
+                    angle: 30
+                  }
+                },
+                yaxis: {
+                  label: 'Commits',
+                  min: 0,
+                  labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+                  tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                  tickOptions: {
+                    angle: 30,
+                    formatString: '%d'
+                  }
+                }
+              },
+              series: [
+                {
+                  label: 'Commits',
+                  showMarker: false
+                }
+              ],
+              cursor: {
+                show: true,
+                zoom: true,
+                looseZoom: false,
+                constrainZoomTo: 'x',
+                showTooltip: true,
+                tooltipLocation: 'sw',
+                showTooltipUnitPosition: false,
+                showTooltipDataPosition: true,
+                showVerticalLine: true,
+                tooltipFormatString: '<b>%2$s</b> %1$s: %3$s'
+              }
+            });
+          
+            plot.target.bind('jqplotZoom', jqplot_zoom);
+            plot.target.bind('jqplotResetZoom', jqplot_zoom_reset);
+          });
+        //]]>
+      </script>
       <script type='text/javascript'>
         //<![CDATA[
           $(document).ready(function() {
@@ -1098,11 +1239,11 @@
           <tbody>
             <tr>
               <td>2011</td>
-              <td>79</td>
-              <td>77</td>
+              <td>91</td>
+              <td>87</td>
               <td>12</td>
-              <td>5208</td>
-              <td>2628</td>
+              <td>5920</td>
+              <td>2644</td>
             </tr>
           </tbody>
         </table>
@@ -1139,11 +1280,11 @@
           <tbody>
             <tr>
               <td>Nov</td>
-              <td>79</td>
-              <td>77</td>
+              <td>91</td>
+              <td>87</td>
               <td>12</td>
-              <td>5208</td>
-              <td>2628</td>
+              <td>5920</td>
+              <td>2644</td>
             </tr>
           </tbody>
         </table>
@@ -1180,11 +1321,11 @@
           <tbody>
             <tr>
               <td>2011-11</td>
-              <td>79</td>
-              <td>77</td>
+              <td>91</td>
+              <td>87</td>
               <td>12</td>
-              <td>5208</td>
-              <td>2628</td>
+              <td>5920</td>
+              <td>2644</td>
             </tr>
           </tbody>
         </table>

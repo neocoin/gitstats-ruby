@@ -6,9 +6,16 @@
       Statistics
     </title>
     <link href='style.css' rel='stylesheet' type='text/css' />
+    <link href='jquery.jqplot.min.css' rel='stylesheet' type='text/css' />
     <meta content='text/html; charset=UTF-8' http-equiv='content-type' />
     <script src='jquery.js' type='text/javascript'></script>
+    <script src='jquery.jqplot.min.js' type='text/javascript'></script>
+    <script src='jqplot.cursor.min.js' type='text/javascript'></script>
     <script src='jquery.tablesorter.js' type='text/javascript'></script>
+    <script src='jqplot.dateAxisRenderer.min.js' type='text/javascript'></script>
+    <script src='jqplot.canvasTextRenderer.min.js' type='text/javascript'></script>
+    <script src='jqplot.canvasAxisTickRenderer.min.js' type='text/javascript'></script>
+    <script src='jqplot.canvasAxisLabelRenderer.min.js' type='text/javascript'></script>
   </head>
   <body>
     <script type='text/javascript'>
@@ -31,6 +38,73 @@
             return false;
           });
         });
+        
+        var jqplot_zoom_reset = function(evt, p, cursor) {
+          for(var i = 0;i < p.series.length;i++) {
+            p.series[i].showMarker = false;
+            p.series[i].markerOptions.show = false;
+            p.series[i].markerRenderer.show = false;
+          }
+        
+          p.redraw();
+        };
+        
+        var jqplot_zoom = function(evt, gridpos, datapos, p, cursor) {
+          var min = p.axes['xaxis'].min;
+          var max = p.axes['xaxis'].max;
+        
+          var maxaxis = {
+            yaxis: null,
+            y2axis: null,
+            y3axis: null,
+            y4axis: null,
+            y5axis: null,
+            y6axis: null,
+            y7axis: null,
+            y8axis: null,
+            y9axis: null
+          };
+        
+          var cnt = [];
+        
+          var maxlen = 0;
+          for(var i = 0;i < p.series.length;i++) {
+            var len = p.series[i].data.length;
+            if(len > maxlen)
+              maxlen = len;
+            cnt[i] = 0;
+          }
+        
+          for(var i = 0;i < maxlen;i++) {
+            for(var j = 0;j < p.series.length;j++) {
+              if(i < p.series[j].data.length) {
+                if((p.series[j].data[i][0] >= min) && (p.series[j].data[i][0] <= max)) {
+                  cnt[j]++;
+                  if(maxaxis[p.series[j].yaxis] == null)
+                    maxaxis[p.series[j].yaxis] = p.series[j].data[i][1];
+                  else if(p.series[j].data[i][1] > maxaxis[p.series[j].yaxis])
+                    maxaxis[p.series[j].yaxis] = p.series[j].data[i][1];
+                }
+              }
+            }
+          }
+        
+          for(var i = 0;i < p.series.length;i++) {
+            p.series[i].showMarker = cnt[i] <= 100;
+            p.series[i].markerOptions.show = cnt[i] <= 100;
+            p.series[i].markerRenderer.show = cnt[i] <= 100;
+          }
+        
+          for(var ax in maxaxis) {
+            if(maxaxis[ax] != null) {
+              p.axes[ax].max = maxaxis[ax] * p.axes[ax].pad;
+              p.axes[ax].tickInterval = null;
+              p.axes[ax].numberTicks = null;
+              p.axes[ax]._ticks = [];
+            }
+          }
+          p.redraw();
+        };
       //]]>
     </script>
     <div id='menu'>
@@ -99,14 +173,14 @@
           <tbody>
             <tr>
               <td>Christoph Plank</td>
-              <td>79</td>
+              <td>91</td>
               <td>100.00%</td>
-              <td>77</td>
+              <td>87</td>
               <td>12</td>
-              <td>5208</td>
-              <td>2628</td>
+              <td>5920</td>
+              <td>2644</td>
               <td>2011-11-03</td>
-              <td>2011-11-07</td>
+              <td>2011-11-23</td>
             </tr>
           </tbody>
         </table>
@@ -129,7 +203,7 @@
             <tr class='top'>
               <td class='yearauthor_top1'>2011</td>
               <td class='yearauthor_top1'>Christoph Plank</td>
-              <td class='yearauthor_top1'>79 of 79 (100.00%)</td>
+              <td class='yearauthor_top1'>91 of 91 (100.00%)</td>
               <td class='yearauthor_top1'>1</td>
             </tr>
           </tbody>
@@ -164,7 +238,7 @@
             <tr class='top'>
               <td class='yearmonthauthor_top1'>2011-11</td>
               <td class='yearmonthauthor_top1'>Christoph Plank</td>
-              <td class='yearmonthauthor_top1'>79 of 79 (100.00%)</td>
+              <td class='yearmonthauthor_top1'>91 of 91 (100.00%)</td>
               <td class='yearmonthauthor_top1'>1</td>
             </tr>
           </tbody>
