@@ -54,4 +54,7 @@
         tooltipFormatString: '<b>%2$s</b> %1$s: %3$s'
       }
     });
+
+    plot.target.bind('jqplotZoom', jqplot_zoom);
+    plot.target.bind('jqplotResetZoom', jqplot_zoom_reset);
   });
